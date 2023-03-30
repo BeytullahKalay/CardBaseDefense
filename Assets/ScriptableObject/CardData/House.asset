@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45cfdad1aefb77e4a84dc61b06b7d38d, type: 3}
+  m_Name: House
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 6074905538072354698, guid: 921d58d4ca1a6d04badbdc854c085974, type: 3}
+  cost: 8
+  cardName: House
+  cardDescription: This card creates a house that generates population over time.
