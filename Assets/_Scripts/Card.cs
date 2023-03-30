@@ -18,11 +18,13 @@ public class Card : MonoBehaviour,IPointerUpHandler,IPointerDownHandler,IEndDrag
     private CanvasGroup _canvasGroup;
     private RectTransform _rectTransform;
     private GameManager _gm;
+    private GoldManager _goldManager;
     private GameObject _createdObject;
 
     private void Awake()
     {
         _gm = GameManager.Instance;
+        _goldManager = GoldManager.Instance;
         _canvasGroup = GetComponent<CanvasGroup>();
         _rectTransform = GetComponent<RectTransform>();
         _gridLayoutGroup = GetComponentInParent<GridLayoutGroup>();
@@ -53,17 +55,15 @@ public class Card : MonoBehaviour,IPointerUpHandler,IPointerDownHandler,IEndDrag
 
     private bool IsCardPurchasable()
     {
-        return _gm.CurrentGold >= _cardData.Cost;
+        return _goldManager.CurrentGold >= _cardData.Cost;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        print("on pointer up");
         if (!MouseOverUI.IsPointerOverUIElement() && _createdObject != null)
         {
-            _gm.CurrentGold -= _cardData.Cost;
+            EventManager.AddThatToCurrentGold?.Invoke(-_cardData.Cost);
             _gm.UpdateAllCardsState();
-            EventManager.UpdateGoldUI?.Invoke();
             Destroy(gameObject);
         }
         else

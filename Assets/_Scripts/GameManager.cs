@@ -1,11 +1,10 @@
 
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    public int CurrentGold = 10;
-
-    public List<Card> Cards;
+    [HideInInspector]public List<Card> Cards;
 
     public void UpdateAllCardsState()
     {
