@@ -53,7 +53,7 @@ public class Card : MonoBehaviour,IPointerUpHandler,IPointerDownHandler,IEndDrag
 
     private bool IsCardPurchasable()
     {
-        return _gm.CurrentGold > _cardData.Cost;
+        return _gm.CurrentGold >= _cardData.Cost;
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -61,7 +61,6 @@ public class Card : MonoBehaviour,IPointerUpHandler,IPointerDownHandler,IEndDrag
         print("on pointer up");
         if (!MouseOverUI.IsPointerOverUIElement() && _createdObject != null)
         {
-            print("1");
             _gm.CurrentGold -= _cardData.Cost;
             _gm.UpdateAllCardsState();
             EventManager.UpdateGoldUI?.Invoke();
@@ -69,7 +68,7 @@ public class Card : MonoBehaviour,IPointerUpHandler,IPointerDownHandler,IEndDrag
         }
         else
         {
-            print("2");
+            _canvasGroup.blocksRaycasts = true;
             _gridLayoutGroup.SetLayoutHorizontal();
             _gridLayoutGroup.SetLayoutVertical();
         }
@@ -77,16 +76,14 @@ public class Card : MonoBehaviour,IPointerUpHandler,IPointerDownHandler,IEndDrag
 
     public void OnDrag(PointerEventData eventData)
     {
-        print("on drag");
+        
         _rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
 
         if (!MouseOverUI.IsPointerOverUIElement())
         {
-            print("3");
             if (_createdObject == null)
             {
                 _canvasGroup.alpha = 0f;
-                _canvasGroup.blocksRaycasts = false;
                 _createdObject = Instantiate(_cardData.ObjectToSpawn);
                 _createdObject.transform.position = Utilitles.GetMouseToWorldPos2D();
             }
@@ -97,12 +94,14 @@ public class Card : MonoBehaviour,IPointerUpHandler,IPointerDownHandler,IEndDrag
         }
         else
         {
+            _canvasGroup.alpha = 1f;
             Destroy(_createdObject);
         }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        _canvasGroup.blocksRaycasts = false;
     }
 
     public void OnEndDrag(PointerEventData eventData)
