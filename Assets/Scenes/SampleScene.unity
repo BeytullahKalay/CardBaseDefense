@@ -546,7 +546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 69498480}
-  _cardData: {fileID: 11400000, guid: bb5b6092725728c46a79f17ee5b420e2, type: 2}
+  _cardData: {fileID: 11400000, guid: c2ea5dbdaafd77a47b1b610078398c51, type: 2}
   cardCostText: {fileID: 431139784}
   cardNameText: {fileID: 2071104481}
   cardDescriptionText: {fileID: 1863528816}
@@ -1182,7 +1182,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2445,6 +2445,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365f3146fbb22e544905b2c1841de60d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 350
+  moveDownAmount: 100
 --- !u!1 &2071104479
 GameObject:
   m_ObjectHideFlags: 0

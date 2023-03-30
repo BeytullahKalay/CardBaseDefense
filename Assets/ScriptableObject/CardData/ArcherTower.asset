@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 6074905538072354698, guid: 7e5d86d5bdb21104b91c4fc0ef1e4b6b, type: 3}
   cost: 10
-  cardName: ArcherTower
+  cardName: Archer Tower
   cardDescription: This card builds an archer tower fighting against the enemy.
