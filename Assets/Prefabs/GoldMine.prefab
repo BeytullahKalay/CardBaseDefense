@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2302180200296581002}
   - component: {fileID: 1759424676282064499}
   m_Layer: 0
-  m_Name: House
+  m_Name: GoldMine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
