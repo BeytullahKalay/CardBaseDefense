@@ -68,7 +68,7 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         {
             EventManager.AddThatToCurrentGold?.Invoke(-_cardData.Cost);
             _gm.UpdateAllCardsState();
-            Destroy(_createdObject.GetComponent<CollisionDetectionOnPlacing>());
+            _createdObject.GetComponent<CollisionDetectionOnPlacing>().OpenActionsAndDestroyCollisionDetection();
             DestroyCardFromUI();
         }
         else
