@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BasicTower : MonoBehaviour
+public class BasicTower : MonoBehaviour, ICardAciton
 {
     [SerializeField] private TowerData _data;
 
@@ -11,8 +11,8 @@ public class BasicTower : MonoBehaviour
         if (Time.time > _nextFireTime && DetectedEnemies().Length > 0)
         {
             var target = DetectedEnemies()[0];
-            var obj =Instantiate(_data.FirePrefab, transform.position, Quaternion.identity);
-            obj.GetComponent<FireObject>().Initialize(transform,target.transform,_data.Damage);
+            var obj = Instantiate(_data.FirePrefab, transform.position, Quaternion.identity);
+            obj.GetComponent<FireObject>().Initialize(transform, target.transform, _data.Damage);
             _nextFireTime = Time.time + 1 / _data.FiringFrequency;
         }
     }
@@ -24,6 +24,12 @@ public class BasicTower : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (enabled) return;
         Gizmos.DrawWireSphere(transform.position, _data.DetectEnemyRadius);
+    }
+
+    public void Enable(bool state)
+    {
+        this.enabled = state;
     }
 }
