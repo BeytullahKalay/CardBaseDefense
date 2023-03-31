@@ -6,12 +6,22 @@ public class CameraController : MonoBehaviour
 
     private float _horizontalInput;
     private float _verticalInput;
+    private Vector2 _inputs;
+    
+    private void Update()
+    {
+        HandleInputs();
+    }
 
-    private void FixedUpdate()
+    private void HandleInputs()
     {
         _horizontalInput = Input.GetAxis("Horizontal");
         _verticalInput = Input.GetAxis("Vertical");
-        var inputs = new Vector2(_horizontalInput, _verticalInput);
-        transform.position += (Vector3)inputs * (Time.fixedTime * speedMultiplier);
+        _inputs = new Vector2(_horizontalInput, _verticalInput);
+    }
+
+    private void FixedUpdate()
+    {
+        transform.position += (Vector3)_inputs * (Time.fixedDeltaTime * speedMultiplier);
     }
 }
