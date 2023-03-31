@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -24,13 +23,11 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
 
     private GameObject _createdObject;
 
-    private Camera _camera;
 
     private void Awake()
     {
         _gm = GameManager.Instance;
         _goldManager = GoldManager.Instance;
-        _camera = Camera.main;
         _canvasGroup = GetComponent<CanvasGroup>();
         _rectTransform = GetComponent<RectTransform>();
         _gridLayoutGroup = GetComponentInParent<GridLayoutGroup>();
@@ -66,7 +63,7 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (!MouseOverUI.IsPointerOverUIElement() &&
+        if (!Helpers.IsPointerOverUIElement(LayerMask.NameToLayer("UI")) &&
             !_createdObject.GetComponent<CollisionDetectionOnPlacing>().Collide)
         {
             EventManager.AddThatToCurrentGold?.Invoke(-_cardData.Cost);
@@ -87,17 +84,17 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
     {
         _rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
 
-        if (!MouseOverUI.IsPointerOverUIElement())
+        if (!Helpers.IsPointerOverUIElement(LayerMask.NameToLayer("UI")))
         {
             if (_createdObject == null)
             {
                 _canvasGroup.alpha = 0f;
                 _createdObject = Instantiate(_cardData.ObjectToSpawn);
-                _createdObject.transform.position = Utilities.GetMouseToWorldPos2D(_camera);
+                _createdObject.transform.position = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
             }
             else
             {
-                _createdObject.transform.position = Utilities.GetMouseToWorldPos2D(_camera);
+                _createdObject.transform.position = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
             }
         }
         else
