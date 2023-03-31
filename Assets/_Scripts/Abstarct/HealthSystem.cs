@@ -2,20 +2,17 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Rigidbody))]
 public abstract class HealthSystem : MonoBehaviour, IHealthSystem
 {
     [SerializeField] protected int maxHealth = 100;
     [SerializeField] private Slider slider;
-    //[SerializeField] private GameObject bloodVFX;
 
-    public int Health { get; set; }
+    public int Health { get; private set; }
 
     public Action<int> TakeDamage;
     public Action OnDead;
 
-    protected Rigidbody rb;
-    protected Collider coll;
+    protected Collider2D coll;
 
     private bool _isDead;
 
@@ -33,8 +30,7 @@ public abstract class HealthSystem : MonoBehaviour, IHealthSystem
 
     protected virtual void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        coll = GetComponent<Collider>();
+        coll = GetComponent<Collider2D>();
     }
 
     public virtual void Start()
@@ -50,16 +46,15 @@ public abstract class HealthSystem : MonoBehaviour, IHealthSystem
         Health = Mathf.Clamp(Health, 0, maxHealth);
         slider.value = (float)Health / maxHealth;
         slider.gameObject.SetActive(true);
-        //Instantiate(bloodVFX, transform.position, quaternion.identity);
         if (Health <= 0 && !_isDead) OnDead.Invoke();
     }
 
     public virtual void Die()
     {
         _isDead = true;
-        rb.isKinematic = true;
         coll.enabled = false;
         slider.gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     public virtual void Heal(int healAmount)
@@ -72,6 +67,5 @@ public abstract class HealthSystem : MonoBehaviour, IHealthSystem
     public virtual void Knockback(Transform attackTransform, float knocbackForce)
     {
         var dir = (transform.position - attackTransform.position).normalized;
-        rb.AddForce(dir * knocbackForce, ForceMode.Impulse);
     }
 }
