@@ -1158,7 +1158,7 @@ GameObject:
   - component: {fileID: 518903217}
   - component: {fileID: 518903219}
   m_Layer: 5
-  m_Name: Mana
+  m_Name: Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1367,7 +1367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6afca4c97b141b54f86d18d7ba59de60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 0.05
+  speedMultiplier: 20
 --- !u!1 &528258813
 GameObject:
   m_ObjectHideFlags: 0
@@ -2824,6 +2824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentGold: 20
+  goldTextUIRectTransform: {fileID: 518903216}
 --- !u!4 &1627240774
 Transform:
   m_ObjectHideFlags: 0
