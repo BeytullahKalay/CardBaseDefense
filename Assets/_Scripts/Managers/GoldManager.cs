@@ -1,7 +1,12 @@
 
+using UnityEngine;
+
 public class GoldManager : MonoSingleton<GoldManager>
 {
+    
     public int CurrentGold = 10;
+
+    [SerializeField] private RectTransform goldTextUIRectTransform;
 
     private void OnEnable()
     {
@@ -23,4 +28,7 @@ public class GoldManager : MonoSingleton<GoldManager>
         CurrentGold += addVal;
         EventManager.UpdateGoldUI?.Invoke();
     }
+
+
+    public RectTransform GoldTextUIRectTransform => goldTextUIRectTransform;
 }
