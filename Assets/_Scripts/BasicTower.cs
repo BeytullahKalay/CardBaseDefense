@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BasicTower : MonoBehaviour, ICardAciton
+public class BasicTower : ActionCard
 {
     [SerializeField] private TowerData _data;
 
@@ -26,10 +26,5 @@ public class BasicTower : MonoBehaviour, ICardAciton
     {
         if (enabled) return;
         Gizmos.DrawWireSphere(transform.position, _data.DetectEnemyRadius);
-    }
-
-    public void Enable(bool state)
-    {
-        this.enabled = state;
     }
 }
