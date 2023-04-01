@@ -7,11 +7,11 @@ public class CollisionDetectionOnPlacing : MonoBehaviour
     [SerializeField] private LayerMask whatIsBuilding;
     [HideInInspector]public bool Collide;
 
-    private List<ICardAciton> _cardAcitons = new List<ICardAciton>();
+    private List<ActionCard> _cardAcitons = new List<ActionCard>();
 
     private void Awake()
     {
-        var actions = GetComponents<ICardAciton>();
+        var actions = GetComponents<ActionCard>();
 
         foreach (var cardAction in actions)
         {
