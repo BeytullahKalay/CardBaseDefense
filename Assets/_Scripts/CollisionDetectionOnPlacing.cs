@@ -9,6 +9,8 @@ public class CollisionDetectionOnPlacing : MonoBehaviour
 
     private List<ActionCard> _cardAcitons = new List<ActionCard>();
 
+    private Collider2D _collider;
+
     private void Awake()
     {
         var actions = GetComponents<ActionCard>();
@@ -18,6 +20,9 @@ public class CollisionDetectionOnPlacing : MonoBehaviour
             cardAction.Enable(false);
             _cardAcitons.Add(cardAction);
         }
+
+        _collider = GetComponent<Collider2D>();
+        _collider.enabled = false;
     }
 
     private void Update()
@@ -39,6 +44,9 @@ public class CollisionDetectionOnPlacing : MonoBehaviour
         {
             cardAciton.Enable(true);
         }
+
+        _collider.enabled = true;
+        
         Destroy(this);
     }
 
