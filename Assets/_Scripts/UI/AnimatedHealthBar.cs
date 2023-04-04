@@ -2,19 +2,19 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(BaseHealth))]
+[RequireComponent(typeof(HealthSystem))]
 public class AnimatedHealthBar : MonoBehaviour
 {
     [SerializeField] private Slider animatedSlider;
     [SerializeField] private float animationSpeed = 5f;
 
-    private BaseHealth _baseHealth;
+    private HealthSystem _baseHealth;
 
     private Tween _tween;
 
     private void Awake()
     {
-        _baseHealth = GetComponent<BaseHealth>();
+        _baseHealth = GetComponent<HealthSystem>();
     }
 
     private void OnEnable()

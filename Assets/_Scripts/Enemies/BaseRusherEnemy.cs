@@ -45,7 +45,7 @@ public class BaseRusherEnemy : MonoBehaviour
             {
                 foreach (var collider2D in collider)
                 {
-                    collider2D.GetComponent<BaseHealth>().TakeDamage?.Invoke(explosionDamage);
+                    collider2D.GetComponent<HealthSystem>().TakeDamage?.Invoke(explosionDamage);
                 }
             }
             
