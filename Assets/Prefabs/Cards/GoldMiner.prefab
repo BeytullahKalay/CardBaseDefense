@@ -250,6 +250,7 @@ GameObject:
   - component: {fileID: -5898578932965097241}
   - component: {fileID: 6461429319965558113}
   - component: {fileID: 5912706338807470119}
+  - component: {fileID: 3418978830738860168}
   m_Layer: 7
   m_Name: GoldMiner
   m_TagString: Untagged
@@ -403,3 +404,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goldMinerData: {fileID: 11400000, guid: 29af927a8ae017740bacf15312a92a26, type: 2}
   fillAmountText: {fileID: 2398910970687944130}
+--- !u!208 &3418978830738860168
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6074905538072354698}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

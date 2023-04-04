@@ -1,9 +1,10 @@
-
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    [SerializeField] private Transform baseTransform;
+    
     [HideInInspector]public List<Card> Cards;
 
     public void UpdateAllCardsState()
@@ -13,4 +14,7 @@ public class GameManager : MonoSingleton<GameManager>
             card.UpdateCardState();
         }
     }
+
+
+    public Transform BaseTransform => baseTransform;
 }

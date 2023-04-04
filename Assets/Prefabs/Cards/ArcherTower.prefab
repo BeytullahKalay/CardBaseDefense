@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 4280787341067937981}
   - component: {fileID: 5966064720105740018}
   - component: {fileID: 6682979045669812429}
+  - component: {fileID: -3272387674602106563}
   m_Layer: 7
   m_Name: ArcherTower
   m_TagString: Untagged
@@ -250,3 +251,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: ad26b11b1bc7d524baf3c089f1ec3270, type: 2}
+--- !u!208 &-3272387674602106563
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6074905538072354698}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
