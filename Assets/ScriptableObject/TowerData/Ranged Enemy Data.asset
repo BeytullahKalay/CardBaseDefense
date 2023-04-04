@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a738bafe7cf72d4696cca3f9ba8f489, type: 3}
+  m_Name: Ranged Enemy Data
+  m_EditorClassIdentifier: 
+  damage: 10
+  detectEnemyRadius: 5
+  firingFrequency: 1
+  whatIsEnemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  firePrefab: {fileID: 4099099113577076465, guid: 53abc30249c646d439f97ce9d757c5bd, type: 3}
