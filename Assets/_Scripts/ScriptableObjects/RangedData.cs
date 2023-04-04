@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Tower Data")]
-public class TowerData : ScriptableObject
+public class RangedData : ScriptableObject
 {
     [SerializeField] private int damage = 10;
     [SerializeField] private float detectEnemyRadius = 5f;
