@@ -10,22 +10,27 @@ public abstract class HealthSystem : MonoBehaviour, IHealthSystem
     public int Health { get; private set; }
 
     public Action<int> TakeDamage;
+    public Action UpdateSlider;
     public Action OnDead;
 
     protected Collider2D coll;
 
     private bool _isDead;
 
+    public int MaxHealth => maxHealth;
+
     protected virtual void OnEnable()
     {
         TakeDamage += GetDamage;
         OnDead += Die;
+        UpdateSlider += SetSlider;
     }
 
     protected virtual void OnDisable()
     {
         TakeDamage -= GetDamage;
         OnDead -= Die;
+        UpdateSlider -= SetSlider;
     }
 
     protected virtual void Awake()
@@ -36,17 +41,32 @@ public abstract class HealthSystem : MonoBehaviour, IHealthSystem
     public virtual void Start()
     {
         Health = maxHealth;
+        Initialize();
+    }
+
+    private void Initialize()
+    {
         slider.value = Health / maxHealth;
         slider.gameObject.SetActive(false);
     }
 
     public virtual void GetDamage(int damage)
     {
-        Health -= damage;
-        Health = Mathf.Clamp(Health, 0, maxHealth);
+        DecreaseHealth(damage);
+        UpdateSlider?.Invoke();
+        if (Health <= 0 && !_isDead) OnDead.Invoke();
+    }
+
+    private void SetSlider()
+    {
         slider.value = (float)Health / maxHealth;
         slider.gameObject.SetActive(true);
-        if (Health <= 0 && !_isDead) OnDead.Invoke();
+    }
+
+    private void DecreaseHealth(int damage)
+    {
+        Health -= damage;
+        Health = Mathf.Clamp(Health, 0, maxHealth);
     }
 
     public virtual void Die()
