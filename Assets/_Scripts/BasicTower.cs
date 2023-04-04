@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BasicTower : ActionCard
 {
-    [SerializeField] private TowerData _data;
+    [SerializeField] private RangedData _data;
 
     private float _nextFireTime = float.MinValue;
 
