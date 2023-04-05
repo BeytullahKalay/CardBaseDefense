@@ -1,46 +1,57 @@
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 public class FireObject : MonoBehaviour
 {
+    [SerializeField] private TMP_Text tmpText;
     [SerializeField] private float speed = 10f;
+    [SerializeField] private float fadeDuration = 1f;
     [SerializeField] private float ifNotHitAnyTargetDestroyAfterSeconds = 3f;
+    [SerializeField] private GameObject bulletSprite;
 
     private Vector3 _direction;
     private LayerMask _enemyLayer;
     private int _damage;
-    private bool _destroyed;
+    private bool _hit;
 
-    public void Initialize(Transform fireTransform, Transform target,int damage)
+    public void Initialize(Transform fireTransform, Transform target, int damage)
     {
         _direction = (target.position - fireTransform.position).normalized;
         _enemyLayer = target.gameObject.layer;
         _damage = damage;
-        Invoke("AttemptToDestroy",ifNotHitAnyTargetDestroyAfterSeconds);
+        Invoke("AttemptToDestroy", ifNotHitAnyTargetDestroyAfterSeconds);
+
+        tmpText.text = damage.ToString();
+        tmpText.alpha = 1;
+        tmpText.gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
     {
-        transform.position += _direction * (speed * Time.fixedDeltaTime);
+        if (!_hit)
+            transform.position += _direction * (speed * Time.fixedDeltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.layer == _enemyLayer)
         {
-            Debug.Log("in give damage");
+            _hit = true;
             col.GetComponent<HealthSystem>().TakeDamage?.Invoke(_damage);
-            Destroy(gameObject);
+            bulletSprite.SetActive(false);
+
+            tmpText.transform.position = col.transform.position + Vector3.up;
+            tmpText.gameObject.SetActive(true);
+            tmpText.transform.DOMoveY(tmpText.transform.position.y + 2, fadeDuration).OnComplete(() => Destroy(gameObject));
+            tmpText.DOFade(0, fadeDuration);
         }
     }
 
     private void AttemptToDestroy()
     {
-        if (_destroyed) return;
+        if (_hit) return;
 
         Destroy(gameObject);
-    }
-    private void OnDestroy()
-    {
-        _destroyed = true;
     }
 }
