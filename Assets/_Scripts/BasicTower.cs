@@ -1,3 +1,4 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class BasicTower : ActionCard
@@ -11,8 +12,10 @@ public class BasicTower : ActionCard
         if (Time.time > _nextFireTime && DetectedEnemies().Length > 0)
         {
             var target = DetectedEnemies()[0];
-            var obj = Instantiate(_data.FirePrefab, transform.position, Quaternion.identity);
-            obj.GetComponent<FireObject>().Initialize(transform, target.transform, _data.Damage);
+            var bullet = Pooler.Instance.BulletPool.Get();
+            Debug.Log("bullet is: " + bullet.name );
+            
+            bullet.GetComponent<FireObject>().Initialize(transform, target.transform, _data.Damage);
             _nextFireTime = Time.time + 1 / _data.FiringFrequency;
         }
     }

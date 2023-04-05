@@ -1,4 +1,3 @@
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,6 +8,7 @@ public class EnemyAttackState : EnemyBaseState
     private NavMeshAgent _agent;
     private Vector2 _basePosition;
     private float _nextFireTime = float.MinValue;
+    private Pooler _pooler;
 
     public EnemyAttackState(RangedData rangedData,Transform transform,NavMeshAgent agent,Vector2 basePosition)
     {
@@ -16,6 +16,8 @@ public class EnemyAttackState : EnemyBaseState
         _transform = transform;
         _agent = agent;
         _basePosition = basePosition;
+
+        _pooler = Pooler.Instance;
     }
     
     public override void OnEnter(RangedEnemyStateManager stateManager)
@@ -31,7 +33,7 @@ public class EnemyAttackState : EnemyBaseState
                 
             _agent.SetDestination(_transform.position);
             var target = stateManager.DetectTargets()[0];
-            var obj = stateManager.CreateBullet();
+            var obj =_pooler.BulletPool.Get();
             obj.GetComponent<FireObject>().Initialize(_transform, target.transform, _rangedData.Damage);
             _nextFireTime = Time.time + 1 / _rangedData.FiringFrequency;
 

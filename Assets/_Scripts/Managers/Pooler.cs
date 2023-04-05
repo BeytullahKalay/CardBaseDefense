@@ -1,18 +1,18 @@
 using UnityEngine.Pool;
 using UnityEngine;
 
-public class Pooler : MonoBehaviour
+public class Pooler : MonoSingleton<Pooler>
 {
-    [SerializeField] private GameObject canvasObject;
+    [SerializeField] private GameObject bulletObject;
 
-    public ObjectPool<GameObject> BulletPool;
+    public ObjectPool<GameObject> BulletPool { get; private set; }
 
     
     private void Awake()
     {
         BulletPool = new ObjectPool<GameObject>(() =>
         {
-            return Instantiate(canvasObject);
+            return Instantiate(bulletObject);
         }, text =>
         {
             text.gameObject.SetActive(true);

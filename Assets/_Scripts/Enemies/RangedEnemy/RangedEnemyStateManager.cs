@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -45,10 +44,10 @@ public class RangedEnemyStateManager : MonoBehaviour
         _currentState.OnEnter(this);
     }
 
-    public GameObject CreateBullet()
-    {
-        return Instantiate(rangedData.FirePrefab, transform.position, Quaternion.identity);
-    }
+    // public GameObject CreateBullet()
+    // {
+    //     return Pooler.Instance.BulletPool.Get();
+    // }
     
     public List<GameObject> DetectTargets()
     {

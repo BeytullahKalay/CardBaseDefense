@@ -10,13 +10,21 @@ public class FireObject : MonoBehaviour
     [SerializeField] private float ifNotHitAnyTargetDestroyAfterSeconds = 3f;
     [SerializeField] private GameObject bulletSprite;
 
+    private Pooler _pooler;
+
     private Vector3 _direction;
     private LayerMask _enemyLayer;
     private int _damage;
     private bool _hit;
 
+    private void Awake()
+    {
+        _pooler = Pooler.Instance;
+    }
+
     public void Initialize(Transform fireTransform, Transform target, int damage)
     {
+        transform.position = fireTransform.position;
         _direction = (target.position - fireTransform.position).normalized;
         _enemyLayer = target.gameObject.layer;
         _damage = damage;
@@ -43,7 +51,8 @@ public class FireObject : MonoBehaviour
 
             tmpText.transform.position = col.transform.position + Vector3.up;
             tmpText.gameObject.SetActive(true);
-            tmpText.transform.DOMoveY(tmpText.transform.position.y + 2, fadeDuration).OnComplete(() => Destroy(gameObject));
+            tmpText.transform.DOMoveY(tmpText.transform.position.y + 2, fadeDuration)
+                .OnComplete(() => Destroy(gameObject));
             tmpText.DOFade(0, fadeDuration);
         }
     }
@@ -51,7 +60,6 @@ public class FireObject : MonoBehaviour
     private void AttemptToDestroy()
     {
         if (_hit) return;
-
-        Destroy(gameObject);
+        _pooler.BulletPool.Release(gameObject);
     }
 }
