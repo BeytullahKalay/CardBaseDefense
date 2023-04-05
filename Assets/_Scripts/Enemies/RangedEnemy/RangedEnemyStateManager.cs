@@ -44,11 +44,6 @@ public class RangedEnemyStateManager : MonoBehaviour
         _currentState.OnEnter(this);
     }
 
-    // public GameObject CreateBullet()
-    // {
-    //     return Pooler.Instance.BulletPool.Get();
-    // }
-    
     public List<GameObject> DetectTargets()
     {
         var allColliders = Physics2D.OverlapCircleAll(transform.position, rangedData.DetectEnemyRadius,
