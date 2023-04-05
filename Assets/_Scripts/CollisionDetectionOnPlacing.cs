@@ -5,14 +5,21 @@ public class CollisionDetectionOnPlacing : MonoBehaviour
 {
     [SerializeField] private float detectRadius = 3f;
     [SerializeField] private LayerMask whatIsBuilding;
-    [HideInInspector]public bool Collide;
+    [HideInInspector] public bool Collide;
 
     private List<ActionCard> _cardAcitons = new List<ActionCard>();
 
     private Collider2D _collider;
 
+    private SpriteRenderer _spriteRenderer;
+    private Color _spriteColor;
+
     private void Awake()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteColor = _spriteRenderer.material.color;
+
+
         var actions = GetComponents<ActionCard>();
 
         foreach (var cardAction in actions)
@@ -22,19 +29,22 @@ public class CollisionDetectionOnPlacing : MonoBehaviour
         }
 
         _collider = GetComponent<Collider2D>();
-        _collider.enabled = false;
     }
 
     private void Update()
     {
-        var col = Physics2D.OverlapCircleAll(transform.position,detectRadius,whatIsBuilding);
+        var col = Physics2D.OverlapCircleAll(transform.position, detectRadius, whatIsBuilding);
         if (col.Length > 1)
         {
             Collide = true;
+            _spriteColor.a = .5f;
+            _spriteRenderer.material.color = _spriteColor;
         }
         else
         {
             Collide = false;
+            _spriteColor.a = 1f;
+            _spriteRenderer.material.color = _spriteColor;
         }
     }
 
@@ -46,7 +56,7 @@ public class CollisionDetectionOnPlacing : MonoBehaviour
         }
 
         _collider.enabled = true;
-        
+
         Destroy(this);
     }
 

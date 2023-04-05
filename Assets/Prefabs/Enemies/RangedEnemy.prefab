@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7112912903196052836}
   - component: {fileID: 7112912903196052839}
   - component: {fileID: 7112912903196052835}
-  - component: {fileID: 7112912903196052844}
+  - component: {fileID: 7112912904767531974}
   m_Layer: 8
   m_Name: RangedEnemy
   m_TagString: Untagged
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatedSlider: {fileID: 7112912903713729303}
   animationSpeed: 0.75
---- !u!114 &7112912903196052844
+--- !u!114 &7112912904767531974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,10 +161,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7112912903196052827}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d43b4f4d7cd7394aa797a31dcd0b32a, type: 3}
+  m_Script: {fileID: 11500000, guid: f6ad2b7ad9fdf614da3b4c758164dd83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rangedData: {fileID: 11400000, guid: 2b7053c580e22014eb4049f5a28c2bec, type: 2}
+  rangedData: {fileID: 11400000, guid: 2b7053c580e22014eb4049f5a28c2bec, type: 2}
 --- !u!1 &7112912903530427371
 GameObject:
   m_ObjectHideFlags: 0
