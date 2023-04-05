@@ -18,9 +18,9 @@ public class FireObject : MonoBehaviour
         Invoke("AttemptToDestroy",ifNotHitAnyTargetDestroyAfterSeconds);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        transform.position += _direction * (speed * Time.deltaTime);
+        transform.position += _direction * (speed * Time.fixedDeltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
