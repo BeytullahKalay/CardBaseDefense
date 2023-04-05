@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -20,6 +19,7 @@ public class BottomUIAnimation : MonoBehaviour,IPointerEnterHandler,IPointerExit
     private void Start()
     {
         _pos = _rectTransform.anchoredPosition;
+        MoveDown();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
