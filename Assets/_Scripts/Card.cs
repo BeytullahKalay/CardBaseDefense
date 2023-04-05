@@ -12,7 +12,7 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
     [SerializeField] private TMP_Text cardCostText;
     [SerializeField] private TMP_Text cardNameText;
     [SerializeField] private TMP_Text cardDescriptionText;
-
+    
 
     private GridLayoutGroup _gridLayoutGroup;
     private RectTransform _rectTransform;
@@ -22,7 +22,6 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
     private GoldManager _goldManager;
 
     private GameObject _createdObject;
-
 
     private void Awake()
     {

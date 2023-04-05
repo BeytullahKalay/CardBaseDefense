@@ -12,8 +12,6 @@ public class BasicTower : ActionCard
         {
             var target = DetectedEnemies()[0];
             var bullet = Pooler.Instance.BulletPool.Get();
-            Debug.Log("bullet is: " + bullet.name );
-            
             bullet.GetComponent<FireObject>().Initialize(transform, target.transform, _data.Damage);
             _nextFireTime = Time.time + 1 / _data.FiringFrequency;
         }
