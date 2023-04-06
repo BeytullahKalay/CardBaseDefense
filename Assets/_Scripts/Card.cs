@@ -89,14 +89,11 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
             {
                 _canvasGroup.alpha = 0f;
                 _createdObject = Instantiate(_cardData.ObjectToSpawn);
-                //_createdObject.transform.position = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
                 FollowMouseOnIntValues(_createdObject.transform);
             }
             else
             {
-                //_createdObject.transform.position = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
                 FollowMouseOnIntValues(_createdObject.transform);
-
             }
         }
         else
