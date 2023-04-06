@@ -659,6 +659,8 @@ GameObject:
   - component: {fileID: 3418978830738860168}
   - component: {fileID: 6461429319965558113}
   - component: {fileID: 5912706338807470119}
+  - component: {fileID: 3881978202115198571}
+  - component: {fileID: 2233529801173050697}
   m_Layer: 7
   m_Name: GoldMiner
   m_TagString: Untagged
@@ -828,6 +830,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goldMinerData: {fileID: 11400000, guid: 29af927a8ae017740bacf15312a92a26, type: 2}
   fillAmountText: {fileID: 2398910970687944130}
+--- !u!114 &3881978202115198571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6074905538072354698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b5f6836ef2f8d4ba47a66fa01d67f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  slider: {fileID: 4575128850590041773}
+--- !u!114 &2233529801173050697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6074905538072354698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2574d97c22e9a4b48ad48b79899c974c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatedSlider: {fileID: 2617999020036467004}
+  animationSpeed: 5
 --- !u!1 &6092438539049460269
 GameObject:
   m_ObjectHideFlags: 0

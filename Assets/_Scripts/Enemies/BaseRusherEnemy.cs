@@ -1,4 +1,3 @@
-using System;
 using NavMeshPlus.Extensions;
 using UnityEngine;
 using UnityEngine.AI;
@@ -37,8 +36,6 @@ public class BaseRusherEnemy : MonoBehaviour
     {
         if (col.gameObject.layer == LayerMask.NameToLayer("Building"))
         {
-            Debug.Log("BOOOM!!");
-
             var collider = Physics2D.OverlapCircleAll(transform.position, explosionRadius, whatIsHurtLayer);
 
             if (collider.Length > 0)

@@ -22,7 +22,6 @@ public class EnemyAttackState : EnemyBaseState
     
     public override void OnEnter(RangedEnemyStateManager stateManager)
     {
-        Debug.Log("Enter Attack State");
     }
 
     public override void OnUpdate(RangedEnemyStateManager stateManager)

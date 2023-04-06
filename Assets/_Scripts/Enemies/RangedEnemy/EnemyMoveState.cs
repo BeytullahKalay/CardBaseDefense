@@ -14,7 +14,6 @@ public class EnemyMoveState : EnemyBaseState
     
     public override void OnEnter(RangedEnemyStateManager stateManager)
     {
-        Debug.Log("Enter Move State");
     }
 
     public override void OnUpdate(RangedEnemyStateManager stateManager)

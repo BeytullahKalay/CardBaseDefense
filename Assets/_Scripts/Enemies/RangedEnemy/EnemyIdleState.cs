@@ -14,7 +14,6 @@ public class EnemyIdleState : EnemyBaseState
     }
     public override void OnEnter(RangedEnemyStateManager stateManager)
     {
-        Debug.Log("Enter Idle State");
     }
 
     public override void OnUpdate(RangedEnemyStateManager stateManager)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,6 +33,11 @@ public class CollisionDetectionOnPlacing : MonoBehaviour
         }
 
         _collider = GetComponent<Collider2D>();
+    }
+
+    private void Start()
+    {
+        _spriteRenderer.sortingOrder += 1;
     }
 
     private void Update()
@@ -72,5 +78,10 @@ public class CollisionDetectionOnPlacing : MonoBehaviour
         Gizmos.color = Collide ? Color.red : Color.green;
 
         Gizmos.DrawWireSphere(transform.position, detectRadius);
+    }
+
+    private void OnDestroy()
+    {
+        _spriteRenderer.sortingOrder -= 1;
     }
 }
