@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Water
+    uniqueID: 1466098107
+    locked: 0
+  - name: Decoration
+    uniqueID: 1143310931
+    locked: 0
+  - name: Ground
+    uniqueID: 1141208551
+    locked: 0
+  - name: Building
+    uniqueID: 683767175
+    locked: 0
+  - name: FrontDecoration
+    uniqueID: 3033832985
+    locked: 0

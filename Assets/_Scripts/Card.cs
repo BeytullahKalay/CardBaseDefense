@@ -89,17 +89,26 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
             {
                 _canvasGroup.alpha = 0f;
                 _createdObject = Instantiate(_cardData.ObjectToSpawn);
-                _createdObject.transform.position = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
+                //_createdObject.transform.position = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
+                FollowMouseOnIntValues(_createdObject.transform);
             }
             else
             {
-                _createdObject.transform.position = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
+                //_createdObject.transform.position = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
+                FollowMouseOnIntValues(_createdObject.transform);
+
             }
         }
         else
         {
             ResetCardUI();
         }
+    }
+
+    private void FollowMouseOnIntValues(Transform objectToFollow)
+    {
+        var pos =Vector2Int.RoundToInt(Helpers.GetWorldPositionOfPointer(Helpers.MainCamera));
+        objectToFollow.position = new Vector3(pos.x,pos.y,0);
     }
 
     public void OnPointerDown(PointerEventData eventData)

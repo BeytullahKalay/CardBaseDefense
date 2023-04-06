@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -35,6 +36,12 @@ public class GoldMiner : ActionCard
     private void OnMouseDown()
     {
         CollectGolds();
+        PlayBouncyEffect();
+    }
+    
+    private void PlayBouncyEffect()
+    {
+        transform.DOPunchScale(Vector3.one * .2f, .1f);
     }
 
     private void CollectGolds()
