@@ -9,14 +9,8 @@ public class GoldMiner : ActionCard
 
     private float _nextMiningTime = float.MinValue;
 
-    private GoldManager _goldManager;
-
     private int _inBagAmount;
 
-    private void Awake()
-    {
-        _goldManager = GoldManager.Instance;
-    }
 
     private void Start()
     {
@@ -62,8 +56,9 @@ public class GoldMiner : ActionCard
 
     private void CompletedAction()
     {
-        _goldManager.CurrentGold += goldMinerData.MiningAmount;
+        GoldManager.Instance.CurrentGold += goldMinerData.MiningAmount;
         EventManager.UpdateGoldUI?.Invoke();
+        GameManager.Instance.UpdateAllCardsState();
     }
 
     private void UpdateFillAmountText()
