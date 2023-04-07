@@ -11,6 +11,10 @@ public class GoldMiner : ActionCard
 
     private int _inBagAmount;
 
+    private void Awake()
+    {
+        SetNextGoldMineTime();
+    }
 
     private void Start()
     {
@@ -19,12 +23,26 @@ public class GoldMiner : ActionCard
 
     private void Update()
     {
-        if (Time.time > _nextMiningTime && _inBagAmount < goldMinerData.MaxGoldAmountCanCarry)
+        if (Time.time > _nextMiningTime && !IsGoldBagFull())
         {
-            _nextMiningTime = Time.time + 1 / goldMinerData.MineFrequency;
+            SetNextGoldMineTime();
             _inBagAmount++;
             UpdateFillAmountText();
         }
+        else if(IsGoldBagFull())
+        {
+            SetNextGoldMineTime();
+        }
+    }
+
+    private bool IsGoldBagFull()
+    {
+        return _inBagAmount >= goldMinerData.MaxGoldAmountCanCarry;
+    }
+    
+    private void SetNextGoldMineTime()
+    {
+        _nextMiningTime = Time.time + 1 / goldMinerData.MineFrequency;
     }
 
     private void OnMouseDown()
