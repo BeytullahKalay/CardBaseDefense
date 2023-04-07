@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 6074905538072354698, guid: 921d58d4ca1a6d04badbdc854c085974, type: 3}
   cost: 8
-  cardName: Gold Mine
+  cardName: Gold Miner
   cardDescription: This card creates a gold mine that make gold over time.

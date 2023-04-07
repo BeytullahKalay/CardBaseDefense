@@ -50,15 +50,18 @@ TagManager:
   - name: Ground
     uniqueID: 1141208551
     locked: 0
+  - name: BackDecoration
+    uniqueID: 239362473
+    locked: 0
   - name: Units
     uniqueID: 1842496263
     locked: 0
   - name: Building
     uniqueID: 683767175
     locked: 0
-  - name: Particles
-    uniqueID: 939540325
-    locked: 0
   - name: FrontDecoration
     uniqueID: 3033832985
+    locked: 0
+  - name: Particles
+    uniqueID: 939540325
     locked: 0
