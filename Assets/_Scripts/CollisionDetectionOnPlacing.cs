@@ -43,11 +43,12 @@ public class CollisionDetectionOnPlacing : MonoBehaviour
     private void Update()
     {
         var col = Physics2D.OverlapCircleAll(transform.position, detectRadius, whatIsNotPlaceableLayerMask);
-        var mousePosVector2Int = Vector2Int.RoundToInt(Helpers.GetWorldPositionOfPointer(Helpers.MainCamera));
-        var isOnWater = _tilemapManager.WaterTilemap.HasTile(new Vector3Int(mousePosVector2Int.x,mousePosVector2Int.y,0));
-
         
-        if (col.Length > 1 || isOnWater)
+        
+        var mousePosVector2Int = Vector2Int.RoundToInt(Helpers.GetWorldPositionOfPointer(Helpers.MainCamera));
+        var isOnGroundTile = _tilemapManager.GroundTilemap.HasTile(new Vector3Int(mousePosVector2Int.x,mousePosVector2Int.y,0));
+
+        if (col.Length > 1 || !isOnGroundTile)
         {
             Collide = true;
             _spriteColor.a = .5f;
