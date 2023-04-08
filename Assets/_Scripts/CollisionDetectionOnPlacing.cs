@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,12 +42,14 @@ public class CollisionDetectionOnPlacing : MonoBehaviour
     private void Update()
     {
         var col = Physics2D.OverlapCircleAll(transform.position, detectRadius, whatIsNotPlaceableLayerMask);
-        
-        
+        var colList = new List<Collider2D>(col);
+        colList.Remove(_collider);
+
+
         var mousePosVector2Int = Vector2Int.RoundToInt(Helpers.GetWorldPositionOfPointer(Helpers.MainCamera));
         var isOnGroundTile = _tilemapManager.GroundTilemap.HasTile(new Vector3Int(mousePosVector2Int.x,mousePosVector2Int.y,0));
 
-        if (col.Length > 1 || !isOnGroundTile)
+        if (colList.Count > 0 || !isOnGroundTile)
         {
             Collide = true;
             _spriteColor.a = .5f;
