@@ -68,4 +68,29 @@ public static class Helpers
     }
 
     #endregion
+
+
+    
+    /// <summary>
+    /// Set sprite renderer color alpha
+    /// </summary>
+    public static SpriteRenderer SetColorAlpha(this SpriteRenderer renderer,float alphaValue)
+    {
+        var c = renderer.color;
+        c.a = alphaValue;
+        renderer.color = c;
+        return renderer;
+    }
+    
+    
+    /// <summary>
+    /// A shorter way of testing if a game object has a component
+    /// </summary>
+    /// <typeparam name="T">Component type</typeparam>
+    /// <param name="obj">The object to check on</param>
+    /// <returns></returns>
+    public static bool Has<T>(this GameObject obj) where T : Component
+    {
+        return obj.GetComponent<T>() != null;
+    }
 }

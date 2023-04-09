@@ -147,11 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 029db663a9a06744b97664b51415bfab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionRadius: 1
-  explosionDamage: 25
-  whatIsHittableLayer:
-    serializedVersion: 2
-    m_Bits: 256
+  _trapData: {fileID: 11400000, guid: 9ee4a7ec7ce7fa24ab635925bcdfe631, type: 2}
+  ready: {r: 0.25866985, g: 1, b: 0, a: 1}
+  exploded: {r: 1, g: 0.14431226, b: 0, a: 1}
 --- !u!114 &2685003176239893
 MonoBehaviour:
   m_ObjectHideFlags: 0

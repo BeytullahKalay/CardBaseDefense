@@ -1,21 +1,19 @@
-using DG.Tweening;
-using TMPro;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class FireObject : MonoBehaviour
 {
-    [SerializeField] private TMP_Text tmpText;
     [SerializeField] private float speed = 10f;
     [SerializeField] private float fadeDuration = 1f;
     [SerializeField] private float ifNotHitAnyTargetDestroyAfterSeconds = 3f;
-    [SerializeField] private GameObject bulletSprite;
 
     private Pooler _pooler;
 
-    private Vector3 _direction;
-    private LayerMask _enemyLayer;
-    private int _damage;
-    private bool _hit;
+    [SerializeField] private Vector3 _direction;
+    [SerializeField] private LayerMask _targetLayerMask;
+    [SerializeField] private int _damage;
+    [SerializeField] private bool _hit;
+    [SerializeField] private GameObject _particleCanvas;
 
     private void Awake()
     {
@@ -24,15 +22,16 @@ public class FireObject : MonoBehaviour
 
     public void Initialize(Transform fireTransform, Transform target, int damage)
     {
+        _hit = false;
         transform.position = fireTransform.position;
         _direction = (target.position - fireTransform.position).normalized;
-        _enemyLayer = target.gameObject.layer;
+        _targetLayerMask = target.gameObject.layer; 
+        
         _damage = damage;
-        Invoke("AttemptToDestroy", ifNotHitAnyTargetDestroyAfterSeconds);
-
-        tmpText.text = damage.ToString();
-        tmpText.alpha = 1;
-        tmpText.gameObject.SetActive(false);
+        
+        
+        
+        //Invoke("AttemptToDestroy", ifNotHitAnyTargetDestroyAfterSeconds);
     }
 
     private void FixedUpdate()
@@ -43,23 +42,37 @@ public class FireObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.layer == _enemyLayer)
+        var colLayer = LayerMask.LayerToName(col.gameObject.layer);
+        var targetLayer = LayerMask.LayerToName(_targetLayerMask);
+        
+        
+        
+        if (colLayer == targetLayer)
         {
             _hit = true;
             col.GetComponent<HealthSystem>().TakeDamage?.Invoke(_damage);
-            bulletSprite.SetActive(false);
-
-            tmpText.transform.position = col.transform.position + Vector3.up;
-            tmpText.gameObject.SetActive(true);
-            tmpText.transform.DOMoveY(tmpText.transform.position.y + 2, fadeDuration)
-                .OnComplete(() => Destroy(gameObject));
-            tmpText.DOFade(0, fadeDuration);
+            
+            
+            _particleCanvas = _pooler.ParticleTextPool.Get();
+            _particleCanvas.GetComponent<ParticleCanvas>().PlayTextAnimation(_damage.ToString(),
+                col.transform.position, fadeDuration,ReleaseTheCanvasParticle);
+            
+            _pooler.BulletPool.Release(gameObject);
         }
     }
 
-    private void AttemptToDestroy()
+    private void ReleaseTheCanvasParticle()
     {
-        if (_hit) return;
-        _pooler.BulletPool.Release(gameObject);
+        _pooler.ParticleTextPool.Release(_particleCanvas);
     }
+
+    //TODO: bu calismiyor
+    // private void AttemptToDestroy()
+    // {
+    //     if (_hit) return;
+    //     
+    //     print("released");
+    //     _pooler.BulletPool.Release(gameObject);
+    //     ReleaseTheCanvasParticle();
+    // }
 }
