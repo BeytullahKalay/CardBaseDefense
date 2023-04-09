@@ -15,5 +15,4 @@ MonoBehaviour:
   objectToSpawn: {fileID: 8553419674588327099, guid: b9dce39d9a47bf446b46beba5bd498b1, type: 3}
   cost: 4
   cardName: Bomb Trap
-  cardDescription: The card places a bomb that explodes and damages enemies upon
-    interaction.
+  cardDescription: This card places a bomb that explodes and damages enemies.

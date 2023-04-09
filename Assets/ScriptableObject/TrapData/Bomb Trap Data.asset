@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a738bafe7cf72d4696cca3f9ba8f489, type: 3}
-  m_Name: BaseTowerData
+  m_Script: {fileID: 11500000, guid: a32d057409fa7194e915caedc8824638, type: 3}
+  m_Name: Bomb Trap Data
   m_EditorClassIdentifier: 
-  damage: {x: 1, y: 1}
-  detectEnemyRadius: 10
-  firingFrequency: 1.25
-  whatIsEnemyLayer:
+  trapDamage: {x: 20, y: 25}
+  explosionRadius: 3
+  whatIsHittableLayer:
     serializedVersion: 2
     m_Bits: 256
-  firePrefab: {fileID: 715455850893262444, guid: 736399d6fee3a2e4ba2d39e56117576a, type: 3}
