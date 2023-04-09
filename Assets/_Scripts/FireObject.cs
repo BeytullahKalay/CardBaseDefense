@@ -55,16 +55,12 @@ public class FireObject : MonoBehaviour
             
             _particleCanvas = _pooler.ParticleTextPool.Get();
             _particleCanvas.GetComponent<ParticleCanvas>().PlayTextAnimation(_damage.ToString(),
-                col.transform.position, fadeDuration,ReleaseTheCanvasParticle);
-            
+                col.transform.position, fadeDuration);
             _pooler.BulletPool.Release(gameObject);
         }
     }
 
-    private void ReleaseTheCanvasParticle()
-    {
-        _pooler.ParticleTextPool.Release(_particleCanvas);
-    }
+
 
     //TODO: bu calismiyor
     // private void AttemptToDestroy()

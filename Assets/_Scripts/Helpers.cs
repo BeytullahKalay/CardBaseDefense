@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -74,7 +75,18 @@ public static class Helpers
     /// <summary>
     /// Set sprite renderer color alpha
     /// </summary>
-    public static SpriteRenderer SetColorAlpha(this SpriteRenderer renderer,float alphaValue)
+    public static SpriteRenderer SetColorAlpha(this SpriteRenderer tmpText,float alphaValue)
+    {
+        var c = tmpText.color;
+        c.a = alphaValue;
+        tmpText.color = c;
+        return tmpText;
+    }
+    
+    /// <summary>
+    /// Set TMP_Text color alpha
+    /// </summary>
+    public static TMP_Text SetColorAlpha(this TMP_Text renderer,float alphaValue)
     {
         var c = renderer.color;
         c.a = alphaValue;
