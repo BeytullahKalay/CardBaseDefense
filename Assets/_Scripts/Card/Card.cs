@@ -43,7 +43,7 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
 
     public void UpdateCardState()
     {
-        if (IsCardPurchasable())
+        if (_goldManager.IsPurchasable(_cardData.Cost))
         {
             _canvasGroup.alpha = 1f;
             _canvasGroup.blocksRaycasts = true;
@@ -55,10 +55,10 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         }
     }
 
-    private bool IsCardPurchasable()
-    {
-        return _goldManager.CurrentGold >= _cardData.Cost;
-    }
+    // private bool IsCardPurchasable()
+    // {
+    //     return _goldManager.CurrentGold >= _cardData.Cost;
+    // }
 
     public void OnPointerUp(PointerEventData eventData)
     {

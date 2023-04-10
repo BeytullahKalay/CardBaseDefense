@@ -29,6 +29,11 @@ public class GoldManager : MonoSingleton<GoldManager>
         EventManager.UpdateGoldUI?.Invoke();
     }
 
+    public bool IsPurchasable(int cost)
+    {
+        return (CurrentGold >= cost);
+    }
+
 
     public RectTransform GoldTextUIRectTransform => goldTextUIRectTransform;
 }
