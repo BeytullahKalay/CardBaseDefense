@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trapDamage: {x: 20, y: 25}
   explosionRadius: 3
+  repairCost: 3
   whatIsHittableLayer:
     serializedVersion: 2
     m_Bits: 256
