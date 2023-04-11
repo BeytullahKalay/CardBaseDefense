@@ -10,18 +10,24 @@ public class BaseRusherEnemy : MonoBehaviour
 
     [SerializeField] private float explosionRadius;
 
-    [SerializeField] private int explosionDamage = 20;
+    [SerializeField] private float explosionTextFadeDuration = 2f;
 
+    [SerializeField] private int explosionDamage = 20;
+    
     [SerializeField] private LayerMask whatIsHurtLayer;
 
     private Vector2 _destinationPosition;
 
     private NavMeshAgent _agent;
 
+    private Pooler _pooler;
+
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-        
+        _pooler = Pooler.Instance;
+
         var basePosition = (Vector2)GameManager.Instance.BaseTransform.position;
         var direction = ((Vector2)transform.position - basePosition).normalized;
         _destinationPosition = basePosition + direction * attackDistance;
@@ -43,10 +49,18 @@ public class BaseRusherEnemy : MonoBehaviour
                 foreach (var collider2D in collider)
                 {
                     collider2D.GetComponent<HealthSystem>().TakeDamage?.Invoke(explosionDamage);
+                    var particleCanvas = _pooler.ParticleTextPool.Get();
+                    particleCanvas.GetComponent<ParticleCanvas>().PlayTextAnimation(explosionDamage.ToString(),
+                        collider2D.transform.position,explosionTextFadeDuration);
                 }
             }
-            
+
             Destroy(gameObject);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, attackDistance);
     }
 }

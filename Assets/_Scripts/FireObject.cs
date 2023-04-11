@@ -1,12 +1,10 @@
 using System;
 using System.Collections;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class FireObject : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
-    [SerializeField] private float fadeDuration = 1f;
     [SerializeField] private float ifNotHitAnyTargetDestroyAfterSeconds = 3f;
 
     private Pooler _pooler;
@@ -15,7 +13,6 @@ public class FireObject : MonoBehaviour
     [SerializeField] private LayerMask _targetLayerMask;
     [SerializeField] private int _damage;
     [SerializeField] private bool _hit;
-    [SerializeField] private GameObject _particleCanvas;
 
     private IEnumerator _coroutine;
 
@@ -53,9 +50,9 @@ public class FireObject : MonoBehaviour
             col.GetComponent<HealthSystem>().TakeDamage?.Invoke(_damage);
             StopCoroutine(_coroutine);
             
-            _particleCanvas = _pooler.ParticleTextPool.Get();
-            _particleCanvas.GetComponent<ParticleCanvas>().PlayTextAnimation(_damage.ToString(),
-                col.transform.position, fadeDuration);
+            var particleCanvas = _pooler.ParticleTextPool.Get();
+            particleCanvas.GetComponent<ParticleCanvas>().PlayTextAnimation(_damage.ToString(),
+                col.transform.position);
             _pooler.BulletPool.Release(gameObject);
         }
     }

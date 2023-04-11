@@ -13,7 +13,7 @@ public class ParticleCanvas : MonoBehaviour
         _pooler = Pooler.Instance;
     }
 
-    public void PlayTextAnimation(string damageString, Vector3 spawnPosition, float fadeDuration)
+    public void PlayTextAnimation(string damageString, Vector3 spawnPosition,float fadeDuration = 1)
     {
         damageTMPText.text = damageString;
         damageTMPText.transform.position = spawnPosition + Vector3.up * .5f;
