@@ -40,7 +40,7 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
         if (!Placeable) return;
 
-        var vector3IntPos = GetMousePositionForTilemap();
+        var vector3IntPos = Helpers.GetMousePositionForTilemap(_groundTilemap);
         var downIntVal = Mathf.FloorToInt(groundCreateData.SizeOfGround * .5f);
         var upIntVal = Mathf.CeilToInt(groundCreateData.SizeOfGround * .5f);
 
@@ -90,7 +90,7 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
     private Vector3Int SetGroundPosition(out int downIntVal, out int upIntVal)
     {
-        var vector3IntPos = GetMousePositionForTilemap();
+        var vector3IntPos = Helpers.GetMousePositionForTilemap(_groundTilemap);
         downIntVal = Mathf.FloorToInt(groundCreateData.SizeOfGround * .5f);
         upIntVal = Mathf.CeilToInt(groundCreateData.SizeOfGround * .5f);
 
@@ -113,14 +113,14 @@ public class GroundCreate : MonoBehaviour, IPlaceable
         return vector3IntPos;
     }
 
-    private Vector3Int GetMousePositionForTilemap()
-    {
-        var mousePosVec2 = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
-        var tileAnchor = _groundTilemap.tileAnchor;
-        var mousePosVector3 =
-            new Vector3(mousePosVec2.x, mousePosVec2.y, 0) - new Vector3(tileAnchor.x, tileAnchor.y, 0);
-        return Vector3Int.RoundToInt(mousePosVector3);
-    }
+    // private Vector3Int GetMousePositionForTilemap()
+    // {
+    //     var mousePosVec2 = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
+    //     var tileAnchor = _groundTilemap.tileAnchor;
+    //     var mousePosVector3 =
+    //         new Vector3(mousePosVec2.x, mousePosVec2.y, 0) - new Vector3(tileAnchor.x, tileAnchor.y, 0);
+    //     return Vector3Int.RoundToInt(mousePosVector3);
+    // }
 
 
     public void PlaceActions()

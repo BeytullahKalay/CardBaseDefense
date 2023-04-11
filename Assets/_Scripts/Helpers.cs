@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 
 public static class Helpers
 {
@@ -92,6 +93,18 @@ public static class Helpers
         c.a = alphaValue;
         renderer.color = c;
         return renderer;
+    }
+
+    /// <summary>
+    /// Get mouse position for given tilemap parameter
+    /// </summary>
+    public static Vector3Int GetMousePositionForTilemap(Tilemap tilemap)
+    {
+        var mousePosVec2 = GetWorldPositionOfPointer(MainCamera);
+        var tileAnchor = tilemap.tileAnchor;
+        var mousePosVector3 =
+            new Vector3(mousePosVec2.x, mousePosVec2.y, 0) - new Vector3(tileAnchor.x, tileAnchor.y, 0);
+        return Vector3Int.RoundToInt(mousePosVector3);
     }
     
     
