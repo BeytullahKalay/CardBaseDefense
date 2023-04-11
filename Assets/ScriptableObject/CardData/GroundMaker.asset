@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 217daef7f4c817940b576744c2ffdb59, type: 3}
-  m_Name: Ground Create Data
+  m_Script: {fileID: 11500000, guid: 45cfdad1aefb77e4a84dc61b06b7d38d, type: 3}
+  m_Name: GroundMaker
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: f1b40e6e72647c84d963f401a29b6cc7, type: 2}
-  sizeOfGround: 2
+  objectToSpawn: {fileID: 2795713516950890467, guid: 62b43ec05e4cf1449801adb0ce017a43, type: 3}
+  cost: 4
+  cardName: Ground
+  cardDescription: This card creates a ground.

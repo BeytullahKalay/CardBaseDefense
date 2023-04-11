@@ -676,7 +676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8672199475512272693
 Transform:
   m_ObjectHideFlags: 0
@@ -731,7 +731,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 683767175
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 0.52156866, g: 0.7333658, b: 0.98039216, a: 1}
@@ -824,7 +824,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 683767175
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.52156866, g: 0.7372549, b: 0.98039216, a: 1}
@@ -912,11 +912,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b347f80eeeb806419efe8b1b0f6e418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectRadius: 0.4
+  detectRadius: 0.57
   whatIsNotPlaceableLayerMask:
     serializedVersion: 2
     m_Bits: 144
-  Collide: 0
 --- !u!114 &6682979045669812429
 MonoBehaviour:
   m_ObjectHideFlags: 0

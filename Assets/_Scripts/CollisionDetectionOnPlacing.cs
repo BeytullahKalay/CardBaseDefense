@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionDetectionOnPlacing : MonoBehaviour
+public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
 {
     [SerializeField] private float detectRadius = 3f;
     [SerializeField] private LayerMask whatIsNotPlaceableLayerMask;
-    [HideInInspector] public bool Collide;
+    //[HideInInspector] public bool Collide;
+    
+    public bool Placeable { get; set; }
+
 
     private List<ActionCard> _cardActions = new List<ActionCard>();
 
@@ -51,19 +54,21 @@ public class CollisionDetectionOnPlacing : MonoBehaviour
 
         if (colList.Count > 0 || !isOnGroundTile)
         {
-            Collide = true;
+            //Collide = true;
+            Placeable = false;
             _spriteColor.a = .5f;
             _spriteRenderer.material.color = _spriteColor;
         }
         else
         {
-            Collide = false;
+            //Collide = false;
+            Placeable = true;
             _spriteColor.a = 1f;
             _spriteRenderer.material.color = _spriteColor;
         }
     }
 
-    public void OpenActionsAndDestroyCollisionDetection()
+    public void PlaceActions()
     {
         foreach (var cardAciton in _cardActions)
         {
@@ -77,7 +82,7 @@ public class CollisionDetectionOnPlacing : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Collide ? Color.red : Color.green;
+        Gizmos.color = !Placeable ? Color.red : Color.green;
 
         Gizmos.DrawWireSphere(transform.position, detectRadius);
     }
@@ -86,4 +91,5 @@ public class CollisionDetectionOnPlacing : MonoBehaviour
     {
         _spriteRenderer.sortingOrder -= 1;
     }
+
 }

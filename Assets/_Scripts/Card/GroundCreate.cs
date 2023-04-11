@@ -1,43 +1,99 @@
+using System;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class GroundCreate : MonoBehaviour
+public class GroundCreate : MonoBehaviour,IPlaceable
 {
     [SerializeField] private GroundCreateData groundCreateData;
+    
+    
+    public bool Placeable { get; set; }
+
 
     private Vector3Int _lastPos;
+
+    private Tilemap _groundTilemap;
+    private Tilemap _undergroundTilemap;
+
+    private void Awake()
+    {
+        _groundTilemap = NavmeshManager.Instance.GroundTilemap;
+        _undergroundTilemap = NavmeshManager.Instance.UndergroundTilemap;
+    }
 
 
     private void Update()
     {
-        var mousePosVec2 = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
-        var tileAnchor = groundCreateData.GroundTilemap.tileAnchor;
-        var mousePosVector3 =
-            new Vector3(mousePosVec2.x, mousePosVec2.y, 0) - new Vector3(tileAnchor.x, tileAnchor.y, 0);
-        var vector3IntPos = Vector3Int.RoundToInt(mousePosVector3);
-        var downIntVal = Mathf.FloorToInt(  groundCreateData.SizeOfGround * .5f);
-        var upIntVal = Mathf.CeilToInt(groundCreateData.SizeOfGround * .5f);
+        FindIsPlaceable();
         
+        if(!Placeable) return;
+
+        var vector3IntPos = SetGroundPosition(out var downIntVal, out var upIntVal);
+
+        CreateGround(vector3IntPos, downIntVal, upIntVal);
+    }
+
+    private void FindIsPlaceable()
+    {
+        var mousePosVec2 = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
+        var mousePosVector3 = new Vector3(mousePosVec2.x, mousePosVec2.y, 0);
+        var tileSearchPos = Vector3Int.RoundToInt(mousePosVector3);
+        Placeable = !_groundTilemap.HasTile(tileSearchPos);
+    }
+
+    private void CreateGround(Vector3Int vector3IntPos, int downIntVal, int upIntVal)
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            _undergroundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, vector3IntPos.x - downIntVal,
+                vector3IntPos.y - downIntVal, vector3IntPos.x + upIntVal, vector3IntPos.y + upIntVal);
+
+            _groundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, vector3IntPos.x - downIntVal,
+                vector3IntPos.y - downIntVal, vector3IntPos.x + upIntVal, vector3IntPos.y + upIntVal);
+
+            NavmeshManager.Instance.UpdateSurfaceData();
+            _undergroundTilemap.ClearAllEditorPreviewTiles();
+            Destroy(gameObject);
+        }
+    }
+
+    private Vector3Int SetGroundPosition(out int downIntVal, out int upIntVal)
+    {
+        var mousePosVec2 = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
+        var tileAnchor = _groundTilemap.tileAnchor;
+        var mousePosVector3 = new Vector3(mousePosVec2.x, mousePosVec2.y, 0) - new Vector3(tileAnchor.x, tileAnchor.y, 0);
+        var vector3IntPos = Vector3Int.RoundToInt(mousePosVector3);
+        downIntVal = Mathf.FloorToInt(groundCreateData.SizeOfGround * .5f);
+        upIntVal = Mathf.CeilToInt(groundCreateData.SizeOfGround * .5f);
+
         if (_lastPos != vector3IntPos)
         {
-           groundCreateData.UnderGroundTilemap.CompressBounds();
-           groundCreateData.GroundTilemap.CompressBounds();
+            _undergroundTilemap.CompressBounds();
+            _groundTilemap.CompressBounds();
 
             CheckBoundaries(vector3IntPos, downIntVal, upIntVal);
 
 
-           groundCreateData.UnderGroundTilemap.ClearAllEditorPreviewTiles();
+            _undergroundTilemap.ClearAllEditorPreviewTiles();
             _lastPos = vector3IntPos;
-            groundCreateData.UnderGroundTilemap.EditorPreviewBoxFill(vector3IntPos,groundCreateData.TileBase, vector3IntPos.x - downIntVal,
+            _undergroundTilemap.EditorPreviewBoxFill(vector3IntPos, groundCreateData.TileBase, vector3IntPos.x - downIntVal,
                 vector3IntPos.y - downIntVal, vector3IntPos.x + upIntVal, vector3IntPos.y + upIntVal);
         }
+
+        return vector3IntPos;
     }
-    
+
+
+    public void PlaceActions()
+    {
+    }
+
     private void CheckBoundaries(Vector3Int vector3IntPos, int downIntVal, int upIntVal)
     {
-        if (vector3IntPos.x - downIntVal < groundCreateData.UnderGroundTilemap.origin.x) // left boundaries
+        if (vector3IntPos.x - downIntVal < _undergroundTilemap.origin.x) // left boundaries
         {
-            var underGroundTilemap = groundCreateData.UnderGroundTilemap;
-            var groundTilemap = groundCreateData.GroundTilemap;
+            var underGroundTilemap = _undergroundTilemap;
+            var groundTilemap = _groundTilemap;
             
             var newSize = underGroundTilemap.size;
             var newOrigin = underGroundTilemap.origin;
@@ -53,10 +109,10 @@ public class GroundCreate : MonoBehaviour
             groundTilemap.origin = newOrigin;
         }
 
-        if (vector3IntPos.x + upIntVal > groundCreateData.UnderGroundTilemap.size.x - Mathf.Abs(groundCreateData.UnderGroundTilemap.origin.x - 1)) // right boundaries
+        if (vector3IntPos.x + upIntVal > _undergroundTilemap.size.x - Mathf.Abs(_undergroundTilemap.origin.x - 1)) // right boundaries
         {
-            var underGroundTilemap = groundCreateData.UnderGroundTilemap;
-            var groundTilemap = groundCreateData.GroundTilemap;
+            var underGroundTilemap = _undergroundTilemap;
+            var groundTilemap = _groundTilemap;
 
             
             var newSize = underGroundTilemap.size;
@@ -69,10 +125,10 @@ public class GroundCreate : MonoBehaviour
             groundTilemap.size = newSize;
         }
 
-        if (vector3IntPos.y - downIntVal < groundCreateData.UnderGroundTilemap.origin.y)
+        if (vector3IntPos.y - downIntVal < _undergroundTilemap.origin.y) // down boundaries
         {
-            var underGroundTilemap = groundCreateData.UnderGroundTilemap;
-            var groundTilemap = groundCreateData.GroundTilemap;
+            var underGroundTilemap = _undergroundTilemap;
+            var groundTilemap = _groundTilemap;
 
             var newSize = underGroundTilemap.size;
             var newOrigin = underGroundTilemap.origin;
@@ -88,10 +144,10 @@ public class GroundCreate : MonoBehaviour
             groundTilemap.origin = newOrigin;
         }
 
-        if (vector3IntPos.y + upIntVal > groundCreateData.UnderGroundTilemap.size.y - Mathf.Abs(groundCreateData.UnderGroundTilemap.origin.y - 1)) // upper boundaries
+        if (vector3IntPos.y + upIntVal > _undergroundTilemap.size.y - Mathf.Abs(_undergroundTilemap.origin.y - 1)) // upper boundaries
         {
-            var underGroundTilemap = groundCreateData.UnderGroundTilemap;
-            var groundTilemap = groundCreateData.GroundTilemap;
+            var underGroundTilemap = _undergroundTilemap;
+            var groundTilemap = _groundTilemap;
 
             var newSize = underGroundTilemap.size;
 

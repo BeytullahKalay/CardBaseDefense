@@ -55,19 +55,14 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         }
     }
 
-    // private bool IsCardPurchasable()
-    // {
-    //     return _goldManager.CurrentGold >= _cardData.Cost;
-    // }
-
     public void OnPointerUp(PointerEventData eventData)
     {
         if (!Helpers.IsPointerOverUIElement(LayerMask.NameToLayer("UI")) &&
-            !_createdObject.GetComponent<CollisionDetectionOnPlacing>().Collide)
+            _createdObject.GetComponent<IPlaceable>().Placeable)
         {
             EventManager.AddThatToCurrentGold?.Invoke(-_cardData.Cost);
             _gm.UpdateAllCardsState();
-            _createdObject.GetComponent<CollisionDetectionOnPlacing>().OpenActionsAndDestroyCollisionDetection();
+            _createdObject.GetComponent<IPlaceable>().PlaceActions();
             DestroyCardFromUI();
         }
         else
