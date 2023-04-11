@@ -5,7 +5,6 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
 {
     [SerializeField] private float detectRadius = 3f;
     [SerializeField] private LayerMask whatIsNotPlaceableLayerMask;
-    //[HideInInspector] public bool Collide;
     
     public bool Placeable { get; set; }
 
@@ -54,14 +53,12 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
 
         if (colList.Count > 0 || !isOnGroundTile)
         {
-            //Collide = true;
             Placeable = false;
             _spriteColor.a = .5f;
             _spriteRenderer.material.color = _spriteColor;
         }
         else
         {
-            //Collide = false;
             Placeable = true;
             _spriteColor.a = 1f;
             _spriteRenderer.material.color = _spriteColor;
