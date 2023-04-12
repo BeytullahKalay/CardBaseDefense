@@ -6,12 +6,12 @@ public class RangedEnemyStateManager : MonoBehaviour,IOnBoard
 {
     [SerializeField] private RangedData rangedData;
     
-    private EnemyBaseState _currentState;
+    private RangedEnemyBaseState _currentState;
     public NavMeshAgent NavMeshAgent{ get; set; }
     
-    public RangedEnemyIdleState RangedEnemyIdleState;
-    public RangedEnemyMoveState RangedEnemyMoveState;
-    public RangedEnemyAttackState RangedEnemyAttackState;
+    public RangedRangedEnemyIdleState RangedRangedEnemyIdleState;
+    public RangedRangedEnemyMoveState RangedRangedEnemyMoveState;
+    public RangedRangedEnemyAttackState RangedRangedEnemyAttackState;
     
     
     public BoardStates BoardState { get; set; }
@@ -23,14 +23,12 @@ public class RangedEnemyStateManager : MonoBehaviour,IOnBoard
         NavMeshAgent = GetComponent<NavMeshAgent>();
         BoardedTransform = transform;
         
-        RangedEnemyAttackState = new RangedEnemyAttackState(rangedData, transform, NavMeshAgent,
+        RangedRangedEnemyAttackState = new RangedRangedEnemyAttackState(rangedData, transform, NavMeshAgent,
             GameManager.Instance.BaseTransform.position);
+        RangedRangedEnemyIdleState = new RangedRangedEnemyIdleState();
+        RangedRangedEnemyMoveState = new RangedRangedEnemyMoveState(NavMeshAgent,transform);
         
-        var boardStates = BoardState;
-        RangedEnemyIdleState = new RangedEnemyIdleState(transform, NavMeshAgent, ref boardStates);
-        RangedEnemyMoveState = new RangedEnemyMoveState(NavMeshAgent);
-        
-        _currentState = RangedEnemyIdleState;
+        _currentState = RangedRangedEnemyIdleState;
 
     }
 
@@ -44,7 +42,7 @@ public class RangedEnemyStateManager : MonoBehaviour,IOnBoard
         _currentState.OnUpdate(this);
     }
 
-    public void SwitchState(EnemyBaseState newState)
+    public void SwitchState(RangedEnemyBaseState newState)
     {
         _currentState.OnExit(this);
         _currentState = newState;
@@ -54,7 +52,7 @@ public class RangedEnemyStateManager : MonoBehaviour,IOnBoard
     public List<GameObject> DetectTargets()
     {
         var allColliders = Physics2D.OverlapCircleAll(transform.position, rangedData.DetectEnemyRadius,
-            rangedData.WhatIsEnemyLayer);
+            rangedData.WhatIsTargetLayer);
         
         var hittableObjects = new List<GameObject>();
 

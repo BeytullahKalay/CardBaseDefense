@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -11,17 +10,34 @@ public class LandPassangers : MonoBehaviour
     [SerializeField] private Ease ease;
 
     private List<IOnBoard> _boardedObjectsList = new List<IOnBoard>();
+
+    private BoatFading _boatFading;
+
+    private bool _landed;
     
     private void Awake()
     {
+        _boatFading = GetComponent<BoatFading>();
+        
         foreach (Transform child in transform)
         {
             if(child.TryGetComponent<IOnBoard>(out var t)) _boardedObjectsList.Add(t);
         }
     }
 
+    private void Update()
+    {
+        if (_landed) return;
+        
+        foreach (var onBoard in _boardedObjectsList)
+        {
+            onBoard.BoardedTransform.rotation = Quaternion.identity;
+        }
+    }
+
     public async void LandPassenger(Vector3Int detectedGroundPosition)
     {
+        _landed = true;
         var dir = (detectedGroundPosition - transform.position).normalized;
         var jumpPos = transform.position + dir * jumpDistance;
         
@@ -35,6 +51,6 @@ public class LandPassangers : MonoBehaviour
                     boarded.BoardState = BoardStates.Landed;
                 }).AsyncWaitForCompletion();
         }
-
+        _boatFading.FadeAndDestroy();
     }
 }

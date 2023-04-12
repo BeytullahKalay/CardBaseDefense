@@ -19,7 +19,7 @@ public class BasicTower : ActionCard
 
     private Collider2D[] DetectedEnemies()
     {
-        return Physics2D.OverlapCircleAll(transform.position, _data.DetectEnemyRadius, _data.WhatIsEnemyLayer);
+        return Physics2D.OverlapCircleAll(transform.position, _data.DetectEnemyRadius, _data.WhatIsTargetLayer);
     }
 
     private void OnDrawGizmos()

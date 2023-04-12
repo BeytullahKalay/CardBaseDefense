@@ -15,7 +15,6 @@ MonoBehaviour:
   damage: {x: 1, y: 1}
   detectEnemyRadius: 10
   firingFrequency: 1.25
-  whatIsEnemyLayer:
+  whatIsTargetLayer:
     serializedVersion: 2
     m_Bits: 256
-  firePrefab: {fileID: 715455850893262444, guid: 736399d6fee3a2e4ba2d39e56117576a, type: 3}
