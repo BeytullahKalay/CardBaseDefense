@@ -2,21 +2,21 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class LandPassangers : MonoBehaviour
 {
-    [SerializeField] private List<IOnBoard> boardedObjectsList = new List<IOnBoard>();
     [SerializeField] private float jumpDuration;
     [SerializeField] private float jumpPower;
     [SerializeField] private float jumpDistance = 3f;
     [SerializeField] private Ease ease;
 
+    private List<IOnBoard> _boardedObjectsList = new List<IOnBoard>();
+    
     private void Awake()
     {
         foreach (Transform child in transform)
         {
-            if(child.TryGetComponent<IOnBoard>(out var t)) boardedObjectsList.Add(t);
+            if(child.TryGetComponent<IOnBoard>(out var t)) _boardedObjectsList.Add(t);
         }
     }
 
@@ -25,7 +25,7 @@ public class LandPassangers : MonoBehaviour
         var dir = (detectedGroundPosition - transform.position).normalized;
         var jumpPos = transform.position + dir * jumpDistance;
         
-        foreach (var boarded in boardedObjectsList)
+        foreach (var boarded in _boardedObjectsList)
         {
             await boarded.BoardedTransform.DOJump(jumpPos, jumpPower, 1, jumpDuration).SetEase(ease)
                 .OnComplete(() =>
