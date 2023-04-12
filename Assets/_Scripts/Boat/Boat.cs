@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Boat : MonoBehaviour
 {
+    
     [SerializeField] private float speed = 5f;
     [SerializeField] private Transform checkGroundPoint;
 
@@ -12,8 +13,14 @@ public class Boat : MonoBehaviour
 
     private bool _isGroundTileDetected;
 
+    private Vector3Int _detectedGroundPosition;
+
+    private LandPassangers _landPassengers;
+
+
     private void Awake()
     {
+        _landPassengers = GetComponent<LandPassangers>();
         _basePosition = GameManager.Instance.BaseTransform.position;
         _navmeshManager = NavmeshManager.Instance;
     }
@@ -26,10 +33,16 @@ public class Boat : MonoBehaviour
 
     private void Update()
     {
+        CheckIsReachedToGround();
+    }
+
+    private void CheckIsReachedToGround()
+    {
         var pos = checkGroundPoint.position;
         var tileAnchor = _navmeshManager.GroundTilemap.tileAnchor;
-        var mousePosVector3  = new Vector3(pos.x,pos.y,0) - new Vector3(tileAnchor.x, tileAnchor.y, 0);
-        _isGroundTileDetected = _navmeshManager.GroundTilemap.HasTile(Vector3Int.RoundToInt(mousePosVector3));
+        var mousePosVector3 = new Vector3(pos.x, pos.y, 0) - new Vector3(tileAnchor.x, tileAnchor.y, 0);
+        _detectedGroundPosition = Vector3Int.RoundToInt(mousePosVector3);
+        _isGroundTileDetected = _navmeshManager.GroundTilemap.HasTile(_detectedGroundPosition);
     }
 
     private void FixedUpdate()
@@ -39,7 +52,13 @@ public class Boat : MonoBehaviour
 
     private void Move()
     {
-        if (_isGroundTileDetected) return;
+        if (_isGroundTileDetected)
+        {
+            _landPassengers.LandPassenger(_detectedGroundPosition);
+            Destroy(this);
+            return;
+        }
+        
         transform.position += transform.right * (speed * Time.fixedDeltaTime);
     }
 }

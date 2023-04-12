@@ -1,6 +1,3 @@
-
-
-using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyMoveState : EnemyBaseState
@@ -22,7 +19,7 @@ public class EnemyMoveState : EnemyBaseState
         {
             stateManager.SwitchState(stateManager.EnemyAttackState);
         }
-        else if (GameManager.Instance.BaseTransform != null)
+        else if (stateManager.BoardState == BoardStates.Landed && GameManager.Instance.BaseTransform != null)
         {
             _agent.SetDestination(GameManager.Instance.BaseTransform.position);
         }

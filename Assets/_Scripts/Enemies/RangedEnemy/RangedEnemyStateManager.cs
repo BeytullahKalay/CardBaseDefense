@@ -2,26 +2,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RangedEnemyStateManager : MonoBehaviour
+public class RangedEnemyStateManager : MonoBehaviour,IOnBoard
 {
     [SerializeField] private RangedData rangedData;
-    private NavMeshAgent _agent;
-
-
+    
     private EnemyBaseState _currentState;
+    public NavMeshAgent NavMeshAgent{ get; set; }
     
     public EnemyIdleState EnemyIdleState;
     public EnemyMoveState EnemyMoveState;
     public EnemyAttackState EnemyAttackState;
+    
+    
+    public BoardStates BoardState { get; set; }
+    public Transform BoardedTransform { get; set; }
+
 
     private void Awake()
     {
-        _agent = GetComponent<NavMeshAgent>();
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        BoardedTransform = transform;
         
-        EnemyAttackState = new EnemyAttackState(rangedData, transform, _agent,
+        EnemyAttackState = new EnemyAttackState(rangedData, transform, NavMeshAgent,
             GameManager.Instance.BaseTransform.position);
-        EnemyIdleState = new EnemyIdleState(transform, _agent);
-        EnemyMoveState = new EnemyMoveState(_agent);
+        
+        var boardStates = BoardState;
+        EnemyIdleState = new EnemyIdleState(transform, NavMeshAgent, ref boardStates);
+        EnemyMoveState = new EnemyMoveState(NavMeshAgent);
         
         _currentState = EnemyIdleState;
 

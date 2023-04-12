@@ -28,7 +28,7 @@ public class EnemyAttackState : EnemyBaseState
     {
         if (stateManager.DetectTargets().Capacity > 0)
         {
-            if (!(Time.time > _nextFireTime)) return;
+            if (!(Time.time > _nextFireTime) || stateManager.BoardState != BoardStates.Landed) return;
                 
             _agent.SetDestination(_transform.position);
             var target = stateManager.DetectTargets()[0];

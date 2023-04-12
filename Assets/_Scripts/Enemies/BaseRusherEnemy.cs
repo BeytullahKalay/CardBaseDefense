@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(AgentOverride2d))]
-public class BaseRusherEnemy : MonoBehaviour
+public class BaseRusherEnemy : MonoBehaviour,IOnBoard
 {
     [SerializeField] private float attackDistance;
 
@@ -16,16 +16,21 @@ public class BaseRusherEnemy : MonoBehaviour
     
     [SerializeField] private LayerMask whatIsHurtLayer;
 
+
     private Vector2 _destinationPosition;
 
-    private NavMeshAgent _agent;
 
     private Pooler _pooler;
+    
+    public BoardStates BoardState { get; set; }
+    public Transform BoardedTransform { get; set; }
+    public NavMeshAgent NavMeshAgent{ get; set; }
 
 
     private void Awake()
     {
-        _agent = GetComponent<NavMeshAgent>();
+        BoardedTransform = transform;
+        NavMeshAgent = GetComponent<NavMeshAgent>();
         _pooler = Pooler.Instance;
 
         var basePosition = (Vector2)GameManager.Instance.BaseTransform.position;
@@ -33,9 +38,10 @@ public class BaseRusherEnemy : MonoBehaviour
         _destinationPosition = basePosition + direction * attackDistance;
     }
 
-    private void Start()
+    private void Update()
     {
-        _agent.SetDestination(_destinationPosition);
+        if(BoardState != BoardStates.Landed) return;
+        NavMeshAgent.SetDestination(_destinationPosition);
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -63,4 +69,6 @@ public class BaseRusherEnemy : MonoBehaviour
     {
         Gizmos.DrawWireSphere(transform.position, attackDistance);
     }
+
+
 }
