@@ -1,10 +1,10 @@
 using UnityEngine.AI;
 
-public class EnemyMoveState : EnemyBaseState
+public class RangedEnemyMoveState : EnemyBaseState
 {
     private NavMeshAgent _agent;
 
-    public EnemyMoveState(NavMeshAgent agent)
+    public RangedEnemyMoveState(NavMeshAgent agent)
     {
         _agent = agent;
     }
@@ -17,7 +17,7 @@ public class EnemyMoveState : EnemyBaseState
     {
         if (stateManager.DetectTargets().Capacity > 0)
         {
-            stateManager.SwitchState(stateManager.EnemyAttackState);
+            stateManager.SwitchState(stateManager.RangedEnemyAttackState);
         }
         else if (stateManager.BoardState == BoardStates.Landed && GameManager.Instance.BaseTransform != null)
         {
@@ -25,7 +25,7 @@ public class EnemyMoveState : EnemyBaseState
         }
         else
         {
-            stateManager.SwitchState(stateManager.EnemyIdleState);
+            stateManager.SwitchState(stateManager.RangedEnemyIdleState);
         }
     }
 

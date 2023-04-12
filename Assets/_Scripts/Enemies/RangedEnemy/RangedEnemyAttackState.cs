@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAttackState : EnemyBaseState
+public class RangedEnemyAttackState : EnemyBaseState
 {
     private RangedData _rangedData;
     private Transform _transform;
@@ -10,7 +10,7 @@ public class EnemyAttackState : EnemyBaseState
     private float _nextFireTime = float.MinValue;
     private Pooler _pooler;
 
-    public EnemyAttackState(RangedData rangedData,Transform transform,NavMeshAgent agent,Vector2 basePosition)
+    public RangedEnemyAttackState(RangedData rangedData,Transform transform,NavMeshAgent agent,Vector2 basePosition)
     {
         _rangedData = rangedData;
         _transform = transform;
@@ -40,7 +40,7 @@ public class EnemyAttackState : EnemyBaseState
         else
         {
             _agent.SetDestination(_basePosition);
-            stateManager.SwitchState(stateManager.EnemyMoveState);
+            stateManager.SwitchState(stateManager.RangedEnemyMoveState);
         }
     }
 

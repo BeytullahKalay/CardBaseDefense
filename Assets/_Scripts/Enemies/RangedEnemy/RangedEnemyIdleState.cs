@@ -2,13 +2,13 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyIdleState : EnemyBaseState
+public class RangedEnemyIdleState : EnemyBaseState
 {
     private NavMeshAgent _agent;
     private Transform _transform;
     private BoardStates _boardState;
 
-    public EnemyIdleState(Transform transform,NavMeshAgent agent,ref BoardStates boardState)
+    public RangedEnemyIdleState(Transform transform,NavMeshAgent agent,ref BoardStates boardState)
     {
         _transform = transform;
         _agent = agent;
@@ -22,7 +22,7 @@ public class EnemyIdleState : EnemyBaseState
     {
         if (_boardState != BoardStates.Landed || GameManager.Instance.BaseTransform != null)
         {
-            stateManager.SwitchState(stateManager.EnemyMoveState);
+            stateManager.SwitchState(stateManager.RangedEnemyMoveState);
         }
         else
         {

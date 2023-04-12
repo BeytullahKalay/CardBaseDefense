@@ -9,9 +9,9 @@ public class RangedEnemyStateManager : MonoBehaviour,IOnBoard
     private EnemyBaseState _currentState;
     public NavMeshAgent NavMeshAgent{ get; set; }
     
-    public EnemyIdleState EnemyIdleState;
-    public EnemyMoveState EnemyMoveState;
-    public EnemyAttackState EnemyAttackState;
+    public RangedEnemyIdleState RangedEnemyIdleState;
+    public RangedEnemyMoveState RangedEnemyMoveState;
+    public RangedEnemyAttackState RangedEnemyAttackState;
     
     
     public BoardStates BoardState { get; set; }
@@ -23,14 +23,14 @@ public class RangedEnemyStateManager : MonoBehaviour,IOnBoard
         NavMeshAgent = GetComponent<NavMeshAgent>();
         BoardedTransform = transform;
         
-        EnemyAttackState = new EnemyAttackState(rangedData, transform, NavMeshAgent,
+        RangedEnemyAttackState = new RangedEnemyAttackState(rangedData, transform, NavMeshAgent,
             GameManager.Instance.BaseTransform.position);
         
         var boardStates = BoardState;
-        EnemyIdleState = new EnemyIdleState(transform, NavMeshAgent, ref boardStates);
-        EnemyMoveState = new EnemyMoveState(NavMeshAgent);
+        RangedEnemyIdleState = new RangedEnemyIdleState(transform, NavMeshAgent, ref boardStates);
+        RangedEnemyMoveState = new RangedEnemyMoveState(NavMeshAgent);
         
-        _currentState = EnemyIdleState;
+        _currentState = RangedEnemyIdleState;
 
     }
 
