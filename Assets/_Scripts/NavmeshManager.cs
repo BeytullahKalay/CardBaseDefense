@@ -6,6 +6,7 @@ public class NavmeshManager : MonoSingleton<NavmeshManager>
 {
     [SerializeField] private Tilemap groundTilemap;
     [SerializeField] private Tilemap undergroundTilemap;
+    [SerializeField] private Tilemap decorationTilemap;
         
     private NavMeshSurface _surface;
 
@@ -27,4 +28,5 @@ public class NavmeshManager : MonoSingleton<NavmeshManager>
 
     public Tilemap GroundTilemap => groundTilemap;
     public Tilemap UndergroundTilemap => undergroundTilemap;
+    public Tilemap DecorationTilemap => decorationTilemap;
 }

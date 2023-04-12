@@ -14,11 +14,13 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
     private Tilemap _groundTilemap;
     private Tilemap _undergroundTilemap;
+    private Tilemap _decorationTilemap;
 
     private void Awake()
     {
         _groundTilemap = NavmeshManager.Instance.GroundTilemap;
         _undergroundTilemap = NavmeshManager.Instance.UndergroundTilemap;
+        _decorationTilemap = NavmeshManager.Instance.DecorationTilemap;
     }
 
 
@@ -81,6 +83,9 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
             _groundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, vector3IntPos.x - downIntVal,
                 vector3IntPos.y - downIntVal, vector3IntPos.x + upIntVal, vector3IntPos.y + upIntVal);
+            
+            _decorationTilemap.BoxFill(vector3IntPos, groundCreateData.DecorationTile, vector3IntPos.x - downIntVal,
+                vector3IntPos.y - downIntVal, vector3IntPos.x + upIntVal, vector3IntPos.y + upIntVal);
 
             NavmeshManager.Instance.UpdateSurfaceData();
             _undergroundTilemap.ClearAllEditorPreviewTiles();
@@ -112,15 +117,6 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
         return vector3IntPos;
     }
-
-    // private Vector3Int GetMousePositionForTilemap()
-    // {
-    //     var mousePosVec2 = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
-    //     var tileAnchor = _groundTilemap.tileAnchor;
-    //     var mousePosVector3 =
-    //         new Vector3(mousePosVec2.x, mousePosVec2.y, 0) - new Vector3(tileAnchor.x, tileAnchor.y, 0);
-    //     return Vector3Int.RoundToInt(mousePosVector3);
-    // }
 
 
     public void PlaceActions()
