@@ -118,4 +118,16 @@ public static class Helpers
     {
         return obj.GetComponent<T>() != null;
     }
+
+    public static List<Transform> GetAllChildren(this Transform transform)
+    {
+        var children = new List<Transform>();
+
+        foreach (Transform child in transform)
+        {
+            children.Add(child);
+        }
+
+        return children;
+    }
 }
