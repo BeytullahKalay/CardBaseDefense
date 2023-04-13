@@ -2,18 +2,21 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BottomUIAnimation : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class BottomUIAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private float duration;
     [SerializeField] private float moveDownAmount = 100;
-    
+
     private Tween _activeTween;
     private RectTransform _rectTransform;
     private Vector3 _pos;
 
+    private Spawner _spawner;
+
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
+        _spawner = Spawner.Instance;
     }
 
     private void Start()
@@ -24,6 +27,7 @@ public class BottomUIAnimation : MonoBehaviour,IPointerEnterHandler,IPointerExit
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (!_spawner.WaveCleared) return;
         MoveUp();
     }
 
@@ -35,12 +39,12 @@ public class BottomUIAnimation : MonoBehaviour,IPointerEnterHandler,IPointerExit
     private void MoveUp()
     {
         _activeTween?.Kill();
-        _rectTransform.DOMoveY(_pos.y, duration).SetSpeedBased().SetUpdate(UpdateType.Fixed,false);
+        _rectTransform.DOMoveY(_pos.y, duration).SetSpeedBased().SetUpdate(UpdateType.Fixed, false);
     }
-    
+
     private void MoveDown()
     {
         _activeTween?.Kill();
-        _rectTransform.DOMoveY(_pos.y - moveDownAmount, duration).SetSpeedBased().SetUpdate(UpdateType.Fixed,false);
+        _rectTransform.DOMoveY(_pos.y - moveDownAmount, duration).SetSpeedBased().SetUpdate(UpdateType.Fixed, false);
     }
 }
