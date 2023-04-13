@@ -69,6 +69,14 @@ public class BaseRusherEnemy : MonoBehaviour,IOnBoard
     {
         Gizmos.DrawWireSphere(transform.position, attackDistance);
     }
+    
+    public void RemoveFromSpawnerList()
+    {
+        Spawner.Instance.SpawnedEnemies.Remove(gameObject);
+    }
 
-
+    private void OnDestroy()
+    {
+        RemoveFromSpawnerList();
+    }
 }

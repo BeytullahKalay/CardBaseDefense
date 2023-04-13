@@ -75,4 +75,14 @@ public class RangedEnemyStateManager : MonoBehaviour,IOnBoard
     {
         Gizmos.DrawWireSphere(transform.position, rangedData.DetectEnemyRadius);
     }
+    
+    public void RemoveFromSpawnerList()
+    {
+        Spawner.Instance.SpawnedEnemies.Remove(gameObject);
+    }
+    
+    private void OnDestroy()
+    {
+        RemoveFromSpawnerList();
+    }
 }

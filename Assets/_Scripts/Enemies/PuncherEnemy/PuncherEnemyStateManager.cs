@@ -75,4 +75,14 @@ public class PuncherEnemyStateManager : MonoBehaviour, IOnBoard
     {
         Gizmos.DrawWireSphere(transform.position, punchEnemyData.DetectRadius);
     }
+    
+    public void RemoveFromSpawnerList()
+    {
+        Spawner.Instance.SpawnedEnemies.Remove(gameObject);
+    }
+    
+    private void OnDestroy()
+    {
+        RemoveFromSpawnerList();
+    }
 }
