@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDragHandler,IPointerEnterHandler,IPointerExitHandler
 {
-    [SerializeField] private Canvas canvas;
-    [SerializeField] private CardData _cardData;
+    public CardData CardData;
+    
+    
+    private Canvas _canvas;
 
     [Header("Card Values")] 
     [SerializeField] private TMP_Text cardCostText;
@@ -30,6 +32,7 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
     {
         _spawner = Spawner.Instance;
         _gm = GameManager.Instance;
+        _canvas = _gm.MainCanvas;
         _goldManager = GoldManager.Instance;
         _canvasGroup = GetComponent<CanvasGroup>();
         _rectTransform = GetComponent<RectTransform>();
@@ -38,16 +41,16 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
 
     private void Start()
     {
-        cardCostText.text = _cardData.Cost.ToString();
-        cardNameText.text = _cardData.CardName;
-        cardDescriptionText.text = _cardData.CardDescription;
+        cardCostText.text = CardData.Cost.ToString();
+        cardNameText.text = CardData.CardName;
+        cardDescriptionText.text = CardData.CardDescription;
         _gm.Cards.Add(this);
         UpdateCardState();
     }
 
     public void UpdateCardState()
     {
-        if (_goldManager.IsPurchasable(_cardData.Cost) && _spawner.WaveCleared)
+        if (_goldManager.IsPurchasable(CardData.Cost) && _spawner.WaveCleared)
         {
             _canvasGroup.blocksRaycasts = true;
         }
@@ -62,7 +65,7 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         if (!Helpers.IsPointerOverUIElement(LayerMask.NameToLayer("UI")) &&
             _createdObject.GetComponent<IPlaceable>().Placeable)
         {
-            EventManager.AddThatToCurrentGold?.Invoke(-_cardData.Cost);
+            EventManager.AddThatToCurrentGold?.Invoke(-CardData.Cost);
             _gm.UpdateAllCardsState();
             _createdObject.GetComponent<IPlaceable>().PlaceActions();
             DestroyCardFromUI();
@@ -77,14 +80,14 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
 
     public void OnDrag(PointerEventData eventData)
     {
-        _rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        _rectTransform.anchoredPosition += eventData.delta / _canvas.scaleFactor;
 
         if (!Helpers.IsPointerOverUIElement(LayerMask.NameToLayer("UI")))
         {
             if (_createdObject == null)
             {
                 _canvasGroup.alpha = 0f;
-                _createdObject = Instantiate(_cardData.ObjectToSpawn);
+                _createdObject = Instantiate(CardData.ObjectToSpawn);
                 FollowMouseOnIntValues(_createdObject.transform);
             }
             else

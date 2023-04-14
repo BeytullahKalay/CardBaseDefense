@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] private Transform baseTransform;
+    [SerializeField] private Canvas mainCanvas;
     
     [HideInInspector]public List<Card> Cards;
 
@@ -17,4 +18,6 @@ public class GameManager : MonoSingleton<GameManager>
 
 
     public Transform BaseTransform => baseTransform;
+
+    public Canvas MainCanvas => mainCanvas;
 }
