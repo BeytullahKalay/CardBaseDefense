@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -116,6 +117,11 @@ public class GroundCreate : MonoBehaviour, IPlaceable
         }
 
         return vector3IntPos;
+    }
+
+    private void OnDestroy()
+    {
+        _undergroundTilemap.ClearAllEditorPreviewTiles();
     }
 
 

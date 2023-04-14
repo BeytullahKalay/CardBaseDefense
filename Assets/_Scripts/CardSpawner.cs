@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -26,6 +27,14 @@ public class CardSpawner : MonoBehaviour
          CreateCard();
       }
    }
+
+   // private void Update()
+   // {
+   //    if (Input.GetKeyDown(KeyCode.C))
+   //    {
+   //       CreateCard();
+   //    }
+   // }
 
    private void CreateCard()
    {
