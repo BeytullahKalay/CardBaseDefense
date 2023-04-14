@@ -7,13 +7,16 @@ public class GoldMiner : ActionCard
     [SerializeField] private GoldMinerData goldMinerData;
     [SerializeField] private TMP_Text fillAmountText;
 
-    private float _nextMiningTime = float.MinValue;
-
     private int _inBagAmount;
 
-    private void Awake()
+    private void OnEnable()
     {
-        SetNextGoldMineTime();
+        EventManager.WaveCompleted += MakeGold;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.WaveCompleted -= MakeGold;
     }
 
     private void Start()
@@ -21,28 +24,12 @@ public class GoldMiner : ActionCard
         UpdateFillAmountText();
     }
 
-    private void Update()
+    private void MakeGold(bool isWaveCompleted)
     {
-        if (Time.time > _nextMiningTime && !IsGoldBagFull())
-        {
-            SetNextGoldMineTime();
-            _inBagAmount++;
-            UpdateFillAmountText();
-        }
-        else if(IsGoldBagFull())
-        {
-            SetNextGoldMineTime();
-        }
-    }
-
-    private bool IsGoldBagFull()
-    {
-        return _inBagAmount >= goldMinerData.MaxGoldAmountCanCarry;
-    }
-    
-    private void SetNextGoldMineTime()
-    {
-        _nextMiningTime = Time.time + 1 / goldMinerData.MineFrequency;
+        if(!isWaveCompleted) return;
+        
+        _inBagAmount = goldMinerData.MaxGoldAmountCanCarry;
+        UpdateFillAmountText();
     }
 
     private void OnMouseDown()
