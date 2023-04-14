@@ -4,21 +4,25 @@ using Random = UnityEngine.Random;
 
 public class CardSpawner : MonoBehaviour
 {
+   [SerializeField] private int cardAmountOnStart = 3;
    [SerializeField] private GameObject cardPrefab;
    [SerializeField] private Transform cardParent;
    [SerializeField] private List<CardData> _cardDatas = new List<CardData>();
 
-   private void Start()
+   private void OnEnable()
    {
-      CreateCard();
-      CreateCard();
+      EventManager.WaveCompleted += WaveCompleted;
    }
 
-   private void Update()
+   private void OnDisable()
    {
-      if (Input.GetKeyDown(KeyCode.C))
+      EventManager.WaveCompleted -= WaveCompleted;
+   }
+
+   private void Start()
+   {
+      for (var i = 0; i < cardAmountOnStart; i++)
       {
-         print("card created");
          CreateCard();
       }
    }
@@ -38,5 +42,11 @@ public class CardSpawner : MonoBehaviour
       }
       
       EventManager.SetCardsPosition?.Invoke();
+   }
+
+   private void WaveCompleted(bool isCompleted)
+   {
+      if(!isCompleted) return;
+      CreateCard();
    }
 }

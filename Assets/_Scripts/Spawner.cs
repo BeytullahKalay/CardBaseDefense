@@ -48,5 +48,6 @@ public class Spawner : MonoSingleton<Spawner>
     private void CheckIsWaveCleared()
     {
         WaveCleared = SpawnedEnemies.Count <= 0;
+        EventManager.WaveCompleted?.Invoke(WaveCleared);
     }
 }
