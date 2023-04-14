@@ -379,13 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa31ad9f8906ef48a13dcc399ceba76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectRadius: 4.11
-  punchDistance: 2
-  damage: 5
-  punchFrequency: 1
-  whatIsHittableLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  punchEnemyData: {fileID: 11400000, guid: 913e99e2ba97efc4a924caba7013fd90, type: 2}
 --- !u!1 &6480985494358502438
 GameObject:
   m_ObjectHideFlags: 0

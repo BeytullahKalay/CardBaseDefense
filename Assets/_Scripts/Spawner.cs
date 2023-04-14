@@ -10,17 +10,24 @@ public class Spawner : MonoSingleton<Spawner>
     [SerializeField] private GameObject spawnObject;
 
     public List<GameObject> SpawnedEnemies => spawnedEnemies;
+    
+    public bool WaveCleared { get; private set; }
 
-    public bool WaveCleared => SpawnedEnemies.Count == 0;
+    private void Awake()
+    {
+        WaveCleared = true; // true for default
+    }
 
     private void OnEnable()
     {
         EventManager.CallTheWave += CallTheWave;
+        EventManager.CheckIsWaveCleared += CheckIsWaveCleared;
     }
 
     private void OnDisable()
     {
         EventManager.CallTheWave -= CallTheWave;
+        EventManager.CheckIsWaveCleared -= CheckIsWaveCleared;
     }
 
     private void CallTheWave()
@@ -34,5 +41,12 @@ public class Spawner : MonoSingleton<Spawner>
                 spawnedEnemies.Add(enemy.BoardedTransform.gameObject);
             }
         }
+
+        WaveCleared = false;
+    }
+
+    private void CheckIsWaveCleared()
+    {
+        WaveCleared = SpawnedEnemies.Count <= 0;
     }
 }

@@ -22,7 +22,6 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
 
     private GameManager _gm;
     private GoldManager _goldManager;
-    private Spawner _spawner;
 
     private GameObject _createdObject;
 
@@ -30,7 +29,6 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
 
     private void Awake()
     {
-        _spawner = Spawner.Instance;
         _gm = GameManager.Instance;
         _canvas = _gm.MainCanvas;
         _goldManager = GoldManager.Instance;
@@ -50,7 +48,7 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
 
     public void UpdateCardState()
     {
-        if (_goldManager.IsPurchasable(CardData.Cost) && _spawner.WaveCleared)
+        if (_goldManager.IsPurchasable(CardData.Cost))
         {
             _canvasGroup.blocksRaycasts = true;
         }
@@ -103,14 +101,18 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
     
     public void OnPointerEnter(PointerEventData eventData)
     {
-        var c = selectionImage.color;
-        c.a = 1;
-        selectionImage.color = c;
-
+        OpenSelectionImage();
         _siblingIndex = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
     }
-    
+
+    private void OpenSelectionImage()
+    {
+        var c = selectionImage.color;
+        c.a = 1;
+        selectionImage.color = c;
+    }
+
     public void OnPointerExit(PointerEventData eventData)
     {
         var c = selectionImage.color;

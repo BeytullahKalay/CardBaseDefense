@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RangedEnemyStateManager : MonoBehaviour,IOnBoard
+public class RangedEnemyStateManager : MonoBehaviour,IOnBoard,IEnemy
 {
     [SerializeField] private RangedData rangedData;
     
@@ -84,5 +84,11 @@ public class RangedEnemyStateManager : MonoBehaviour,IOnBoard
     private void OnDestroy()
     {
         RemoveFromSpawnerList();
+        CheckIsWaveCleared();
+    }
+
+    public void CheckIsWaveCleared()
+    {
+        EventManager.CheckIsWaveCleared?.Invoke();
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(AgentOverride2d))]
-public class BaseRusherEnemy : MonoBehaviour,IOnBoard
+public class BaseRusherEnemy : MonoBehaviour,IOnBoard,IEnemy
 {
     [SerializeField] private float attackDistance;
 
@@ -78,5 +78,11 @@ public class BaseRusherEnemy : MonoBehaviour,IOnBoard
     private void OnDestroy()
     {
         RemoveFromSpawnerList();
+        CheckIsWaveCleared();
+    }
+
+    public void CheckIsWaveCleared()
+    {
+        EventManager.CheckIsWaveCleared?.Invoke();
     }
 }

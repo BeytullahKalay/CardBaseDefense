@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,6 +7,8 @@ public class WaveCallerUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private float duration = .1f;
     [SerializeField] private Ease ease;
     [SerializeField] private Transform buttonAndText;
+    
+    
     private Vector3 _scale;
 
     private Tween _tween;

@@ -8,6 +8,12 @@ public class CardSpawner : MonoBehaviour
    [SerializeField] private Transform cardParent;
    [SerializeField] private List<CardData> _cardDatas = new List<CardData>();
 
+   private void Start()
+   {
+      CreateCard();
+      CreateCard();
+   }
+
    private void Update()
    {
       if (Input.GetKeyDown(KeyCode.C))

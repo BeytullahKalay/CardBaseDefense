@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PuncherEnemyStateManager : MonoBehaviour, IOnBoard
+public class PuncherEnemyStateManager : MonoBehaviour, IOnBoard,IEnemy
 {
     [SerializeField] private PunchEnemyData punchEnemyData;
 
@@ -84,5 +84,11 @@ public class PuncherEnemyStateManager : MonoBehaviour, IOnBoard
     private void OnDestroy()
     {
         RemoveFromSpawnerList();
+        CheckIsWaveCleared();
+    }
+
+    public void CheckIsWaveCleared()
+    {
+        EventManager.CheckIsWaveCleared?.Invoke();
     }
 }
