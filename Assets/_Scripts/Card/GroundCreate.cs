@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -16,12 +15,14 @@ public class GroundCreate : MonoBehaviour, IPlaceable
     private Tilemap _groundTilemap;
     private Tilemap _undergroundTilemap;
     private Tilemap _decorationTilemap;
+    private Tilemap _bushTilemap;
 
     private void Awake()
     {
         _groundTilemap = NavmeshManager.Instance.GroundTilemap;
         _undergroundTilemap = NavmeshManager.Instance.UndergroundTilemap;
         _decorationTilemap = NavmeshManager.Instance.DecorationTilemap;
+        _bushTilemap = NavmeshManager.Instance.BushTilemap;
     }
 
 
