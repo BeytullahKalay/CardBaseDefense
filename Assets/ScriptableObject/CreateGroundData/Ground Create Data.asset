@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: f1b40e6e72647c84d963f401a29b6cc7, type: 2}
   decorationTile: {fileID: 11400000, guid: 6768c15a9de14b24baeb8aee50723e18, type: 2}
-  bushTile: {fileID: 11400000, guid: fe996dbab70d6ae4c8c3b8ef346cec1d, type: 2}
+  bushTile:
+  - {fileID: 11400000, guid: fe996dbab70d6ae4c8c3b8ef346cec1d, type: 2}
+  - {fileID: 11400000, guid: 0a62c764b30b59442a62ecbf6d6072cd, type: 2}
+  - {fileID: 11400000, guid: 7d388172d236f5044a8e6cac025c813a, type: 2}
   sizeOfGround: 2
   placeableColor: {r: 1, g: 0.2216981, b: 0.2216981, a: 0.54901963}
   notPlaceableColor: {r: 1, g: 1, b: 1, a: 0.54901963}
-  bushSpawnChance: 0.055
+  bushSpawnChance: 0.02
