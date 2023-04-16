@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a738bafe7cf72d4696cca3f9ba8f489, type: 3}
   m_Name: BaseTowerData
   m_EditorClassIdentifier: 
-  damage: {x: 1, y: 1}
+  damage: {x: 9, y: 14}
   detectEnemyRadius: 10
   firingFrequency: 1.25
   whatIsTargetLayer:
