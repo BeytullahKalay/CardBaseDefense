@@ -88,6 +88,21 @@ public class GroundCreate : MonoBehaviour, IPlaceable
             
             _decorationTilemap.BoxFill(vector3IntPos, groundCreateData.DecorationTile, vector3IntPos.x - downIntVal,
                 vector3IntPos.y - downIntVal, vector3IntPos.x + upIntVal, vector3IntPos.y + upIntVal);
+            
+            
+            // TODO: not working correctly
+            // _bushTilemap.BoxFill(vector3IntPos, groundCreateData.BushTile, vector3IntPos.x - downIntVal,
+            //     vector3IntPos.y - downIntVal, vector3IntPos.x + upIntVal, vector3IntPos.y + upIntVal);
+
+            for (var x = vector3IntPos.x - downIntVal; x < vector3IntPos.x + upIntVal; x++)
+            {
+                for (var y = vector3IntPos.y - downIntVal; y < vector3IntPos.y + upIntVal; y++)
+                {
+                   _bushTilemap.SetTile(new Vector3Int(x,y,0),groundCreateData.BushTile); 
+                }
+            }
+            
+            
 
             NavmeshManager.Instance.UpdateSurfaceData();
             _undergroundTilemap.ClearAllEditorPreviewTiles();
@@ -124,7 +139,6 @@ public class GroundCreate : MonoBehaviour, IPlaceable
     {
         _undergroundTilemap.ClearAllEditorPreviewTiles();
     }
-
 
     public void PlaceActions()
     {
