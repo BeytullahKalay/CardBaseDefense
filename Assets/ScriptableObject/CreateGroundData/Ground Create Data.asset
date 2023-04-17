@@ -21,4 +21,4 @@ MonoBehaviour:
   sizeOfGround: 2
   placeableColor: {r: 1, g: 0.2216981, b: 0.2216981, a: 0.54901963}
   notPlaceableColor: {r: 1, g: 1, b: 1, a: 0.54901963}
-  bushSpawnChance: 1
+  bushSpawnChance: 0.1

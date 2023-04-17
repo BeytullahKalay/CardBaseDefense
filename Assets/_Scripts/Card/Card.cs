@@ -18,12 +18,11 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
     [SerializeField] private Color selectedColor;
 
     private RectTransform _rectTransform;
-    private CanvasGroup _canvasGroup;
-
+    private CanvasGroup _cardCanvasGroup;
     private GameManager _gm;
     private GoldManager _goldManager;
-
     private GameObject _createdObject;
+    private CardPositioner _cardPositioner;
 
     private int _siblingIndex;
 
@@ -32,9 +31,10 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         _gm = GameManager.Instance;
         _canvas = _gm.MainCanvas;
         _goldManager = GoldManager.Instance;
-        _canvasGroup = GetComponent<CanvasGroup>();
+        _cardCanvasGroup = GetComponent<CanvasGroup>();
         _rectTransform = GetComponent<RectTransform>();
         selectionImage.color = selectedColor;
+        _cardPositioner = GetComponentInParent<CardPositioner>();
     }
 
     private void Start()
@@ -50,11 +50,11 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
     {
         if (_goldManager.IsPurchasable(CardData.Cost))
         {
-            _canvasGroup.blocksRaycasts = true;
+            _cardCanvasGroup.blocksRaycasts = true;
         }
         else
         {
-            _canvasGroup.blocksRaycasts = false;
+            _cardCanvasGroup.blocksRaycasts = false;
         }
     }
 
@@ -71,9 +71,10 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         else
         {
             ResetCardUI();
-            _canvasGroup.blocksRaycasts = true;
+            _cardCanvasGroup.blocksRaycasts = true;
         }
         EventManager.SetCardsPosition?.Invoke();
+        _cardPositioner.CanvasGroup.blocksRaycasts = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -84,7 +85,7 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         {
             if (_createdObject == null)
             {
-                _canvasGroup.alpha = 0f;
+                _cardCanvasGroup.alpha = 0f;
                 _createdObject = Instantiate(CardData.ObjectToSpawn);
                 FollowMouseOnIntValues(_createdObject.transform);
             }
@@ -130,12 +131,14 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        _canvasGroup.blocksRaycasts = false;
+        _cardCanvasGroup.blocksRaycasts = false;
+        print("down");
+        _cardPositioner.CanvasGroup.blocksRaycasts = false;
     }
     
     private void ResetCardUI()
     {
-        _canvasGroup.alpha = 1f;
+        _cardCanvasGroup.alpha = 1f;
         Destroy(_createdObject);
     }
 
@@ -145,7 +148,4 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         gameObject.transform.SetParent(null);
         Destroy(gameObject);
     }
-
-
-
 }

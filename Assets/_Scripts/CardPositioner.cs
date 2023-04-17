@@ -1,12 +1,23 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
+[RequireComponent(typeof(CanvasGroup))]
 public class CardPositioner : MonoBehaviour
 {
     [SerializeField] private float radius;
     private float fanAngle;
     [SerializeField] private float upperAmount;
     [SerializeField] private float duration = 2f;
+    
+    private CanvasGroup _cardsCanvasGroup;
+
+    public CanvasGroup CanvasGroup => _cardsCanvasGroup;
+
+    private void Awake()
+    {
+        _cardsCanvasGroup = GetComponent<CanvasGroup>();
+    }
 
     void Start()
     {
