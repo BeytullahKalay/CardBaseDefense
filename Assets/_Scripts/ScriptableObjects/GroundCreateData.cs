@@ -16,7 +16,7 @@ public class GroundCreateData : ScriptableObject
 
     public TileBase TileBase => tile;
     public TileBase DecorationTile => decorationTile;
-    public TileBase BushTile => Random.value < bushSpawnChance ? null : bushTile[Random.Range(0,bushTile.Count)];
+    public TileBase BushTile => Random.value > bushSpawnChance ? null : bushTile[Random.Range(0,bushTile.Count)];
     
     public int SizeOfGround => sizeOfGround;
 
