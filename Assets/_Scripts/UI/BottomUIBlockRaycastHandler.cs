@@ -5,17 +5,31 @@ using UnityEngine;
 public class BottomUIBlockRaycastHandler : MonoBehaviour
 {
     private CanvasGroup _canvasGroup;
-    private Spawner _spawner;
     
-
     private void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
-        _spawner = Spawner.Instance;
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        _canvasGroup.blocksRaycasts = _spawner.WaveCleared;
+        EventManager.WaveCompleted += BlockRaycast;
+        EventManager.CallTheWave += DontBlockRaycast;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.CallTheWave -= DontBlockRaycast;
+        EventManager.WaveCompleted -= BlockRaycast;
+    }
+
+    private void DontBlockRaycast()
+    {
+        _canvasGroup.blocksRaycasts = false;
+    }
+    
+    private void BlockRaycast(bool waveStatus)
+    {
+        _canvasGroup.blocksRaycasts = true;
     }
 }
