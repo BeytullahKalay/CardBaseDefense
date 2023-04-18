@@ -2,7 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 
 [RequireComponent(typeof(BaseHealth))]
-public class BaseAnimatons : MonoBehaviour
+public class BaseAnimations : MonoBehaviour
 {
 
     [SerializeField] private float animationForce;
@@ -18,14 +18,6 @@ public class BaseAnimatons : MonoBehaviour
     private void Awake()
     {
         _baseHealth = GetComponent<BaseHealth>();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _baseHealth.TakeDamage?.Invoke(1);
-        }
     }
 
     private void OnEnable()
