@@ -74,6 +74,11 @@ public abstract class HealthSystem : MonoBehaviour, IHealthSystem
         _isDead = true;
         coll.enabled = false;
         slider.gameObject.SetActive(false);
+        //Destroy(gameObject);
+    }
+    
+    public virtual void DestroyGameObject()
+    {
         Destroy(gameObject);
     }
 
