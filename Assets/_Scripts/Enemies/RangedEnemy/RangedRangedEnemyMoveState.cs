@@ -14,6 +14,7 @@ public class RangedRangedEnemyMoveState : RangedEnemyBaseState
     
     public override void OnEnter(RangedEnemyStateManager stateManager)
     {
+        stateManager.UnitStates = UnitStates.Move;
     }
 
     public override void OnUpdate(RangedEnemyStateManager stateManager)

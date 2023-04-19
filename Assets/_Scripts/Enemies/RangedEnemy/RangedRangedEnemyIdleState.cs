@@ -3,6 +3,7 @@ public class RangedRangedEnemyIdleState : RangedEnemyBaseState
 {
     public override void OnEnter(RangedEnemyStateManager stateManager)
     {
+        stateManager.UnitStates = UnitStates.Idle;
     }
 
     public override void OnUpdate(RangedEnemyStateManager stateManager)

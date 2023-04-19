@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,18 +11,21 @@ public class RangedRangedEnemyAttackState : RangedEnemyBaseState
     private float _nextFireTime = float.MinValue;
     private Pooler _pooler;
 
-    public RangedRangedEnemyAttackState(RangedData rangedData,Transform transform,NavMeshAgent agent,Vector2 basePosition)
+    public Action Attack;
+
+    public RangedRangedEnemyAttackState(RangedData rangedData, Transform transform, NavMeshAgent agent,
+        Vector2 basePosition)
     {
         _rangedData = rangedData;
         _transform = transform;
         _agent = agent;
         _basePosition = basePosition;
-
         _pooler = Pooler.Instance;
     }
-    
+
     public override void OnEnter(RangedEnemyStateManager stateManager)
     {
+        stateManager.UnitStates = UnitStates.Attack;
     }
 
     public override void OnUpdate(RangedEnemyStateManager stateManager)
@@ -29,19 +33,23 @@ public class RangedRangedEnemyAttackState : RangedEnemyBaseState
         if (stateManager.DetectTargets().Capacity > 0)
         {
             if (!(Time.time > _nextFireTime) || stateManager.BoardState != BoardStates.Landed) return;
-                
-            _agent.SetDestination(_transform.position);
-            var target = stateManager.DetectTargets()[0];
-            var obj =_pooler.BulletPool.Get();
-            obj.GetComponent<FireObject>().Initialize(_transform, target.transform, _rangedData.Damage);
-            _nextFireTime = Time.time + 1 / _rangedData.FiringFrequency;
 
+            _agent.SetDestination(_transform.position);
+            _nextFireTime = Time.time + 1 / _rangedData.FiringFrequency;
+            Attack?.Invoke();
         }
         else
         {
             _agent.SetDestination(_basePosition);
             stateManager.SwitchState(stateManager.RangedRangedEnemyMoveState);
         }
+    }
+
+    public void FireBullet(RangedEnemyStateManager stateManager)
+    {
+        var target = stateManager.DetectTargets()[0];
+        var obj = _pooler.BulletPool.Get();
+        obj.GetComponent<FireObject>().Initialize(_transform, target.transform, _rangedData.Damage);
     }
 
     public override void OnExit(RangedEnemyStateManager stateManager)
