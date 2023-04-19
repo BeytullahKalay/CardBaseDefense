@@ -4,6 +4,8 @@ using UnityEngine.AI;
 
 public class RangedEnemyStateManager : MonoBehaviour,IOnBoard,IEnemy
 {
+    public UnitStates UnitStates;
+
     [SerializeField] private RangedData rangedData;
     
     private RangedEnemyBaseState _currentState;
