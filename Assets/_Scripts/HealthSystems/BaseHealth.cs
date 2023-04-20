@@ -97,5 +97,6 @@ public class BaseHealth : HealthSystem
         canvasGameObject.SetActive(false);
         _basicTowerScript.enabled = false;
         _spriteRenderer.sprite = destroyedSprite;
+        EventManager.GameOver?.Invoke();
     }
 }
