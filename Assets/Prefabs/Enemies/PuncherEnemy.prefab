@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 6480985494251019131}
   - component: {fileID: 6480985494251019130}
   - component: {fileID: 6480985494251019106}
+  - component: {fileID: 737332105281510543}
   m_Layer: 8
   m_Name: PuncherEnemy
   m_TagString: Untagged
@@ -353,6 +354,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   slider: {fileID: 6480985494233773246}
+  firePrefab: {fileID: 0}
+  fireSpawnRadius: 1
+  canvasGameObject: {fileID: 0}
+  destroyedSprite: {fileID: 0}
 --- !u!114 &6480985494251019130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +385,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   punchEnemyData: {fileID: 11400000, guid: 913e99e2ba97efc4a924caba7013fd90, type: 2}
+--- !u!114 &737332105281510543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6480985494251019125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6df27ee7afcb0744aa700b555bcd1282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationForce: 0.2
+  animationDuration: 0.15
+  vibration: 5
+  elasticity: 1
 --- !u!1 &6480985494358502438
 GameObject:
   m_ObjectHideFlags: 0
