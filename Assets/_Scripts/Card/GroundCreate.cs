@@ -80,14 +80,14 @@ public class GroundCreate : MonoBehaviour, IPlaceable
     {
         if (Input.GetMouseButtonUp(0))
         {
-            _undergroundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, vector3IntPos.x - downIntVal,
-                vector3IntPos.y - downIntVal, vector3IntPos.x + upIntVal, vector3IntPos.y + upIntVal);
-
-            _groundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, vector3IntPos.x - downIntVal,
-                vector3IntPos.y - downIntVal, vector3IntPos.x + upIntVal, vector3IntPos.y + upIntVal);
+            var startX = vector3IntPos.x - downIntVal;
+            var endX = vector3IntPos.x + upIntVal;
+            var startY = vector3IntPos.y - downIntVal;
+            var endY = vector3IntPos.y + upIntVal;
             
-            _decorationTilemap.BoxFill(vector3IntPos, groundCreateData.DecorationTile, vector3IntPos.x - downIntVal,
-                vector3IntPos.y - downIntVal, vector3IntPos.x + upIntVal, vector3IntPos.y + upIntVal);
+            _undergroundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, startX, startY, endX, endY);
+            _groundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, startX, startY, endX, endY);
+            _decorationTilemap.BoxFill(vector3IntPos, groundCreateData.DecorationTile, startX, startY, endX, endY);
 
             
             AddRandomBushes(vector3IntPos, downIntVal, upIntVal);
@@ -95,6 +95,12 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
             NavmeshManager.Instance.UpdateSurfaceData();
             _undergroundTilemap.ClearAllEditorPreviewTiles();
+
+            var start = _groundTilemap.CellToWorld(new Vector3Int(startX, startY, 0));
+            var end =_groundTilemap.CellToWorld(new Vector3Int(endX, endY, 0));
+
+            CameraController.Instance.UpdateMaxMovePosition(start.x, start.y, end.x, end.y);
+            
             Destroy(gameObject);
         }
     }
@@ -127,9 +133,12 @@ public class GroundCreate : MonoBehaviour, IPlaceable
             _undergroundTilemap.ClearAllEditorPreviewTiles();
             _lastPos = vector3IntPos;
 
-            _undergroundTilemap.EditorPreviewBoxFill(vector3IntPos, groundCreateData.TileBase,
+            _undergroundTilemap.EditorPreviewBoxFill(
+                vector3IntPos, groundCreateData.TileBase,
                 vector3IntPos.x - downIntVal,
-                vector3IntPos.y - downIntVal, vector3IntPos.x + upIntVal, vector3IntPos.y + upIntVal);
+                vector3IntPos.y - downIntVal,
+                vector3IntPos.x + upIntVal, 
+                vector3IntPos.y + upIntVal);
         }
 
         return vector3IntPos;
