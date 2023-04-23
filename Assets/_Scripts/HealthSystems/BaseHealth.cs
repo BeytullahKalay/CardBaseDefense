@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,6 +11,8 @@ public class BaseHealth : HealthSystem
     [Header("Fire Values")]
     [SerializeField] private GameObject firePrefab;
     [SerializeField] private float fireSpawnRadius = 1f;
+    
+
 
     [Space(10)]
     
@@ -41,6 +44,8 @@ public class BaseHealth : HealthSystem
         OnHeal += CheckFireObjects;
         OnDead += DeadActions;
     }
+
+
 
     protected override void OnDisable()
     {

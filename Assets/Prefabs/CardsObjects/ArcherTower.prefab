@@ -761,6 +761,7 @@ GameObject:
   - component: {fileID: 6682979045669812429}
   - component: {fileID: 2205468908370327761}
   - component: {fileID: 6258574448782083696}
+  - component: {fileID: 2271039375666933208}
   m_Layer: 7
   m_Name: ArcherTower
   m_TagString: Untagged
@@ -957,3 +958,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatedSlider: {fileID: 1859075006}
   animationSpeed: 0.75
+--- !u!114 &2271039375666933208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6074905538072354698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6df27ee7afcb0744aa700b555bcd1282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationForce: 0.2
+  animationDuration: 0.15
+  vibration: 5
+  elasticity: 1

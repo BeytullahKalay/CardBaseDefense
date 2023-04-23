@@ -661,6 +661,7 @@ GameObject:
   - component: {fileID: 5912706338807470119}
   - component: {fileID: 3881978202115198571}
   - component: {fileID: 2233529801173050697}
+  - component: {fileID: 1310610128972008010}
   m_Layer: 7
   m_Name: GoldMiner
   m_TagString: Untagged
@@ -723,7 +724,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 683767175
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.28502133, g: 0.990566, b: 0.9045661, a: 1}
@@ -815,7 +816,6 @@ MonoBehaviour:
   whatIsNotPlaceableLayerMask:
     serializedVersion: 2
     m_Bits: 144
-  Collide: 0
 --- !u!114 &5912706338807470119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,6 +858,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatedSlider: {fileID: 2617999020036467004}
   animationSpeed: 5
+--- !u!114 &1310610128972008010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6074905538072354698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6df27ee7afcb0744aa700b555bcd1282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationForce: 0.2
+  animationDuration: 0.15
+  vibration: 5
+  elasticity: 1
 --- !u!1 &6092438539049460269
 GameObject:
   m_ObjectHideFlags: 0
