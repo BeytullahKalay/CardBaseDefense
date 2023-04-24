@@ -36,14 +36,18 @@ public class PuncherEnemyAttackState : PuncherEnemyBaseState
             var target = FindClosestTarget(stateManager.DetectTargets());
             var dir = (target.transform.position - _transform.position).normalized;
             var distance = Vector2.Distance(_transform.position, target.transform.position);
-            _transform.DOPunchPosition(dir * distance, .5f, 0, 0)
+            _transform.DOPunchPosition(dir * (distance - .5f), .5f, 0, 0).OnStart(() =>
+                {
+                    // Task.Factory.StartNew(() =>
+                    // {
+                    //     System.Threading.Thread.Sleep(250);
+                    //     GiveDamage(target);
+                    // });
+                })
                 .OnComplete(() =>
                 {
-                    target.GetComponent<HealthSystem>().GetDamage(_punchEnemyData.Damage);
-                    var particleCanvas = _pooler.ParticleTextPool.Get();
-                    particleCanvas.GetComponent<ParticleCanvas>().PlayTextAnimation(_punchEnemyData.Damage.ToString(),
-                        target.transform.position);
-                }).OnStepComplete(() => Debug.Log("step completed"));
+                    GiveDamage(target);
+                });
 
             _nextFireTime = Time.time + 1 / _punchEnemyData.PunchFrequency;
         }
@@ -52,6 +56,15 @@ public class PuncherEnemyAttackState : PuncherEnemyBaseState
             _agent.SetDestination(_basePosition);
             stateManager.SwitchState(stateManager.PuncherEnemyMoveState);
         }
+    }
+
+    private void GiveDamage(GameObject target)
+    {
+        target.GetComponent<HealthSystem>().TakeDamage?.Invoke(_punchEnemyData.Damage);
+        
+        var particleCanvas = _pooler.ParticleTextPool.Get();
+        particleCanvas.GetComponent<ParticleCanvas>().PlayTextAnimation(_punchEnemyData.Damage.ToString(),
+            target.transform.position);
     }
 
     public override void OnExit(PuncherStateManager stateManager)
