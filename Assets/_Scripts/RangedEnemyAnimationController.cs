@@ -1,54 +1,47 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(SpriteRenderer))]
-public class RangedEnemyAnimationController : MonoBehaviour
+public class RangedEnemyAnimationController : AnimationControllerSystem
 {
-    [SerializeField] private GameObject canvasGameObject;
-
-    private Animator _animator;
-    private NavMeshAgent _agent;
-    private UnitHealth _healthSystem;
     private SpriteRenderer _spriteRenderer;
     private RangedEnemyStateManager _rangedEnemyStateManager;
-    private RangedRangedEnemyAttackState _attackState;
+    private RangedEnemyAttackState _attackState;
 
-    private const string MoveSpeedValName = "MoveSpeed";
-    private const string AttackValName = "Attack";
-    private const string DeadValName = "Dead";
-
-    private void Awake()
+    public virtual void Awake()
     {
-        _healthSystem = GetComponentInParent<UnitHealth>();
-        _agent = GetComponentInParent<NavMeshAgent>();
+        HealthSystem = GetComponentInParent<HealthSystem>();
+        Agent = GetComponentInParent<NavMeshAgent>();
+        Animator = GetComponentInChildren<Animator>();
+        
         _rangedEnemyStateManager = GetComponentInParent<RangedEnemyStateManager>();
-        _attackState = GetComponentInParent<RangedEnemyStateManager>().RangedRangedEnemyAttackState;
+        _attackState = _rangedEnemyStateManager.RangedEnemyAttackState;
 
-        _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void OnEnable()
+    public override void OnEnable()
     {
-        _healthSystem.OnDead += OnDead;
+        base.OnEnable();
         _attackState.Attack += PlayAttackAnimation;
     }
 
-    private void OnDisable()
+    public override void OnDisable()
     {
-        _healthSystem.OnDead -= OnDead;
+        base.OnDisable();
         _attackState.Attack -= PlayAttackAnimation;
     }
 
-    private void Update()
+    public override void Update()
     {
-        _animator.SetFloat(MoveSpeedValName, _agent.velocity.magnitude);
+        base.Update();
+        Flip();
+    }
 
-
+    private void Flip()
+    {
         if (_rangedEnemyStateManager.UnitStates != UnitStates.Attack)
         {
-            _spriteRenderer.flipX = _agent.velocity.x <= 0;
+            _spriteRenderer.flipX = Agent.velocity.x <= 0;
         }
         else
         {
@@ -58,22 +51,17 @@ public class RangedEnemyAnimationController : MonoBehaviour
         }
     }
 
-    private void OnDead()
+    public override void OnDead()
     {
+        base.OnDead();
         _rangedEnemyStateManager.enabled = false;
-        _animator.SetTrigger(DeadValName);
+        Animator.SetTrigger(DeadValName);
         canvasGameObject.SetActive(false);
-    }
-
-    // using by animation system
-    public void CallDestroy()
-    {
-        _healthSystem.DestroyGameObject();
     }
 
     private void PlayAttackAnimation()
     {
-        _animator.SetTrigger(AttackValName);
+        Animator.SetTrigger(AttackValName);
     }
 
     // using by animation system

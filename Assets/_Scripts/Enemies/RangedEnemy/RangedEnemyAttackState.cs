@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RangedRangedEnemyAttackState : RangedEnemyBaseState
+public class RangedEnemyAttackState : RangedEnemyBaseState
 {
     private RangedData _rangedData;
     private Transform _transform;
@@ -13,7 +13,7 @@ public class RangedRangedEnemyAttackState : RangedEnemyBaseState
 
     public Action Attack;
 
-    public RangedRangedEnemyAttackState(RangedData rangedData, Transform transform, NavMeshAgent agent,
+    public RangedEnemyAttackState(RangedData rangedData, Transform transform, NavMeshAgent agent,
         Vector2 basePosition)
     {
         _rangedData = rangedData;

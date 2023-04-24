@@ -21,7 +21,7 @@ public class RangedRangedEnemyMoveState : RangedEnemyBaseState
     {
         if (stateManager.DetectTargets().Capacity > 0)
         {
-            stateManager.SwitchState(stateManager.RangedRangedEnemyAttackState);
+            stateManager.SwitchState(stateManager.RangedEnemyAttackState);
         }
         else if (GameManager.Instance.BaseTransform != null)
         {

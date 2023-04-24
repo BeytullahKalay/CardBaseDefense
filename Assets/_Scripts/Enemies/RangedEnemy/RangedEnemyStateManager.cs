@@ -4,16 +4,16 @@ using UnityEngine.AI;
 
 public class RangedEnemyStateManager : MonoBehaviour,IOnBoard,IEnemy
 {
-    public UnitStates UnitStates;
 
     [SerializeField] private RangedData rangedData;
+    [HideInInspector]public UnitStates UnitStates;
     
     private RangedEnemyBaseState _currentState;
     public NavMeshAgent NavMeshAgent{ get; set; }
     
     public RangedRangedEnemyIdleState RangedRangedEnemyIdleState;
     public RangedRangedEnemyMoveState RangedRangedEnemyMoveState;
-    public RangedRangedEnemyAttackState RangedRangedEnemyAttackState;
+    public RangedEnemyAttackState RangedEnemyAttackState;
     
     
     public BoardStates BoardState { get; set; }
@@ -25,7 +25,7 @@ public class RangedEnemyStateManager : MonoBehaviour,IOnBoard,IEnemy
         NavMeshAgent = GetComponent<NavMeshAgent>();
         BoardedTransform = transform;
         
-        RangedRangedEnemyAttackState = new RangedRangedEnemyAttackState(rangedData, transform, NavMeshAgent,
+        RangedEnemyAttackState = new RangedEnemyAttackState(rangedData, transform, NavMeshAgent,
             GameManager.Instance.BaseTransform.position);
         RangedRangedEnemyIdleState = new RangedRangedEnemyIdleState();
         RangedRangedEnemyMoveState = new RangedRangedEnemyMoveState(NavMeshAgent,transform);
