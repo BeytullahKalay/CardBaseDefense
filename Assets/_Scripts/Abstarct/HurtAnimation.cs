@@ -9,7 +9,6 @@ public class HurtAnimation : MonoBehaviour
     [SerializeField] private float animationDuration;
     [SerializeField] private int vibration;
     [SerializeField] private float elasticity;
-    private Tween _tween;
 
     private HealthSystem _healthSystem;
 

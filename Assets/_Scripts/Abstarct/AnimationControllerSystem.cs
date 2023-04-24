@@ -32,11 +32,7 @@ public abstract class AnimationControllerSystem : MonoBehaviour
     
     public virtual void Update()
     {
-        
         Animator.SetFloat(MoveSpeedValName, Agent.velocity.magnitude);
-
-
-        //Flip();
     }
 
     public virtual void OnDead()
