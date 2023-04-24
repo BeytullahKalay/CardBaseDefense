@@ -41,6 +41,6 @@ Material:
     - _BlendValue: 0.075
     - _CellDensity: 13.3
     - _PixelateAmount: 111.39
-    - _Speed: 2
+    - _Speed: 2.5
     m_Colors: []
   m_BuildTextureStacks: []
