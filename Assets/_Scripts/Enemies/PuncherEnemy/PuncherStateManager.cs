@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PuncherEnemyStateManager : MonoBehaviour, IOnBoard,IEnemy
+public class PuncherStateManager : MonoBehaviour, IOnBoard,IEnemy
 {
     [SerializeField] private PunchEnemyData punchEnemyData;
+    [SerializeField] private BoardStates startState;
+    [HideInInspector]public UnitStates UnitStates;
 
     private PuncherEnemyBaseState _currentState;
 
@@ -34,6 +36,7 @@ public class PuncherEnemyStateManager : MonoBehaviour, IOnBoard,IEnemy
     private void Start()
     {
         _currentState.OnEnter(this);
+        BoardState = startState;
     }
 
     private void Update()

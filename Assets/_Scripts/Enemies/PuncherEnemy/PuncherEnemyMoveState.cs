@@ -15,11 +15,11 @@ public class PuncherEnemyMoveState : PuncherEnemyBaseState
         _attackDistance = attackDistance;
     }
 
-    public override void OnEnter(PuncherEnemyStateManager stateManager)
+    public override void OnEnter(PuncherStateManager stateManager)
     {
     }
 
-    public override void OnUpdate(PuncherEnemyStateManager stateManager)
+    public override void OnUpdate(PuncherStateManager stateManager)
     {
         var detectedTargets = stateManager.DetectTargets();
 
@@ -47,7 +47,7 @@ public class PuncherEnemyMoveState : PuncherEnemyBaseState
         }
     }
 
-    public override void OnExit(PuncherEnemyStateManager stateManager)
+    public override void OnExit(PuncherStateManager stateManager)
     {
     }
 

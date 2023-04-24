@@ -22,11 +22,11 @@ public class PuncherEnemyAttackState : PuncherEnemyBaseState
         _punchEnemyData = punchEnemyData;
     }
 
-    public override void OnEnter(PuncherEnemyStateManager stateManager)
+    public override void OnEnter(PuncherStateManager stateManager)
     {
     }
 
-    public override void OnUpdate(PuncherEnemyStateManager stateManager)
+    public override void OnUpdate(PuncherStateManager stateManager)
     {
         if (stateManager.DetectTargets().Count > 0)
         {
@@ -54,7 +54,7 @@ public class PuncherEnemyAttackState : PuncherEnemyBaseState
         }
     }
 
-    public override void OnExit(PuncherEnemyStateManager stateManager)
+    public override void OnExit(PuncherStateManager stateManager)
     {
     }
 

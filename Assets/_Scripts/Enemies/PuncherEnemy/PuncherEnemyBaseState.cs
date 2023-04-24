@@ -2,7 +2,7 @@
 
 public abstract class PuncherEnemyBaseState
 {
-    public abstract void OnEnter(PuncherEnemyStateManager stateManager);
-    public abstract void OnUpdate(PuncherEnemyStateManager stateManager);
-    public abstract void OnExit(PuncherEnemyStateManager stateManager);
+    public abstract void OnEnter(PuncherStateManager stateManager);
+    public abstract void OnUpdate(PuncherStateManager stateManager);
+    public abstract void OnExit(PuncherStateManager stateManager);
 }
