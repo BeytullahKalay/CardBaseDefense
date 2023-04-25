@@ -785,7 +785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa31ad9f8906ef48a13dcc399ceba76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  punchEnemyData: {fileID: 11400000, guid: 913e99e2ba97efc4a924caba7013fd90, type: 2}
+  punchData: {fileID: 11400000, guid: 913e99e2ba97efc4a924caba7013fd90, type: 2}
   startState: 0
   UnitStates: 0
 --- !u!114 &737332105281510543

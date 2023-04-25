@@ -36,6 +36,10 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6480985494251019106, guid: 103d8120c8d9dcf42b8017412438cb70, type: 3}
+      propertyPath: punchData
+      value: 
+      objectReference: {fileID: 11400000, guid: 64d2991f4214b444393bd1c950035be9, type: 2}
+    - target: {fileID: 6480985494251019106, guid: 103d8120c8d9dcf42b8017412438cb70, type: 3}
       propertyPath: startState
       value: 1
       objectReference: {fileID: 0}

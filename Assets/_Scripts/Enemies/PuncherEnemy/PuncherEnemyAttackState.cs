@@ -10,16 +10,16 @@ public class PuncherEnemyAttackState : PuncherEnemyBaseState
     private Vector2 _basePosition;
     private float _nextFireTime = float.MinValue;
     private Pooler _pooler;
-    private PunchEnemyData _punchEnemyData;
+    private PunchData _punchData;
 
     public PuncherEnemyAttackState(Transform transform, NavMeshAgent agent, Vector2 basePosition,
-        PunchEnemyData punchEnemyData)
+        PunchData punchData)
     {
         _transform = transform;
         _agent = agent;
         _basePosition = basePosition;
         _pooler = Pooler.Instance;
-        _punchEnemyData = punchEnemyData;
+        _punchData = punchData;
     }
 
     public override void OnEnter(PuncherStateManager stateManager)
@@ -49,7 +49,7 @@ public class PuncherEnemyAttackState : PuncherEnemyBaseState
                     GiveDamage(target);
                 });
 
-            _nextFireTime = Time.time + 1 / _punchEnemyData.PunchFrequency;
+            _nextFireTime = Time.time + 1 / _punchData.PunchFrequency;
         }
         else
         {
@@ -60,10 +60,10 @@ public class PuncherEnemyAttackState : PuncherEnemyBaseState
 
     private void GiveDamage(GameObject target)
     {
-        target.GetComponent<HealthSystem>().TakeDamage?.Invoke(_punchEnemyData.Damage);
+        target.GetComponent<HealthSystem>().TakeDamage?.Invoke(_punchData.Damage);
         
         var particleCanvas = _pooler.ParticleTextPool.Get();
-        particleCanvas.GetComponent<ParticleCanvas>().PlayTextAnimation(_punchEnemyData.Damage.ToString(),
+        particleCanvas.GetComponent<ParticleCanvas>().PlayTextAnimation(_punchData.Damage.ToString(),
             target.transform.position);
     }
 

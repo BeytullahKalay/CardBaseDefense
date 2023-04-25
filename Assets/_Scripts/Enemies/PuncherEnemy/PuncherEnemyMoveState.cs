@@ -7,12 +7,14 @@ public class PuncherEnemyMoveState : PuncherEnemyBaseState
     private NavMeshAgent _agent;
     private Transform _transform;
     private float _attackDistance;
+    private PunchData _punchData;
 
-    public PuncherEnemyMoveState(NavMeshAgent agent, Transform transform, float attackDistance)
+    public PuncherEnemyMoveState(NavMeshAgent agent, Transform transform,PunchData punchData)
     {
         _agent = agent;
         _transform = transform;
-        _attackDistance = attackDistance;
+        _punchData = punchData;
+        _attackDistance = punchData.PunchDistance;
     }
 
     public override void OnEnter(PuncherStateManager stateManager)
@@ -36,14 +38,18 @@ public class PuncherEnemyMoveState : PuncherEnemyBaseState
                 _agent.SetDestination(closestTarget.transform.position);
             }
         }
-        else if (GameManager.Instance.BaseTransform != null)
-        {
-            _agent.SetDestination(GameManager.Instance.BaseTransform.position);
-        }
+        // else if (GameManager.Instance.BaseTransform != null)
+        // {
+        //     _agent.SetDestination(GameManager.Instance.BaseTransform.position);
+        // }
+        // else
+        // {
+        //     _agent.SetDestination(_transform.position);
+        //     stateManager.SwitchState(stateManager.PuncherEnemyIdleState);
+        // }
         else
         {
-            _agent.SetDestination(_transform.position);
-            stateManager.SwitchState(stateManager.PuncherEnemyIdleState);
+            _agent.SetDestination(_punchData.MovePos);
         }
     }
 

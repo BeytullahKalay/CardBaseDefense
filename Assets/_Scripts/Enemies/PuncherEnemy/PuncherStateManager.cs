@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class PuncherStateManager : MonoBehaviour, IOnBoard,IEnemy
 {
-    [SerializeField] private PunchEnemyData punchEnemyData;
+    [SerializeField] private PunchData punchData;
     [SerializeField] private BoardStates startState;
     [HideInInspector]public UnitStates UnitStates;
 
@@ -26,9 +26,9 @@ public class PuncherStateManager : MonoBehaviour, IOnBoard,IEnemy
 
 
         PuncherEnemyIdleState = new PuncherEnemyIdleState();
-        PuncherEnemyMoveState = new PuncherEnemyMoveState(NavMeshAgent, transform, punchEnemyData.PunchDistance);
+        PuncherEnemyMoveState = new PuncherEnemyMoveState(NavMeshAgent, transform, punchData);
         PuncherEnemyAttackState = new PuncherEnemyAttackState(transform, NavMeshAgent,
-            GameManager.Instance.BaseTransform.position, punchEnemyData);
+            GameManager.Instance.BaseTransform.position, punchData);
 
         _currentState = PuncherEnemyIdleState;
     }
@@ -54,8 +54,8 @@ public class PuncherStateManager : MonoBehaviour, IOnBoard,IEnemy
 
     public List<GameObject> DetectTargets()
     {
-        var allColliders = Physics2D.OverlapCircleAll(transform.position, punchEnemyData.DetectRadius,
-            punchEnemyData.WhatIsTargetLayer);
+        var allColliders = Physics2D.OverlapCircleAll(transform.position, punchData.DetectRadius,
+            punchData.WhatIsTargetLayer);
 
         var hittableObjects = new List<GameObject>();
 
@@ -76,7 +76,7 @@ public class PuncherStateManager : MonoBehaviour, IOnBoard,IEnemy
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, punchEnemyData.DetectRadius);
+        Gizmos.DrawWireSphere(transform.position, punchData.DetectRadius);
     }
     
     public void RemoveFromSpawnerList()
