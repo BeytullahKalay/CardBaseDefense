@@ -4,17 +4,34 @@ using UnityEngine;
 [RequireComponent(typeof(HealthSystem))]
 public class HurtAnimation : MonoBehaviour
 {
-    [Header("Animation Values")]
-    [SerializeField] private float animationForce;
+    [Header("Animation Values")] [SerializeField]
+    private float animationForce;
+
     [SerializeField] private float animationDuration;
     [SerializeField] private int vibration;
-    [SerializeField] private float elasticity;
 
     private HealthSystem _healthSystem;
+
+    private Tween _tween;
+
+    private Vector3 _startScale;
 
     private void Awake()
     {
         _healthSystem = GetComponent<HealthSystem>();
+    }
+
+    private void Start()
+    {
+        _startScale = transform.localScale;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            PlayHurtAnimation(12);
+        }
     }
 
     private void OnEnable()
@@ -29,6 +46,10 @@ public class HurtAnimation : MonoBehaviour
 
     private void PlayHurtAnimation(int dmg)
     {
-        transform.DOPunchScale(Vector3.one * animationForce, animationDuration, vibration, elasticity);
+        _tween?.Kill();
+        _tween = transform.DOShakeScale(animationDuration, Vector3.one * animationForce, vibration).OnComplete(() =>
+        {
+            transform.DOScale(_startScale, .1f);
+        });
     }
 }
