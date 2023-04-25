@@ -757,7 +757,7 @@ GameObject:
   - component: {fileID: 561619913647746629}
   - component: {fileID: 561619913647746624}
   - component: {fileID: 561619913647746625}
-  - component: {fileID: 561619913647746626}
+  - component: {fileID: 2533399235071238665}
   - component: {fileID: 561619913647746627}
   - component: {fileID: 561619913647746630}
   - component: {fileID: 4036228747266659800}
@@ -868,7 +868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e39f6090724e4a4a8aadeb042afa2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &561619913647746626
+--- !u!114 &2533399235071238665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -877,13 +877,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 561619913647746686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be93ff0a998360a47be10c477e471445, type: 3}
+  m_Script: {fileID: 11500000, guid: 2589cf0b961d63943a877436f145bc97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
   slider: {fileID: 561619912118434736}
-  canvasGameObject: {fileID: 561619911871547296}
-  destroyedSprite: {fileID: 0}
 --- !u!114 &561619913647746627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -929,7 +927,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6df27ee7afcb0744aa700b555bcd1282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationForce: 0.2
-  animationDuration: 0.15
-  vibration: 5
-  elasticity: 1
+  animationForce: 0.1
+  animationDuration: 0.1
+  vibration: 1

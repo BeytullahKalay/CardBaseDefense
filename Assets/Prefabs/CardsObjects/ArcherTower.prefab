@@ -626,10 +626,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6df27ee7afcb0744aa700b555bcd1282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationForce: 0.2
-  animationDuration: 0.15
-  vibration: 5
-  elasticity: 1
+  animationForce: 0.1
+  animationDuration: 0.1
+  vibration: 1
 --- !u!1 &6568669672215705162
 GameObject:
   m_ObjectHideFlags: 0
