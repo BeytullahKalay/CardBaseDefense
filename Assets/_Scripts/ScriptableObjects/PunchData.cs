@@ -8,7 +8,6 @@ public class PunchData : ScriptableObject
    [SerializeField] Vector2Int damage;
    [SerializeField] private float punchFrequency;
    [SerializeField] private LayerMask whatIsTargetLayer;
-   public Vector3 MovePos;
 
 
    public float DetectRadius => detectRadius;

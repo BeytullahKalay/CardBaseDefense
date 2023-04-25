@@ -8,29 +8,30 @@ public class PuncherStateManager : MonoBehaviour, IOnBoard,IEnemy
     [SerializeField] private BoardStates startState;
     [HideInInspector]public UnitStates UnitStates;
 
-    private PuncherEnemyBaseState _currentState;
+    private PuncherBaseState _currentState;
 
-    public PuncherEnemyIdleState PuncherEnemyIdleState;
-    public PuncherEnemyMoveState PuncherEnemyMoveState;
-    public PuncherEnemyAttackState PuncherEnemyAttackState;
+    public PuncherIdleState PuncherIdleState;
+    public PuncherMoveState PuncherMoveState;
+    public PuncherAttackState PuncherAttackState;
 
 
     public BoardStates BoardState { get; set; }
     public Transform BoardedTransform { get; set; }
     public NavMeshAgent NavMeshAgent { get; set; }
+    public Vector3 MovePos { get; set; }
 
     private void Awake()
     {
         BoardedTransform = transform;
         NavMeshAgent = GetComponent<NavMeshAgent>();
+        MovePos = GameManager.Instance.BaseTransform.position;
 
-
-        PuncherEnemyIdleState = new PuncherEnemyIdleState();
-        PuncherEnemyMoveState = new PuncherEnemyMoveState(NavMeshAgent, transform, punchData);
-        PuncherEnemyAttackState = new PuncherEnemyAttackState(transform, NavMeshAgent,
+        PuncherIdleState = new PuncherIdleState();
+        PuncherMoveState = new PuncherMoveState(NavMeshAgent, transform, punchData);
+        PuncherAttackState = new PuncherAttackState(transform, NavMeshAgent,
             GameManager.Instance.BaseTransform.position, punchData);
 
-        _currentState = PuncherEnemyIdleState;
+        _currentState = PuncherIdleState;
     }
 
     private void Start()
@@ -44,7 +45,7 @@ public class PuncherStateManager : MonoBehaviour, IOnBoard,IEnemy
         _currentState.OnUpdate(this);
     }
 
-    public void SwitchState(PuncherEnemyBaseState newState)
+    public void SwitchState(PuncherBaseState newState)
     {
         _currentState.OnExit(this);
         _currentState = newState;

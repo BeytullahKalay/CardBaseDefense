@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PuncherEnemyAttackState : PuncherEnemyBaseState
+public class PuncherAttackState : PuncherBaseState
 {
     private Transform _transform;
     private NavMeshAgent _agent;
@@ -12,7 +12,7 @@ public class PuncherEnemyAttackState : PuncherEnemyBaseState
     private Pooler _pooler;
     private PunchData _punchData;
 
-    public PuncherEnemyAttackState(Transform transform, NavMeshAgent agent, Vector2 basePosition,
+    public PuncherAttackState(Transform transform, NavMeshAgent agent, Vector2 basePosition,
         PunchData punchData)
     {
         _transform = transform;
@@ -54,7 +54,7 @@ public class PuncherEnemyAttackState : PuncherEnemyBaseState
         else
         {
             _agent.SetDestination(_basePosition);
-            stateManager.SwitchState(stateManager.PuncherEnemyMoveState);
+            stateManager.SwitchState(stateManager.PuncherMoveState);
         }
     }
 
