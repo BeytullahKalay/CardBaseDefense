@@ -132,7 +132,6 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
     public void OnPointerDown(PointerEventData eventData)
     {
         _cardCanvasGroup.blocksRaycasts = false;
-        print("down");
         _cardPositioner.CanvasGroup.blocksRaycasts = false;
     }
     

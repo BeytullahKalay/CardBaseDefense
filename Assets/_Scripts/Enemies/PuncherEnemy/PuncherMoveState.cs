@@ -2,18 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PuncherEnemyMoveState : PuncherEnemyBaseState
+public class PuncherMoveState : PuncherBaseState
 {
+    
     private NavMeshAgent _agent;
     private Transform _transform;
     private float _attackDistance;
-    private PunchData _punchData;
 
-    public PuncherEnemyMoveState(NavMeshAgent agent, Transform transform,PunchData punchData)
+    public PuncherMoveState(NavMeshAgent agent, Transform transform,PunchData punchData)
     {
         _agent = agent;
         _transform = transform;
-        _punchData = punchData;
         _attackDistance = punchData.PunchDistance;
     }
 
@@ -31,25 +30,16 @@ public class PuncherEnemyMoveState : PuncherEnemyBaseState
 
             if (Vector3.Distance(_transform.position, closestTarget.transform.position) < _attackDistance)
             {
-                stateManager.SwitchState(stateManager.PuncherEnemyAttackState);
+                stateManager.SwitchState(stateManager.PuncherAttackState);
             }
             else
             {
                 _agent.SetDestination(closestTarget.transform.position);
             }
         }
-        // else if (GameManager.Instance.BaseTransform != null)
-        // {
-        //     _agent.SetDestination(GameManager.Instance.BaseTransform.position);
-        // }
-        // else
-        // {
-        //     _agent.SetDestination(_transform.position);
-        //     stateManager.SwitchState(stateManager.PuncherEnemyIdleState);
-        // }
         else
         {
-            _agent.SetDestination(_punchData.MovePos);
+            _agent.SetDestination(stateManager.MovePos);
         }
     }
 

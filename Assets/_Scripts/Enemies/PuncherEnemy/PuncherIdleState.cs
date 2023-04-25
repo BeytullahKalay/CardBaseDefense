@@ -1,5 +1,5 @@
 
-public class PuncherEnemyIdleState : PuncherEnemyBaseState
+public class PuncherIdleState : PuncherBaseState
 {
     public override void OnEnter(PuncherStateManager stateManager)
     {
@@ -9,7 +9,7 @@ public class PuncherEnemyIdleState : PuncherEnemyBaseState
     {
         if (stateManager.BoardState == BoardStates.Landed && GameManager.Instance.BaseTransform != null)
         {
-            stateManager.SwitchState(stateManager.PuncherEnemyMoveState);
+            stateManager.SwitchState(stateManager.PuncherMoveState);
         }
     }
 
