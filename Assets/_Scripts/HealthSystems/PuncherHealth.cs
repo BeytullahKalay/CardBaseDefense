@@ -35,6 +35,5 @@ public class PuncherHealth : HealthSystem
         canvasGameObject.SetActive(false);
         _puncherStateManager.enabled = false;
         print("puncher dead");
-        Destroy(gameObject);
     }
 }
