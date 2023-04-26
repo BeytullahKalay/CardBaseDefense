@@ -26,14 +26,6 @@ public class HurtAnimation : MonoBehaviour
         _startScale = transform.localScale;
     }
 
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            PlayHurtAnimation(12);
-        }
-    }
-
     private void OnEnable()
     {
         _healthSystem.TakeDamage += PlayHurtAnimation;
