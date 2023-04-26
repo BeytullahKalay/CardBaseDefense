@@ -22,7 +22,6 @@ public class CameraController : MonoSingleton<CameraController>
     [SerializeField] private float _maxRightPosition = 5;
     [SerializeField] private float _maxLeftPosition = -5;
 
-
     private void Awake()
     {
         _cam = GetComponent<Camera>();
