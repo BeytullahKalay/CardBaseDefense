@@ -27,34 +27,37 @@ public class Barracks : ActionCard
         TrySpawnASolider(true);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            TrySpawnASolider(true);
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.Space))
+    //     {
+    //         SpawnTest();
+    //     }
+    // }
 
     private void TrySpawnASolider(bool isWaveCompleted)
     {
-        print("1");
-        
-        
         if(!isWaveCompleted) return;
-        print("2");
 
         if (spawnedSolider.Count < maxSoliderAmount)
         {
-            print("3");
             var obj = Instantiate(soliderPrefab);
             obj.GetComponent<DoRandomPath>().Initialize(transform,pathRadius,timeBetweenPaths,transform.position);
-            obj.GetComponent<HealthSystem>().OnDead += RemoveObject;
+            obj.GetComponent<HealthSystem>().OnDead += ClearNullObjectFromList;
             spawnedSolider.Add(obj); 
         }
     }
 
-    private void RemoveObject()
+    // private void SpawnTest()
+    // {
+    //     var obj = Instantiate(soliderPrefab);
+    //     obj.GetComponent<DoRandomPath>().Initialize(transform,pathRadius,timeBetweenPaths,transform.position);
+    //     obj.GetComponent<HealthSystem>().OnDead += ClearNullObjectFromList;
+    //     spawnedSolider.Add(obj); 
+    // }
+
+    private void ClearNullObjectFromList()
     {
-        
+        spawnedSolider.RemoveAll(item => item == null);
     }
 }

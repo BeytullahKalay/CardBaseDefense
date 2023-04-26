@@ -27,33 +27,33 @@ public class PuncherAnimationController : AnimationControllerSystem
 
     private void Flip()
     {
-        if (_puncherStateManager.UnitStates != UnitStates.Attack)
-        {
-            _spriteRenderer.flipX = Agent.velocity.x <= 0;
-        }
-        else
-        {
-            var target = _puncherStateManager.DetectTargets()[0];
-            var dir = (target.transform.position - transform.position).normalized;
-            _spriteRenderer.flipX = dir.x <= 0;
-        }
-
-        // if (_puncherStateManager.UnitStates == UnitStates.Move)
+        // if (_puncherStateManager.UnitStates != UnitStates.Attack)
         // {
         //     _spriteRenderer.flipX = Agent.velocity.x <= 0;
         // }
-        // else if (_puncherStateManager.UnitStates == UnitStates.Attack)
+        // else
         // {
         //     var target = _puncherStateManager.DetectTargets()[0];
         //     var dir = (target.transform.position - transform.position).normalized;
         //     _spriteRenderer.flipX = dir.x <= 0;
         // }
-        // else
-        // {
-        //     if (Mathf.Abs(Agent.velocity.x) > .2f)
-        //     {
-        //         _spriteRenderer.flipX = Agent.velocity.x <= 0;
-        //     }
-        // }
+
+        if (_puncherStateManager.UnitStates == UnitStates.Move)
+        {
+            _spriteRenderer.flipX = Agent.velocity.x <= 0;
+        }
+        else if (_puncherStateManager.UnitStates == UnitStates.Attack)
+        {
+            var target = _puncherStateManager.DetectTargets()[0];
+            var dir = (target.transform.position - transform.position).normalized;
+            _spriteRenderer.flipX = dir.x <= 0;
+        }
+        else
+        {
+            if (Mathf.Abs(Agent.velocity.x) > .2f)
+            {
+                _spriteRenderer.flipX = Agent.velocity.x <= 0;
+            }
+        }
     }
 }
