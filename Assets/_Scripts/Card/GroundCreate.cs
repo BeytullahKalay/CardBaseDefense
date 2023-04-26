@@ -19,10 +19,10 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
     private void Awake()
     {
-        _groundTilemap = NavmeshManager.Instance.GroundTilemap;
-        _undergroundTilemap = NavmeshManager.Instance.UndergroundTilemap;
-        _decorationTilemap = NavmeshManager.Instance.DecorationTilemap;
-        _bushTilemap = NavmeshManager.Instance.BushTilemap;
+        _groundTilemap = TilemapManager.Instance.GroundTilemap;
+        _undergroundTilemap = TilemapManager.Instance.UndergroundTilemap;
+        _decorationTilemap = TilemapManager.Instance.DecorationTilemap;
+        _bushTilemap = TilemapManager.Instance.BushTilemap;
     }
 
 

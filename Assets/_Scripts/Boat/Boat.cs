@@ -9,7 +9,7 @@ public class Boat : MonoBehaviour
     private Vector2 _basePosition;
     private Vector2 _direction;
 
-    private NavmeshManager _navmeshManager;
+    private TilemapManager _tilemapManager;
 
     private bool _isGroundTileDetected;
 
@@ -22,7 +22,7 @@ public class Boat : MonoBehaviour
     {
         _landPassengers = GetComponent<LandPassangers>();
         _basePosition = GameManager.Instance.BaseTransform.position;
-        _navmeshManager = NavmeshManager.Instance;
+        _tilemapManager = TilemapManager.Instance;
     }
 
     private void Start()
@@ -39,10 +39,10 @@ public class Boat : MonoBehaviour
     private void CheckIsReachedToGround()
     {
         var pos = checkGroundPoint.position;
-        var tileAnchor = _navmeshManager.GroundTilemap.tileAnchor;
+        var tileAnchor = _tilemapManager.GroundTilemap.tileAnchor;
         var mousePosVector3 = new Vector3(pos.x, pos.y, 0) - new Vector3(tileAnchor.x, tileAnchor.y, 0);
         _detectedGroundPosition = Vector3Int.RoundToInt(mousePosVector3);
-        _isGroundTileDetected = _navmeshManager.GroundTilemap.HasTile(_detectedGroundPosition);
+        _isGroundTileDetected = _tilemapManager.GroundTilemap.HasTile(_detectedGroundPosition);
     }
 
     private void FixedUpdate()
