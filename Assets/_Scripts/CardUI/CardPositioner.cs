@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -37,7 +36,7 @@ public class CardPositioner : MonoBehaviour
     private void SetCardsPosition()
     {
         var allChildren = transform.GetAllChildren();
-        
+
         float cardAngleStep = 0;
         float startAngle = 0;
         
@@ -66,6 +65,8 @@ public class CardPositioner : MonoBehaviour
             
             allChildren[i].GetComponent<RectTransform>().DOLocalMove(new Vector2(x, y), duration);
             allChildren[i].GetComponent<RectTransform>().DORotate(new Vector3(0f, 0f, -cardAngle),duration);
+            
+            allChildren[i].GetComponent<Card>().AssignCardPositionAndRotation(new Vector2(x, y),new Vector3(0f, 0f, -cardAngle));
         }
 
         var average = sum / allChildren.Count;
