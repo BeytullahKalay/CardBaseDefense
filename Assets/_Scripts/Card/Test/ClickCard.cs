@@ -98,5 +98,6 @@ public class ClickCard : Card
         transform.SetSiblingIndex(SiblingIndex);
 
         _cardSelectManager.SelectedCards.Remove(this);
+        EventManager.CloseBottomUI?.Invoke();
     }
 }

@@ -15,6 +15,7 @@ public class BottomUIAnimation : MonoBehaviour, IPointerEnterHandler, IPointerEx
     private CardSelectManager _cardSelectManager;
 
     private bool _isBottomPanelOpen;
+    private bool _pointerOnBottomPanel;
 
     private void Awake()
     {
@@ -26,12 +27,12 @@ public class BottomUIAnimation : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     private void OnEnable()
     {
-        EventManager.CallTheWave += OnWaveComing;
+        EventManager.CloseBottomUI += CloseBottomUI;
     }
 
     private void OnDisable()
     {
-        EventManager.CallTheWave -= OnWaveComing;
+        EventManager.CloseBottomUI -= CloseBottomUI;
     }
 
     private void Start()
@@ -42,12 +43,14 @@ public class BottomUIAnimation : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        _pointerOnBottomPanel = true;
         if (!_spawner.WaveCleared) return;
         MoveUp();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        _pointerOnBottomPanel = false;
         if(_cardSelectManager.SelectedCards.Count > 0 && _cardSelectManager.SelectedCards.Count > 0) return;
         MoveDown();
     }
@@ -66,9 +69,9 @@ public class BottomUIAnimation : MonoBehaviour, IPointerEnterHandler, IPointerEx
         _rectTransform.DOMoveY(_pos.y - moveDownAmount, duration).SetSpeedBased().SetUpdate(UpdateType.Fixed, false);
     }
 
-    private void OnWaveComing()
+    private void CloseBottomUI()
     {
-        if (_isBottomPanelOpen)
+        if (_isBottomPanelOpen && !_pointerOnBottomPanel)
         {
             MoveDown();
         }
