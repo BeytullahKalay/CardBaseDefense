@@ -13,9 +13,8 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
 
     private Canvas _canvas;
 
-    [Header("Card Values")] [SerializeField]
-    private TMP_Text cardCostText;
-
+    [Header("Card Values")]
+    [SerializeField] private TMP_Text cardCostText;
     [SerializeField] private TMP_Text cardNameText;
     [SerializeField] private TMP_Text cardDescriptionText;
     [SerializeField] private Image selectionImage;
@@ -30,9 +29,9 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
 
     private int _siblingIndex;
 
-    [Header("Animation Values")] private Vector2 _cardPositionOnDeck;
+    [Header("Animation Values")]
     private Vector3 _cardRotationOnDeck;
-    private Tween _moveTween;
+    private Tween _scaleTween;
     private Tween _rotateTween;
     private bool _cardSelected;
 
@@ -128,28 +127,26 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         selectionImage.color = c;
     }
 
-    public void AssignCardPositionAndRotation(Vector2 cardPositionOnDeck, Vector3 cardRotationOnDeck)
+    public void AssignCardPositionAndRotation(Vector3 cardRotationOnDeck)
     {
-        _cardPositionOnDeck = cardPositionOnDeck;
         _cardRotationOnDeck = cardRotationOnDeck;
     }
 
     private void PlaySelectionAnimation()
     {
-        _moveTween?.Kill();
+        _scaleTween?.Kill();
         _rotateTween?.Kill();
 
-        _moveTween = transform.DOLocalMoveY(_cardPositionOnDeck.y + cardSelectionAnimationData.MoveUpDistance,
-            cardSelectionAnimationData.MoveUpDuration);
+        _scaleTween = transform.DOScale(Vector3.one + Vector3.one * cardSelectionAnimationData.ScaleUpPercentage, cardSelectionAnimationData.MoveUpDuration);
         _rotateTween = transform.DOLocalRotate(Vector3.zero, cardSelectionAnimationData.MoveUpDuration);
     }
 
     private void PlayUnSelectionAnimation()
     {
-        _moveTween?.Kill();
+        _scaleTween?.Kill();
         _rotateTween?.Kill();
-
-        _moveTween = transform.DOLocalMoveY(_cardPositionOnDeck.y, cardSelectionAnimationData.MoveUpDuration);
+        
+        _scaleTween = transform.DOScale(Vector3.one, cardSelectionAnimationData.MoveUpDuration);
         _rotateTween = transform.DOLocalRotate(_cardRotationOnDeck, cardSelectionAnimationData.MoveUpDuration);
     }
 

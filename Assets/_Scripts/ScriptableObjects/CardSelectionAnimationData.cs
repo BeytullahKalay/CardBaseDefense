@@ -4,9 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Card Selection Animation Data")]
 public class CardSelectionAnimationData : ScriptableObject
 {
-    [SerializeField] private float moveUpDistance = 50;
+    [SerializeField][Range(0,1)] private float scaleUpPercentage = .25f;
     [SerializeField] private float moveUpDuration = .25f;
     
     public float MoveUpDuration => moveUpDuration;
-    public float MoveUpDistance => moveUpDistance;
+    public float ScaleUpPercentage => scaleUpPercentage;
 }
