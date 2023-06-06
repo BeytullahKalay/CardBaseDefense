@@ -15,4 +15,6 @@ MonoBehaviour:
   objectToSpawn: {fileID: 2795713516950890467, guid: 62b43ec05e4cf1449801adb0ce017a43, type: 3}
   cost: 4
   cardName: Ground
+  cardType: 1
+  buttonPanel: {fileID: 7587818972153548042, guid: 2755cd8934da70a42af11e88e5f4d448, type: 3}
   cardDescription: This card creates a ground.

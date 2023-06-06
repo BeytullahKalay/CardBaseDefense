@@ -207,8 +207,6 @@ MonoBehaviour:
   cardDescriptionText: {fileID: 418489673884951911}
   selectionImage: {fileID: 418489675058494899}
   selectedColor: {r: 1, g: 0.5568628, b: 0, a: 0}
-  CardPositionOnDeck: {x: 0, y: 0}
-  StartCardRotationOnDeck: {x: 0, y: 0, z: 0}
 --- !u!1 &418489673884951905
 GameObject:
   m_ObjectHideFlags: 0

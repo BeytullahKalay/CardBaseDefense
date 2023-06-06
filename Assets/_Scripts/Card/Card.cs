@@ -27,15 +27,15 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
     private GameObject _createdObject;
     private CardPositioner _cardPositioner;
 
-    private int _siblingIndex;
+    protected int SiblingIndex;
 
     [Header("Animation Values")]
     private Vector3 _cardRotationOnDeck;
     private Tween _scaleTween;
     private Tween _rotateTween;
-    private bool _cardSelected;
+    protected bool CardSelected;
 
-    private void Awake()
+    public virtual void Awake()
     {
         _gm = GameManager.Instance;
         _canvas = _gm.MainCanvas;
@@ -46,7 +46,7 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         _cardPositioner = GetComponentInParent<CardPositioner>();
     }
 
-    private void Start()
+    public virtual void Start()
     {
         cardCostText.text = CardData.Cost.ToString();
         cardNameText.text = CardData.CardName;
@@ -58,17 +58,10 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
 
     public void UpdateCardState()
     {
-        if (_goldManager.IsPurchasable(CardData.Cost))
-        {
-            _cardCanvasGroup.blocksRaycasts = true;
-        }
-        else
-        {
-            _cardCanvasGroup.blocksRaycasts = false;
-        }
+        _cardCanvasGroup.blocksRaycasts = _goldManager.IsPurchasable(CardData.Cost);
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public virtual void OnPointerUp(PointerEventData eventData)
     {
         if (!Helpers.IsPointerOverUIElement(LayerMask.NameToLayer("UI")) &&
             _createdObject.GetComponent<IPlaceable>().Placeable)
@@ -86,10 +79,10 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
 
         EventManager.SetCardsPosition?.Invoke();
         _cardPositioner.CanvasGroup.blocksRaycasts = true;
-        _cardSelected = false;
+        CardSelected = false;
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public virtual void OnDrag(PointerEventData eventData)
     {
         _rectTransform.anchoredPosition += eventData.delta / _canvas.scaleFactor;
 
@@ -112,11 +105,11 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public virtual void OnPointerEnter(PointerEventData eventData)
     {
         OpenSelectionImage();
         PlaySelectionAnimation();
-        _siblingIndex = transform.GetSiblingIndex();
+        SiblingIndex = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
     }
 
@@ -141,7 +134,7 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         _rotateTween = transform.DOLocalRotate(Vector3.zero, cardSelectionAnimationData.MoveUpDuration);
     }
 
-    private void PlayUnSelectionAnimation()
+    protected void PlayUnSelectionAnimation()
     {
         _scaleTween?.Kill();
         _rotateTween?.Kill();
@@ -150,15 +143,15 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         _rotateTween = transform.DOLocalRotate(_cardRotationOnDeck, cardSelectionAnimationData.MoveUpDuration);
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
-        if (!_cardSelected) PlayUnSelectionAnimation();
+        if (!CardSelected) PlayUnSelectionAnimation();
 
         CloseCardSelectionImage();
-        transform.SetSiblingIndex(_siblingIndex);
+        transform.SetSiblingIndex(SiblingIndex);
     }
 
-    private void CloseCardSelectionImage()
+    protected void CloseCardSelectionImage()
     {
         var c = selectionImage.color;
         c.a = 0;
@@ -171,11 +164,11 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         objectToFollow.position = new Vector3(pos.x, pos.y, 0);
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public virtual void OnPointerDown(PointerEventData eventData)
     {
         _cardCanvasGroup.blocksRaycasts = false;
         _cardPositioner.CanvasGroup.blocksRaycasts = false;
-        _cardSelected = true;
+        CardSelected = true;
     }
 
     private void ResetCardUI()

@@ -12,3 +12,9 @@ public enum UnitStates
     Move,
     Attack
 }
+
+public enum CardType
+{
+    DragDrop,
+    ClickActivate
+}

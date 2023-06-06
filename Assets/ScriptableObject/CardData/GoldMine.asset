@@ -15,4 +15,6 @@ MonoBehaviour:
   objectToSpawn: {fileID: 6074905538072354698, guid: 921d58d4ca1a6d04badbdc854c085974, type: 3}
   cost: 8
   cardName: Gold Miner
+  cardType: 0
+  buttonPanel: {fileID: 7587818972153548042, guid: 2755cd8934da70a42af11e88e5f4d448, type: 3}
   cardDescription: This card creates a gold mine that make gold over time.

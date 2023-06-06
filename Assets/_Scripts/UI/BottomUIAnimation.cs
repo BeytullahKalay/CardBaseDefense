@@ -12,11 +12,26 @@ public class BottomUIAnimation : MonoBehaviour, IPointerEnterHandler, IPointerEx
     private Vector3 _pos;
 
     private Spawner _spawner;
+    private CardSelectManager _cardSelectManager;
+
+    private bool _isBottomPanelOpen;
 
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
+        
         _spawner = Spawner.Instance;
+        _cardSelectManager = CardSelectManager.Instance;
+    }
+
+    private void OnEnable()
+    {
+        EventManager.CallTheWave += OnWaveComing;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.CallTheWave -= OnWaveComing;
     }
 
     private void Start()
@@ -33,18 +48,29 @@ public class BottomUIAnimation : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if(_cardSelectManager.SelectedCards.Count > 0 && _cardSelectManager.SelectedCards.Count > 0) return;
         MoveDown();
     }
 
     private void MoveUp()
     {
+        _isBottomPanelOpen = true;
         _activeTween?.Kill();
         _rectTransform.DOMoveY(_pos.y, duration).SetSpeedBased().SetUpdate(UpdateType.Fixed, false);
     }
 
     private void MoveDown()
     {
+        _isBottomPanelOpen = false;
         _activeTween?.Kill();
         _rectTransform.DOMoveY(_pos.y - moveDownAmount, duration).SetSpeedBased().SetUpdate(UpdateType.Fixed, false);
+    }
+
+    private void OnWaveComing()
+    {
+        if (_isBottomPanelOpen)
+        {
+            MoveDown();
+        }
     }
 }
