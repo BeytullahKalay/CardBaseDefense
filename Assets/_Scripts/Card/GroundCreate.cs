@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -18,6 +19,7 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
     private int _numberOfGroundToPlace = 0;
     private Action _onCompleteAction;
+    private TMP_Text _tmpText;
 
     private void Awake()
     {
@@ -131,10 +133,12 @@ public class GroundCreate : MonoBehaviour, IPlaceable
             CameraController.Instance.UpdateMaxMovePosition(start.x, start.y, end.x, end.y);
 
             _numberOfGroundToPlace--;
+            _tmpText.text = "X" + _numberOfGroundToPlace;
 
             if (_numberOfGroundToPlace <= 0)
             {
                 _onCompleteAction?.Invoke();
+                EventManager.SetBlockRaycastStateTo?.Invoke(true);
                 Destroy(gameObject);
             }
         }
@@ -262,9 +266,11 @@ public class GroundCreate : MonoBehaviour, IPlaceable
         }
     }
 
-    public void SetForPlacing(int placeGroundAmount,Action completeAction)
+    public void SetForPlacing(int placeGroundAmount,Action completeAction,TMP_Text textToUpdate)
     {
         _numberOfGroundToPlace = placeGroundAmount;
         _onCompleteAction = completeAction;
+        _tmpText = textToUpdate;
+        _tmpText.text = "X" + placeGroundAmount;
     }
 }

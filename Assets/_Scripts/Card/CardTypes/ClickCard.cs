@@ -13,6 +13,8 @@ public class ClickCard : ClassicCard
     private CardSelectManager _cardSelectManager;
     private TMP_Text _groundAmountText;
 
+    private readonly int _placeGroundAmount = 5;
+    private bool _cardInAction;
 
     public override void Awake()
     {
@@ -31,8 +33,9 @@ public class ClickCard : ClassicCard
         var buttonPanel = _panel.GetComponent<ButtonPanel>();
         
         _button = buttonPanel.Button;
-        _button.onClick.AddListener(ButtonTestFunc);
+        _button.onClick.AddListener(ButtonPressedActions);
         _groundAmountText = buttonPanel.AmountText;
+        buttonPanel.AmountText.text = "X" + _placeGroundAmount;
     }
 
     public override void OnPointerUp(PointerEventData eventData)
@@ -76,6 +79,8 @@ public class ClickCard : ClassicCard
     private void Update()
     {
         if (!CardSelected) return;
+        
+        if(_cardInAction) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
             UnSelectActions();
@@ -90,17 +95,19 @@ public class ClickCard : ClassicCard
         _panel.SetActive(false);
 
         // on exit stuff
+        transform.SetSiblingIndex(SiblingIndex);
         PlayUnSelectionAnimation();
         CloseCardSelectionImage();
-        transform.SetSiblingIndex(SiblingIndex);
 
         _cardSelectManager.SelectedCards.Remove(this);
         EventManager.CloseBottomUI?.Invoke();
     }
 
-    private void ButtonTestFunc()
+    private void ButtonPressedActions()
     {
         print("BUTTON WORKED!");
+
+        _cardInAction = true;
 
         EventManager.AddThatToCurrentGold?.Invoke(-CardData.Cost);
         Gm.UpdateAllCardsState();
@@ -110,7 +117,10 @@ public class ClickCard : ClassicCard
 
         var createdObject = Instantiate(CardData.ObjectToSpawn);
         var groundScript = createdObject.GetComponent<GroundCreate>();
-        groundScript.SetForPlacing(5, CardCompleteActions, _groundAmountText);
+        groundScript.SetForPlacing(_placeGroundAmount, CardCompleteActions, _groundAmountText);
+        
+        EventManager.CloseBottomUI?.Invoke();
+        EventManager.SetBlockRaycastStateTo?.Invoke(false);
     }
 
     private void CardCompleteActions()

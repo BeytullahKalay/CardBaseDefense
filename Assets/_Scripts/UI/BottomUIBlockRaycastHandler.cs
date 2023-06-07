@@ -15,12 +15,14 @@ public class BottomUIBlockRaycastHandler : MonoBehaviour
     {
         EventManager.WaveCompleted += BlockRaycast;
         EventManager.CallTheWave += DontBlockRaycast;
+        EventManager.SetBlockRaycastStateTo += SetBlockRaycastStateTo;
     }
 
     private void OnDisable()
     {
         EventManager.CallTheWave -= DontBlockRaycast;
         EventManager.WaveCompleted -= BlockRaycast;
+        EventManager.SetBlockRaycastStateTo -= SetBlockRaycastStateTo;
     }
 
     private void DontBlockRaycast()
@@ -31,5 +33,10 @@ public class BottomUIBlockRaycastHandler : MonoBehaviour
     private void BlockRaycast(bool waveStatus)
     {
         _canvasGroup.blocksRaycasts = true;
+    }
+
+    private void SetBlockRaycastStateTo(bool state)
+    {
+        _canvasGroup.blocksRaycasts = state;
     }
 }
