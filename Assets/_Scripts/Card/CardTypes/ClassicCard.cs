@@ -80,6 +80,7 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         EventManager.SetCardsPosition?.Invoke();
         _cardPositioner.CanvasGroup.blocksRaycasts = true;
         CardSelected = false;
+        
     }
 
     public virtual void OnDrag(PointerEventData eventData)
@@ -145,8 +146,7 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        if (!CardSelected) PlayUnSelectionAnimation();
-
+        PlayUnSelectionAnimation();
         CloseCardSelectionImage();
         transform.SetSiblingIndex(SiblingIndex);
     }
