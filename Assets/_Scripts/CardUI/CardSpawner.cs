@@ -43,7 +43,7 @@ public class CardSpawner : MonoBehaviour
         var cardObject = Instantiate(
             randomCardData.CardType == CardType.ClickCard ? clickCardPrefab : classicCardPrefab, cardParent);
         
-        if (cardObject.TryGetComponent<Card>(out var cardScript))
+        if (cardObject.TryGetComponent<ClassicCard>(out var cardScript))
             cardScript.CardData = randomCardData;
         else
             Debug.LogError("No Card script on " + cardObject.name + " game object!");

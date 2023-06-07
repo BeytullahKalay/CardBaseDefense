@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ClickCard : Card
+public class ClickCard : ClassicCard
 {
     private GameObject _panel;
     private Button _button;

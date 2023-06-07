@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDragHandler, IPointerEnterHandler,
+public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDragHandler, IPointerEnterHandler,
     IPointerExitHandler
 {
     public CardData CardData;

@@ -66,7 +66,7 @@ public class CardPositioner : MonoBehaviour
             allChildren[i].GetComponent<RectTransform>().DOLocalMove(new Vector2(x, y), duration);
             allChildren[i].GetComponent<RectTransform>().DORotate(new Vector3(0f, 0f, -cardAngle),duration);
             
-            allChildren[i].GetComponent<Card>().AssignCardPositionAndRotation(new Vector3(0f, 0f, -cardAngle));
+            allChildren[i].GetComponent<ClassicCard>().AssignCardPositionAndRotation(new Vector3(0f, 0f, -cardAngle));
         }
 
         var average = sum / allChildren.Count;

@@ -6,7 +6,7 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] private Transform baseTransform;
     [SerializeField] private Canvas mainCanvas;
     
-    public List<Card> Cards;
+    public List<ClassicCard> Cards;
 
     public void UpdateAllCardsState()
     {
