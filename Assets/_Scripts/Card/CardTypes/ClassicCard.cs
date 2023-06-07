@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -53,6 +54,7 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         cardDescriptionText.text = CardData.CardDescription;
         Gm.Cards.Add(this);
         UpdateCardState();
+        SiblingIndex = transform.GetSiblingIndex();
     }
 
 
@@ -63,7 +65,7 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 
     public virtual void OnPointerUp(PointerEventData eventData)
     {
-        if (!Helpers.IsPointerOverUIElement(LayerMask.NameToLayer("UI")) &&
+        if (!Helpers.IsPointerOverUIElement(LayerMask.NameToLayer("UI")) && _createdObject != null &&
             _createdObject.GetComponent<IPlaceable>().Placeable)
         {
             EventManager.AddThatToCurrentGold?.Invoke(-CardData.Cost);
@@ -80,7 +82,6 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         EventManager.SetCardsPosition?.Invoke();
         _cardPositioner.CanvasGroup.blocksRaycasts = true;
         CardSelected = false;
-        
     }
 
     public virtual void OnDrag(PointerEventData eventData)
@@ -110,7 +111,7 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     {
         OpenSelectionImage();
         PlaySelectionAnimation();
-        SiblingIndex = transform.GetSiblingIndex();
+        //SiblingIndex = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
     }
 
@@ -131,7 +132,8 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         _scaleTween?.Kill();
         _rotateTween?.Kill();
 
-        _scaleTween = transform.DOScale(Vector3.one + Vector3.one * cardSelectionAnimationData.ScaleUpPercentage, cardSelectionAnimationData.MoveUpDuration);
+        _scaleTween = transform.DOScale(Vector3.one + Vector3.one * cardSelectionAnimationData.ScaleUpPercentage,
+            cardSelectionAnimationData.MoveUpDuration);
         _rotateTween = transform.DOLocalRotate(Vector3.zero, cardSelectionAnimationData.MoveUpDuration);
     }
 
@@ -139,16 +141,16 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     {
         _scaleTween?.Kill();
         _rotateTween?.Kill();
-        
+
         _scaleTween = transform.DOScale(Vector3.one, cardSelectionAnimationData.MoveUpDuration);
         _rotateTween = transform.DOLocalRotate(_cardRotationOnDeck, cardSelectionAnimationData.MoveUpDuration);
     }
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
+        transform.SetSiblingIndex(SiblingIndex);
         PlayUnSelectionAnimation();
         CloseCardSelectionImage();
-        transform.SetSiblingIndex(SiblingIndex);
     }
 
     protected void CloseCardSelectionImage()
