@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -5,17 +6,18 @@ using UnityEngine.Tilemaps;
 public class GroundCreate : MonoBehaviour, IPlaceable
 {
     [SerializeField] private GroundCreateData groundCreateData;
-
-
+    
     public bool Placeable { get; set; }
-
-
+    
     private Vector3Int _lastPos;
 
     private Tilemap _groundTilemap;
     private Tilemap _undergroundTilemap;
     private Tilemap _decorationTilemap;
     private Tilemap _bushTilemap;
+
+    private int _numberOfGroundToPlace = 0;
+    private Action _onCompleteAction;
 
     private void Awake()
     {
@@ -48,9 +50,10 @@ public class GroundCreate : MonoBehaviour, IPlaceable
         var downIntVal = Mathf.FloorToInt(groundCreateData.SizeOfGround * .5f);
         var upIntVal = Mathf.CeilToInt(groundCreateData.SizeOfGround * .5f);
 
-        for (var x = vector3IntPos.x - downIntVal; x <= vector3IntPos.x + upIntVal; x++)
+
+        for (var x = vector3IntPos.x - downIntVal; x < vector3IntPos.x + upIntVal; x++)
         {
-            for (var y = vector3IntPos.y - downIntVal; y <= vector3IntPos.y + upIntVal; y++)
+            for (var y = vector3IntPos.y - downIntVal; y < vector3IntPos.y + upIntVal; y++)
             {
                 var tileChecks = new List<bool>()
                 {
@@ -78,7 +81,33 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
     private void CreateGround(Vector3Int vector3IntPos, int downIntVal, int upIntVal)
     {
-        if (Input.GetMouseButtonUp(0))
+        // if (Input.GetMouseButtonUp(0))
+        // {
+        //     var startX = vector3IntPos.x - downIntVal;
+        //     var endX = vector3IntPos.x + upIntVal;
+        //     var startY = vector3IntPos.y - downIntVal;
+        //     var endY = vector3IntPos.y + upIntVal;
+        //     
+        //     _undergroundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, startX, startY, endX, endY);
+        //     _groundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, startX, startY, endX, endY);
+        //     _decorationTilemap.BoxFill(vector3IntPos, groundCreateData.DecorationTile, startX, startY, endX, endY);
+        //
+        //     
+        //     AddRandomBushes(vector3IntPos, downIntVal, upIntVal);
+        //
+        //
+        //     NavmeshManager.Instance.UpdateSurfaceData();
+        //     _undergroundTilemap.ClearAllEditorPreviewTiles();
+        //
+        //     var start = _groundTilemap.CellToWorld(new Vector3Int(startX, startY, 0));
+        //     var end =_groundTilemap.CellToWorld(new Vector3Int(endX, endY, 0));
+        //
+        //     CameraController.Instance.UpdateMaxMovePosition(start.x, start.y, end.x, end.y);
+        //     
+        //     Destroy(gameObject);
+        // }
+        
+        if (Input.GetMouseButtonDown(0))
         {
             var startX = vector3IntPos.x - downIntVal;
             var endX = vector3IntPos.x + upIntVal;
@@ -100,8 +129,14 @@ public class GroundCreate : MonoBehaviour, IPlaceable
             var end =_groundTilemap.CellToWorld(new Vector3Int(endX, endY, 0));
 
             CameraController.Instance.UpdateMaxMovePosition(start.x, start.y, end.x, end.y);
-            
-            Destroy(gameObject);
+
+            _numberOfGroundToPlace--;
+
+            if (_numberOfGroundToPlace <= 0)
+            {
+                _onCompleteAction?.Invoke();
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -120,7 +155,7 @@ public class GroundCreate : MonoBehaviour, IPlaceable
     {
         var vector3IntPos = Helpers.GetMousePositionForTilemap(_groundTilemap);
         downIntVal = Mathf.FloorToInt(groundCreateData.SizeOfGround * .5f);
-        upIntVal = Mathf.CeilToInt(groundCreateData.SizeOfGround * .5f);
+        upIntVal = Mathf.CeilToInt(groundCreateData.SizeOfGround * .5f) - 1;
 
         if (_lastPos != vector3IntPos)
         {
@@ -225,5 +260,11 @@ public class GroundCreate : MonoBehaviour, IPlaceable
             underGroundTilemap.size = newSize;
             groundTilemap.size = newSize;
         }
+    }
+
+    public void SetForPlacing(int placeGroundAmount,Action completeAction)
+    {
+        _numberOfGroundToPlace = placeGroundAmount;
+        _onCompleteAction = completeAction;
     }
 }

@@ -22,7 +22,7 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
 
     private RectTransform _rectTransform;
     private CanvasGroup _cardCanvasGroup;
-    private GameManager _gm;
+    protected GameManager Gm;
     private GoldManager _goldManager;
     private GameObject _createdObject;
     private CardPositioner _cardPositioner;
@@ -37,8 +37,8 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
 
     public virtual void Awake()
     {
-        _gm = GameManager.Instance;
-        _canvas = _gm.MainCanvas;
+        Gm = GameManager.Instance;
+        _canvas = Gm.MainCanvas;
         _goldManager = GoldManager.Instance;
         _cardCanvasGroup = GetComponent<CanvasGroup>();
         _rectTransform = GetComponent<RectTransform>();
@@ -51,7 +51,7 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         cardCostText.text = CardData.Cost.ToString();
         cardNameText.text = CardData.CardName;
         cardDescriptionText.text = CardData.CardDescription;
-        _gm.Cards.Add(this);
+        Gm.Cards.Add(this);
         UpdateCardState();
     }
 
@@ -67,7 +67,7 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
             _createdObject.GetComponent<IPlaceable>().Placeable)
         {
             EventManager.AddThatToCurrentGold?.Invoke(-CardData.Cost);
-            _gm.UpdateAllCardsState();
+            Gm.UpdateAllCardsState();
             _createdObject.GetComponent<IPlaceable>().PlaceActions();
             DestroyCardFromUI();
         }
@@ -177,9 +177,9 @@ public class Card : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDrag
         Destroy(_createdObject);
     }
 
-    private void DestroyCardFromUI()
+    protected void DestroyCardFromUI()
     {
-        _gm.Cards.Remove(this);
+        Gm.Cards.Remove(this);
         gameObject.transform.SetParent(null);
         Destroy(gameObject);
     }
