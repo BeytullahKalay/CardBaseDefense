@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ public class ClickCard : ClassicCard
     private bool _overThisUI;
 
     private CardSelectManager _cardSelectManager;
+    private TMP_Text _groundAmountText;
+
 
     public override void Awake()
     {
@@ -24,8 +27,12 @@ public class ClickCard : ClassicCard
 
         _panel = Instantiate(CardData.Buttonpanel, transform);
         _panel.SetActive(false);
-        _button = _panel.transform.GetChild(0).GetComponent<Button>();
+
+        var buttonPanel = _panel.GetComponent<ButtonPanel>();
+        
+        _button = buttonPanel.Button;
         _button.onClick.AddListener(ButtonTestFunc);
+        _groundAmountText = buttonPanel.AmountText;
     }
 
     public override void OnPointerUp(PointerEventData eventData)
@@ -42,7 +49,7 @@ public class ClickCard : ClassicCard
     {
         CardSelected = !CardSelected;
         _panel.SetActive(CardSelected);
-        
+
         if (CardSelected)
             CardSelectManager.Instance.SelectedCards.Add(this);
         else
@@ -57,10 +64,12 @@ public class ClickCard : ClassicCard
 
     public override void OnPointerExit(PointerEventData eventData)
     {
-        if (!CardSelected) PlayUnSelectionAnimation();
-
-        CloseCardSelectionImage();
-
+        if (!CardSelected)
+        {
+            PlayUnSelectionAnimation();
+            CloseCardSelectionImage();
+        }
+        
         _overThisUI = false;
     }
 
@@ -92,16 +101,16 @@ public class ClickCard : ClassicCard
     private void ButtonTestFunc()
     {
         print("BUTTON WORKED!");
-        
+
         EventManager.AddThatToCurrentGold?.Invoke(-CardData.Cost);
         Gm.UpdateAllCardsState();
-        
-        
+
+
         _button.gameObject.SetActive(false);
 
         var createdObject = Instantiate(CardData.ObjectToSpawn);
         var groundScript = createdObject.GetComponent<GroundCreate>();
-        groundScript.SetForPlacing(5,CardCompleteActions);
+        groundScript.SetForPlacing(5, CardCompleteActions, _groundAmountText);
     }
 
     private void CardCompleteActions()
