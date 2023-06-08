@@ -71,12 +71,12 @@ public class CameraController : MonoSingleton<CameraController>
         transform.position = desPos;
     }
 
-    public void UpdateMaxMovePosition(float startX, float startY, float endX, float endY)
+    public void UpdateMaxMovePosition(Vector3 start,Vector3 end)
     {
-        _maxUpPosition = startY > _maxUpPosition ? startY : _maxUpPosition;
-        _maxDownPosition = endY < _maxDownPosition ? endY : _maxDownPosition;
+        _maxUpPosition = start.y > _maxUpPosition ? start.y : _maxUpPosition;
+        _maxDownPosition = end.y < _maxDownPosition ? end.y : _maxDownPosition;
 
-        _maxLeftPosition = startX < _maxLeftPosition ? startX : _maxLeftPosition;
-        _maxRightPosition = endX > _maxRightPosition ? endX : _maxRightPosition;
+        _maxLeftPosition = start.x < _maxLeftPosition ? start.x : _maxLeftPosition;
+        _maxRightPosition = end.x > _maxRightPosition ? end.x : _maxRightPosition;
     }
 }
