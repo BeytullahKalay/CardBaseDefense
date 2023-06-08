@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -21,6 +22,11 @@ public class Spawner : MonoSingleton<Spawner>
     private void Awake()
     {
         WaveCleared = true; // true for default
+    }
+
+    private void Start()
+    {
+        ChangeSpawnPositionRandomly();
     }
 
     private void OnEnable()

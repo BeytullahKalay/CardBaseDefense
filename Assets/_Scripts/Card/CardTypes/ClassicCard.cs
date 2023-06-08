@@ -47,14 +47,29 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         _cardPositioner = GetComponentInParent<CardPositioner>();
     }
 
+    private void OnEnable()
+    {
+        EventManager.UpdateCardUI += UpdateCardText;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.UpdateCardUI -= UpdateCardText;
+    }
+
     public virtual void Start()
+    {
+        UpdateCardText();
+        Gm.Cards.Add(this);
+        UpdateCardState();
+        SiblingIndex = transform.GetSiblingIndex();
+    }
+
+    private void UpdateCardText()
     {
         cardCostText.text = CardData.Cost.ToString();
         cardNameText.text = CardData.CardName;
         cardDescriptionText.text = CardData.CardDescription;
-        Gm.Cards.Add(this);
-        UpdateCardState();
-        SiblingIndex = transform.GetSiblingIndex();
     }
 
 
@@ -68,20 +83,32 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         if (!Helpers.IsPointerOverUIElement(LayerMask.NameToLayer("UI")) && _createdObject != null &&
             _createdObject.GetComponent<IPlaceable>().Placeable)
         {
-            EventManager.AddThatToCurrentGold?.Invoke(-CardData.Cost);
-            Gm.UpdateAllCardsState();
-            _createdObject.GetComponent<IPlaceable>().PlaceActions();
-            DestroyCardFromUI();
+            UseCard();
+            CardData.IncreaseCostForThisCard();
+            EventManager.UpdateCardUI?.Invoke();
         }
         else
         {
-            ResetCardUI();
-            _cardCanvasGroup.blocksRaycasts = true;
+            ResetCardAndCanvasRaycast();
         }
 
         EventManager.SetCardsPosition?.Invoke();
         _cardPositioner.CanvasGroup.blocksRaycasts = true;
         CardSelected = false;
+    }
+
+    private void ResetCardAndCanvasRaycast()
+    {
+        ResetCardUI();
+        _cardCanvasGroup.blocksRaycasts = true;
+    }
+
+    private void UseCard()
+    {
+        EventManager.AddThatToCurrentGold?.Invoke(-CardData.Cost);
+        Gm.UpdateAllCardsState();
+        _createdObject.GetComponent<IPlaceable>().PlaceActions();
+        DestroyCardFromUI();
     }
 
     public virtual void OnDrag(PointerEventData eventData)
