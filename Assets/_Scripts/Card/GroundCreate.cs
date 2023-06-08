@@ -47,7 +47,7 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
     private void CheckIsPlaceable()
     {
-        var mousePosVec2 = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
+        //var mousePosVec2 = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
         //Placeable = !_groundTilemap.HasTile(Vector3Int.RoundToInt(mousePosVec2));
         Placeable = !_groundTilemap.HasTile(Helpers.GetMousePositionForTilemap(_groundTilemap));
 
