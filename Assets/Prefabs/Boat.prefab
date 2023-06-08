@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpDuration: 1
-  jumpPower: 5
+  jumpPower: 2
   jumpDistance: 3
   ease: 1
 --- !u!114 &4055933735622943871
