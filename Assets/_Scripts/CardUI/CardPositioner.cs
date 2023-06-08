@@ -57,15 +57,14 @@ public class CardPositioner : MonoBehaviour
 
         for (int i = 0; i < allChildren.Count; i++)
         {
-            
             var cardAngle = startAngle + i * cardAngleStep;
             var x = Mathf.Sin(cardAngle * Mathf.Deg2Rad) * radius;
             var y = Mathf.Cos(cardAngle * Mathf.Deg2Rad) * radius;
             sum += y;
-            
+
             allChildren[i].GetComponent<RectTransform>().DOLocalMove(new Vector2(x, y), duration);
-            allChildren[i].GetComponent<RectTransform>().DORotate(new Vector3(0f, 0f, -cardAngle),duration);
-            
+            allChildren[i].GetComponent<RectTransform>().DORotate(new Vector3(0f, 0f, -cardAngle), duration);
+
             allChildren[i].GetComponent<ClassicCard>().AssignCardPositionAndRotation(new Vector3(0f, 0f, -cardAngle));
         }
 
