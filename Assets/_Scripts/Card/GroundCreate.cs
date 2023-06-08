@@ -47,15 +47,10 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
     private void CheckIsPlaceable()
     {
-        //var mousePosVec2 = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
-        //Placeable = !_groundTilemap.HasTile(Vector3Int.RoundToInt(mousePosVec2));
         Placeable = !_groundTilemap.HasTile(Helpers.GetMousePositionForTilemap(_groundTilemap));
 
-        
         if (!Placeable) return;
         
-        print("PLACEABLE!");
-
         var vector3IntPos = Helpers.GetMousePositionForTilemap(_groundTilemap);
         var downIntVal = Mathf.FloorToInt(groundCreateData.SizeOfGround * .5f);
         var upIntVal = Mathf.CeilToInt(groundCreateData.SizeOfGround * .5f);
@@ -110,7 +105,11 @@ public class GroundCreate : MonoBehaviour, IPlaceable
         var start = _groundTilemap.CellToWorld(new Vector3Int(startX, startY, 0));
         var end =_groundTilemap.CellToWorld(new Vector3Int(endX, endY, 0));
 
-        CameraController.Instance.UpdateMaxMovePosition(start.x, start.y, end.x, end.y);
+        // set camera max position values
+        CameraController.Instance.UpdateMaxMovePosition(start,end);
+        
+        // set spawner spawn position values
+        Spawner.Instance.UpdateMaxMovePosition(start,end);
 
         _numberOfGroundToPlace--;
         _tmpText.text = "X" + _numberOfGroundToPlace;
