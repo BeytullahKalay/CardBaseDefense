@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class CardSelectManager : MonoSingleton<CardSelectManager>
 {
-    public List<ClickCard> SelectedCards = new List<ClickCard>();
+    public List<ClassicCard> SelectedCards = new List<ClassicCard>();
 
     private void OnEnable()
     {

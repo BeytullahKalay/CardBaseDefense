@@ -38,15 +38,23 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
         if (!Placeable) return;
 
-        CreateGround(vector3IntPos, downIntVal, upIntVal);
+        if (Input.GetMouseButtonDown(0))
+        {
+            print("mouse clicked!");
+            CreateGround(vector3IntPos, downIntVal, upIntVal);
+        }
     }
 
     private void CheckIsPlaceable()
     {
         var mousePosVec2 = Helpers.GetWorldPositionOfPointer(Helpers.MainCamera);
-        Placeable = !_groundTilemap.HasTile(Vector3Int.RoundToInt(mousePosVec2));
+        //Placeable = !_groundTilemap.HasTile(Vector3Int.RoundToInt(mousePosVec2));
+        Placeable = !_groundTilemap.HasTile(Helpers.GetMousePositionForTilemap(_groundTilemap));
 
+        
         if (!Placeable) return;
+        
+        print("PLACEABLE!");
 
         var vector3IntPos = Helpers.GetMousePositionForTilemap(_groundTilemap);
         var downIntVal = Mathf.FloorToInt(groundCreateData.SizeOfGround * .5f);
@@ -83,64 +91,37 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
     private void CreateGround(Vector3Int vector3IntPos, int downIntVal, int upIntVal)
     {
-        // if (Input.GetMouseButtonUp(0))
-        // {
-        //     var startX = vector3IntPos.x - downIntVal;
-        //     var endX = vector3IntPos.x + upIntVal;
-        //     var startY = vector3IntPos.y - downIntVal;
-        //     var endY = vector3IntPos.y + upIntVal;
-        //     
-        //     _undergroundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, startX, startY, endX, endY);
-        //     _groundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, startX, startY, endX, endY);
-        //     _decorationTilemap.BoxFill(vector3IntPos, groundCreateData.DecorationTile, startX, startY, endX, endY);
-        //
-        //     
-        //     AddRandomBushes(vector3IntPos, downIntVal, upIntVal);
-        //
-        //
-        //     NavmeshManager.Instance.UpdateSurfaceData();
-        //     _undergroundTilemap.ClearAllEditorPreviewTiles();
-        //
-        //     var start = _groundTilemap.CellToWorld(new Vector3Int(startX, startY, 0));
-        //     var end =_groundTilemap.CellToWorld(new Vector3Int(endX, endY, 0));
-        //
-        //     CameraController.Instance.UpdateMaxMovePosition(start.x, start.y, end.x, end.y);
-        //     
-        //     Destroy(gameObject);
-        // }
-        
-        if (Input.GetMouseButtonDown(0))
+        var startX = vector3IntPos.x - downIntVal;
+        var endX = vector3IntPos.x + upIntVal;
+        var startY = vector3IntPos.y - downIntVal;
+        var endY = vector3IntPos.y + upIntVal;
+            
+        _undergroundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, startX, startY, endX, endY);
+        _groundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, startX, startY, endX, endY);
+        _decorationTilemap.BoxFill(vector3IntPos, groundCreateData.DecorationTile, startX, startY, endX, endY);
+
+            
+        AddRandomBushes(vector3IntPos, downIntVal, upIntVal);
+
+
+        NavmeshManager.Instance.UpdateSurfaceData();
+        _undergroundTilemap.ClearAllEditorPreviewTiles();
+
+        var start = _groundTilemap.CellToWorld(new Vector3Int(startX, startY, 0));
+        var end =_groundTilemap.CellToWorld(new Vector3Int(endX, endY, 0));
+
+        CameraController.Instance.UpdateMaxMovePosition(start.x, start.y, end.x, end.y);
+
+        _numberOfGroundToPlace--;
+        _tmpText.text = "X" + _numberOfGroundToPlace;
+
+        if (_numberOfGroundToPlace <= 0)
         {
-            var startX = vector3IntPos.x - downIntVal;
-            var endX = vector3IntPos.x + upIntVal;
-            var startY = vector3IntPos.y - downIntVal;
-            var endY = vector3IntPos.y + upIntVal;
-            
-            _undergroundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, startX, startY, endX, endY);
-            _groundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, startX, startY, endX, endY);
-            _decorationTilemap.BoxFill(vector3IntPos, groundCreateData.DecorationTile, startX, startY, endX, endY);
-
-            
-            AddRandomBushes(vector3IntPos, downIntVal, upIntVal);
-
-
-            NavmeshManager.Instance.UpdateSurfaceData();
-            _undergroundTilemap.ClearAllEditorPreviewTiles();
-
-            var start = _groundTilemap.CellToWorld(new Vector3Int(startX, startY, 0));
-            var end =_groundTilemap.CellToWorld(new Vector3Int(endX, endY, 0));
-
-            CameraController.Instance.UpdateMaxMovePosition(start.x, start.y, end.x, end.y);
-
-            _numberOfGroundToPlace--;
-            _tmpText.text = "X" + _numberOfGroundToPlace;
-
-            if (_numberOfGroundToPlace <= 0)
-            {
-                _onCompleteAction?.Invoke();
-                EventManager.SetBlockRaycastStateTo?.Invoke(true);
-                Destroy(gameObject);
-            }
+            _onCompleteAction?.Invoke();
+            EventManager.SetBlockRaycastStateTo?.Invoke(true);
+            EventManager.CloseBottomUI?.Invoke();
+            CardSelectManager.Instance.SelectedCards.Clear();
+            Destroy(gameObject);
         }
     }
 
@@ -266,7 +247,7 @@ public class GroundCreate : MonoBehaviour, IPlaceable
         }
     }
 
-    public void SetForPlacing(int placeGroundAmount,Action completeAction,TMP_Text textToUpdate)
+    public void PrepareForPlacing(int placeGroundAmount,Action completeAction,TMP_Text textToUpdate)
     {
         _numberOfGroundToPlace = placeGroundAmount;
         _onCompleteAction = completeAction;

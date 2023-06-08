@@ -14,7 +14,7 @@ public class BottomUIAnimation : MonoBehaviour, IPointerEnterHandler, IPointerEx
     private Spawner _spawner;
     private CardSelectManager _cardSelectManager;
 
-    private bool _isBottomPanelOpen;
+    //private bool _isBottomPanelOpen;
     private bool _pointerOnBottomPanel;
 
     private void Awake()
@@ -57,21 +57,21 @@ public class BottomUIAnimation : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     private void MoveUp()
     {
-        _isBottomPanelOpen = true;
+        //_isBottomPanelOpen = true;
         _activeTween?.Kill();
         _rectTransform.DOMoveY(_pos.y, duration).SetSpeedBased().SetUpdate(UpdateType.Fixed, false);
     }
 
     private void MoveDown()
     {
-        _isBottomPanelOpen = false;
+        //_isBottomPanelOpen = false;
         _activeTween?.Kill();
         _rectTransform.DOMoveY(_pos.y - moveDownAmount, duration).SetSpeedBased().SetUpdate(UpdateType.Fixed, false);
     }
 
     private void CloseBottomUI()
     {
-        if (_isBottomPanelOpen && !_pointerOnBottomPanel)
+        if (!_pointerOnBottomPanel)
         {
             MoveDown();
         }

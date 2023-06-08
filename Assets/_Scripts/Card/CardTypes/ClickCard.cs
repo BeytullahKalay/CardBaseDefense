@@ -117,7 +117,7 @@ public class ClickCard : ClassicCard
 
         var createdObject = Instantiate(CardData.ObjectToSpawn);
         var groundScript = createdObject.GetComponent<GroundCreate>();
-        groundScript.SetForPlacing(_placeGroundAmount, CardCompleteActions, _groundAmountText);
+        groundScript.PrepareForPlacing(_placeGroundAmount, CardCompleteActions, _groundAmountText);
         
         EventManager.CloseBottomUI?.Invoke();
         EventManager.SetBlockRaycastStateTo?.Invoke(false);
