@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 public static class Helpers
 {
     private static Camera _camera;
+
     public static Camera MainCamera
     {
         get
@@ -25,17 +26,18 @@ public static class Helpers
         return new Vector2(pos.x, pos.y);
     }
 
-    
+
     /// <summary>
     ///  Returns world position of canvas element.
     /// </summary>
-    public static Vector2 GetWorldPositionOfCanvasElement(RectTransform element,Camera camera)
+    public static Vector2 GetWorldPositionOfCanvasElement(RectTransform element, Camera camera)
     {
         RectTransformUtility.ScreenPointToWorldPointInRectangle(element, element.position, camera, out var result);
         return result;
     }
 
     #region Mouse Over UI
+
     /// <summary>
     ///Returns 'true' if pointer touched or hovering on Unity UI element.
     /// </summary>
@@ -72,22 +74,21 @@ public static class Helpers
     #endregion
 
 
-    
     /// <summary>
     /// Set sprite renderer color alpha
     /// </summary>
-    public static SpriteRenderer SetColorAlpha(this SpriteRenderer tmpText,float alphaValue)
+    public static SpriteRenderer SetColorAlpha(this SpriteRenderer tmpText, float alphaValue)
     {
         var c = tmpText.color;
         c.a = alphaValue;
         tmpText.color = c;
         return tmpText;
     }
-    
+
     /// <summary>
     /// Set TMP_Text color alpha
     /// </summary>
-    public static TMP_Text SetColorAlpha(this TMP_Text renderer,float alphaValue)
+    public static TMP_Text SetColorAlpha(this TMP_Text renderer, float alphaValue)
     {
         var c = renderer.color;
         c.a = alphaValue;
@@ -106,8 +107,8 @@ public static class Helpers
             new Vector3(mousePosVec2.x, mousePosVec2.y, 0) - new Vector3(tileAnchor.x, tileAnchor.y, 0);
         return Vector3Int.RoundToInt(mousePosVector3);
     }
-    
-    
+
+
     /// <summary>
     /// A shorter way of testing if a game object has a component
     /// </summary>
@@ -129,5 +130,17 @@ public static class Helpers
         }
 
         return children;
+    }
+
+
+    /// <summary>
+    ///  Get angle for given Vector3 direction
+    /// </summary>
+    public static float GetAngleFromVectorFloat(Vector3 dir)
+    {
+        dir = dir.normalized;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        if (angle < 0) angle += 360;
+        return angle;
     }
 }
