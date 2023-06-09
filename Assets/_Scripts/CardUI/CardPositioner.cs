@@ -72,11 +72,11 @@ public class CardPositioner : MonoBehaviour
         transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -average + upperAmount, 0);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SetCardsPosition();
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.Space))
+    //     {
+    //         SetCardsPosition();
+    //     }
+    // }
 }

@@ -7,9 +7,7 @@ using UnityEngine.AI;
 public class BaseRusherEnemy : MonoBehaviour,IOnBoard,IEnemy
 {
     [SerializeField] private float attackDistance;
-
     [SerializeField] private float explosionRadius;
-
     [SerializeField] private float explosionTextFadeDuration = 2f;
 
     [SerializeField] private int explosionDamage = 20;
