@@ -28,13 +28,13 @@ public class CardSpawner : MonoBehaviour
         }
     }
 
-    // private void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.C))
-    //     {
-    //         CreateCard();
-    //     }
-    // }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            CreateCard();
+        }
+    }
 
     private void CreateCard()
     {

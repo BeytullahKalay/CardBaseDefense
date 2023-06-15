@@ -16,10 +16,10 @@ public class Test : MonoBehaviour
         //     EventManager.GameOver?.Invoke();
         // }
 
-        //     if (Input.GetKeyDown(KeyCode.C))
-        //     {
-        //         CreateCard();
-        //     }
+        // if (Input.GetKeyDown(KeyCode.C))
+        // {
+        //     CreateCard();
+        // }
 
         //     if (Input.GetKeyDown(KeyCode.Space))
         //     {

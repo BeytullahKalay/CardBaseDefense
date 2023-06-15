@@ -15,6 +15,6 @@ public enum UnitStates
 
 public enum CardType
 {
-    Classic,
-    ClickCard
+    DragAndDrop,
+    ClickCard,
 }
