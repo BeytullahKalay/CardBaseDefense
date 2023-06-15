@@ -17,10 +17,10 @@ public class BombTrap : ActionCard, ITrap
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _goldManager = GoldManager.Instance;
 
-        SetUpRepair();
+        SetUpTrap();
     }
 
-    private void SetUpRepair()
+    private void SetUpTrap()
     {
         TrapRepair = gameObject.AddComponent<TrapRepair>();
         TrapRepair.TrapData = _trapData;
