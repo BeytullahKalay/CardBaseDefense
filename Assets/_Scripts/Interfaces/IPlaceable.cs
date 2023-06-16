@@ -1,7 +1,5 @@
 
-public interface IPlaceable
+public interface IPlaceable : IUsable
 {
-    public bool Placeable { get; set; }
-
     public void PlaceActions();
 }
