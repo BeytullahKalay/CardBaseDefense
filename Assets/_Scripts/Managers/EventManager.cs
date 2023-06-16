@@ -15,4 +15,6 @@ public static class EventManager
     
     public static Action CloseBottomUI;
     public static Action<bool> SetBlockRaycastStateTo;
+
+    public static Action<MouseState> SetMouseStateTo;
 }

@@ -4,11 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class GroundCreate : MonoBehaviour, IPlaceable
+public class GroundCreate : MonoBehaviour, IUsable
 {
     [SerializeField] private GroundCreateData groundCreateData;
     
-    public bool Placeable { get; set; }
+    public bool Usable { get; set; }
     
     private Vector3Int _lastPos;
 
@@ -29,6 +29,11 @@ public class GroundCreate : MonoBehaviour, IPlaceable
         _bushTilemap = TilemapManager.Instance.BushTilemap;
     }
 
+    private void Start()
+    {
+        OpenActions();
+    }
+
 
     private void Update()
     {
@@ -36,7 +41,7 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
         CheckIsPlaceable();
 
-        if (!Placeable) return;
+        if (!Usable) return;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -47,9 +52,9 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
     private void CheckIsPlaceable()
     {
-        Placeable = !_groundTilemap.HasTile(Helpers.GetMousePositionForTilemap(_groundTilemap));
+        Usable = !_groundTilemap.HasTile(Helpers.GetMousePositionForTilemap(_groundTilemap));
 
-        if (!Placeable) return;
+        if (!Usable) return;
         
         var vector3IntPos = Helpers.GetMousePositionForTilemap(_groundTilemap);
         var downIntVal = Mathf.FloorToInt(groundCreateData.SizeOfGround * .5f);
@@ -73,14 +78,14 @@ public class GroundCreate : MonoBehaviour, IPlaceable
                 {
                     if (!tileCheck) continue;
                     
-                    Placeable = true;
+                    Usable = true;
                     _undergroundTilemap.color = groundCreateData.NotPlaceableColor;
                     return;
                 }
             }
         }
         
-        Placeable = false;
+        Usable = false;
         _undergroundTilemap.color = groundCreateData.PlaceableColor;
     }
 
@@ -165,11 +170,24 @@ public class GroundCreate : MonoBehaviour, IPlaceable
 
     private void OnDestroy()
     {
-        _undergroundTilemap.ClearAllEditorPreviewTiles();
+        DestroyActions();
     }
 
-    public void PlaceActions()
+    public void SetMouseBusyStateTo(bool state)
     {
+        EventManager.SetMouseStateTo?.Invoke(state ? MouseState.Busy : MouseState.Available);
+    }
+
+    public void OpenActions()
+    {
+        SetMouseBusyStateTo(true);
+    }
+    
+
+    public void DestroyActions()
+    {
+        _undergroundTilemap.ClearAllEditorPreviewTiles();
+        SetMouseBusyStateTo(false);
     }
 
     private void CheckBoundaries(Vector3Int vector3IntPos, int downIntVal, int upIntVal)

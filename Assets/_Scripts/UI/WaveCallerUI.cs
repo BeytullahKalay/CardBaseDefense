@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,10 +16,13 @@ public class WaveCallerUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private GameManager _gm;
 
+
     private void Awake()
     {
         _gm = GameManager.Instance;
     }
+
+
 
     private void Start()
     {
@@ -28,7 +32,7 @@ public class WaveCallerUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!Spawner.Instance.WaveCleared)
+        if (!Spawner.Instance.WaveCleared || MouseStateManager.Instance.MouseState != MouseState.Available)
         {
             _gm.UpdateAllCardsState();
             return;
@@ -58,4 +62,6 @@ public class WaveCallerUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         EventManager.CallTheWave?.Invoke();
         CloseUI();
     }
+
+
 }

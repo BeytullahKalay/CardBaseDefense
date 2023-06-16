@@ -6,7 +6,7 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
     [SerializeField] private float detectRadius = 3f;
     [SerializeField] private LayerMask whatIsNotPlaceableLayerMask;
     
-    public bool Placeable { get; set; }
+    public bool Usable { get; set; }
 
 
     private List<ActionCard> _cardActions = new List<ActionCard>();
@@ -23,8 +23,17 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
         _tilemapManager = TilemapManager.Instance;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteColor = _spriteRenderer.material.color;
+        _collider = GetComponent<Collider2D>();
+        CloseActionCardScripts();
+    }
 
-
+    private void Start()
+    {
+        OpenActions();
+    }
+    
+    private void CloseActionCardScripts()
+    {
         var actions = GetComponents<ActionCard>();
 
         foreach (var cardAction in actions)
@@ -32,13 +41,6 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
             cardAction.Enable(false);
             _cardActions.Add(cardAction);
         }
-
-        _collider = GetComponent<Collider2D>();
-    }
-
-    private void Start()
-    {
-        _spriteRenderer.sortingOrder += 1;
     }
 
     private void Update()
@@ -53,13 +55,13 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
 
         if (colList.Count > 0 || !isOnGroundTile)
         {
-            Placeable = false;
+            Usable = false;
             _spriteColor.a = .5f;
             _spriteRenderer.material.color = _spriteColor;
         }
         else
         {
-            Placeable = true;
+            Usable = true;
             _spriteColor.a = 1f;
             _spriteRenderer.material.color = _spriteColor;
         }
@@ -67,26 +69,48 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
 
     public void PlaceActions()
     {
-        foreach (var cardAciton in _cardActions)
-        {
-            cardAciton.Enable(true);
-        }
+        OpenActionCardScripts();
 
         _collider.enabled = true;
 
         Destroy(this);
     }
 
+    public void SetMouseBusyStateTo(bool state)
+    {
+        EventManager.SetMouseStateTo?.Invoke(state ? MouseState.Busy : MouseState.Available);
+    }
+
+    public void OpenActions()
+    {
+        _spriteRenderer.sortingOrder += 1;
+        SetMouseBusyStateTo(true);
+    }
+
+    public void DestroyActions()
+    {
+        _spriteRenderer.sortingOrder -= 1;
+        SetMouseBusyStateTo(false);
+    }
+
+    private void OpenActionCardScripts()
+    {
+        foreach (var cardAction in _cardActions)
+        {
+            cardAction.Enable(true);
+        }
+    }
+
     private void OnDrawGizmos()
     {
-        Gizmos.color = !Placeable ? Color.red : Color.green;
+        Gizmos.color = !Usable ? Color.red : Color.green;
 
         Gizmos.DrawWireSphere(transform.position, detectRadius);
     }
 
     private void OnDestroy()
     {
-        _spriteRenderer.sortingOrder -= 1;
+        DestroyActions();
     }
 
 }

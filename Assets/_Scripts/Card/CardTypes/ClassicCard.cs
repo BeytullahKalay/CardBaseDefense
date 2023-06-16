@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -81,7 +80,7 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     public virtual void OnPointerUp(PointerEventData eventData)
     {
         if (!Helpers.IsPointerOverUIElement(LayerMask.NameToLayer("UI")) && _createdObject != null &&
-            _createdObject.GetComponent<IPlaceable>().Placeable)
+            _createdObject.GetComponent<IUsable>().Usable)
         {
             UseCard();
             CardData.IncreaseCostForThisCard();

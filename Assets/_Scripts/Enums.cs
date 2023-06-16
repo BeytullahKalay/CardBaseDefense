@@ -18,3 +18,9 @@ public enum CardType
     DragAndDrop,
     ClickCard,
 }
+
+public enum MouseState
+{
+    Available,
+    Busy
+}

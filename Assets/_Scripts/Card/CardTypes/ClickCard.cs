@@ -38,6 +38,7 @@ public class ClickCard : ClassicCard
         buttonPanel.AmountText.text = "X" + _placeGroundAmount;
     }
 
+    // those empty function(s) should be removed
     public override void OnPointerUp(PointerEventData eventData)
     {
         Debug.Log("ON POINTER UP!!");
