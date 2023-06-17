@@ -1,10 +1,10 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class WaveCallerUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] private GameObject canvasTransform;
     [SerializeField] private float duration = .1f;
     [SerializeField] private Ease ease;
     [SerializeField] private Transform buttonAndText;
@@ -22,7 +22,15 @@ public class WaveCallerUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         _gm = GameManager.Instance;
     }
 
+    private void OnEnable()
+    {
+        EventManager.SetMouseStateTo += OpenCloseCanvasByMouseState;
+    }
 
+    private void OnDisable()
+    {
+        EventManager.SetMouseStateTo -= OpenCloseCanvasByMouseState;
+    }
 
     private void Start()
     {
@@ -63,5 +71,9 @@ public class WaveCallerUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         CloseUI();
     }
 
+    private void OpenCloseCanvasByMouseState(MouseState mouseState)
+    {
+        canvasTransform.SetActive(mouseState == MouseState.Available);
+    }
 
 }
