@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barracks : ActionCard
+public class Barracks : MonoBehaviour, IActionCard
 {
     [SerializeField] private int maxSoliderAmount = 3;
     
@@ -59,5 +59,10 @@ public class Barracks : ActionCard
     private void ClearNullObjectFromList()
     {
         spawnedSolider.RemoveAll(item => item == null);
+    }
+
+    public void Enable(bool state)
+    {
+        this.enabled = state;
     }
 }

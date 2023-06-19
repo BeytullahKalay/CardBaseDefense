@@ -2,7 +2,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class GoldMiner : ActionCard
+public class GoldMiner : MonoBehaviour, IActionCard
 {
     [SerializeField] private GoldMinerData goldMinerData;
     [SerializeField] private TMP_Text fillAmountText;
@@ -69,5 +69,10 @@ public class GoldMiner : ActionCard
     private void UpdateFillAmountText()
     {
         fillAmountText.text = $"{_inBagAmount}/{goldMinerData.MaxGoldAmountCanCarry}";
+    }
+
+    public void Enable(bool state)
+    {
+        this.enabled = state;
     }
 }

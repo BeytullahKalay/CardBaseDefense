@@ -9,7 +9,7 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
     public bool Usable { get; set; }
 
 
-    private List<ActionCard> _cardActions = new List<ActionCard>();
+    private List<IActionCard> _cardActions = new List<IActionCard>();
 
     private Collider2D _collider;
 
@@ -34,7 +34,7 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
     
     private void CloseActionCardScripts()
     {
-        var actions = GetComponents<ActionCard>();
+        var actions = GetComponents<IActionCard>();
 
         foreach (var cardAction in actions)
         {

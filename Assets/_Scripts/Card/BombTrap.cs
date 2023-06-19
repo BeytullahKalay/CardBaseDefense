@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BombTrap : ActionCard, ITrap
+public class BombTrap : MonoBehaviour, IActionCard, ITrap
 {
     [SerializeField] private TrapData _trapData;
     [SerializeField] private Color ready;
@@ -61,5 +61,10 @@ public class BombTrap : ActionCard, ITrap
         _spriteRenderer.color = ready;
         _spriteRenderer.SetColorAlpha(1f);
         EventManager.AddThatToCurrentGold?.Invoke(-_trapData.RepairCost);
+    }
+
+    public void Enable(bool state)
+    {
+        this.enabled = state;
     }
 }
