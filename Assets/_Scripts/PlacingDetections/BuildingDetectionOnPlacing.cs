@@ -10,12 +10,15 @@ public class BuildingDetectionOnPlacing : MonoBehaviour, IPlaceable
 
     public bool Usable { get; set; }
 
+    private GameObject _raycastedObject;
+    private IBuildEffectCard _effectCard;
+
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteColor = _spriteRenderer.material.color;
-        CloseActionCardScripts();
+        _effectCard = GetComponent<IBuildEffectCard>();
     }
 
     private void Start()
@@ -23,44 +26,45 @@ public class BuildingDetectionOnPlacing : MonoBehaviour, IPlaceable
         OpenActions();
     }
 
-    private void CloseActionCardScripts()
-    {
-        var actions = GetComponents<IActionCard>();
-
-        foreach (var cardAction in actions)
-        {
-            cardAction.Enable(false);
-        }
-    }
-
     private void Update()
     {
         var ray = Helpers.MainCamera.ScreenPointToRay((Vector2)Input.mousePosition);
         var hit2D = Physics2D.GetRayIntersection(ray,whatIsNotBuildLayerMask);
 
-        if (hit2D.collider != null && hit2D.transform.TryGetComponent<HealthSystem>(out var healthSystem))
+        
+        if (hit2D.collider != null && _effectCard.IsPlaceable(hit2D.collider.gameObject))
         {
-            // repairable
             Usable = true;
-            _spriteColor.a = 1f;
-            _spriteRenderer.material.color = _spriteColor;
+            
+            SetSpriteAlphaToUsable();
+
+            _raycastedObject = hit2D.collider.gameObject;
         }
         else
         {
             Usable = false;
-            _spriteColor.a = .5f;
-            _spriteRenderer.material.color = _spriteColor; 
-        }
+            
+            SetSpriteAlphaNotUsable();
 
+            _raycastedObject = null;
+        }
+    }
+
+    private void SetSpriteAlphaNotUsable()
+    {
+        _spriteColor.a = .5f;
+        _spriteRenderer.material.color = _spriteColor;
+    }
+
+    private void SetSpriteAlphaToUsable()
+    {
+        _spriteColor.a = 1f;
+        _spriteRenderer.material.color = _spriteColor;
     }
 
     public void PlaceActions()
     {
-        foreach (var effectCard in GetComponents<IEffectCard>())
-        {
-            effectCard.DoEffect();
-        }
-        
+        _effectCard.DoEffect(_raycastedObject);
         Destroy(this);
     }
 

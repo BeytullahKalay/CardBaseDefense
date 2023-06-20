@@ -39,4 +39,11 @@ public class BaseHealth : HealthSystem
         _basicTowerScript.enabled = false;
         EventManager.GameOver?.Invoke();
     }
+
+    public override void Heal(int healAmount)
+    {
+        base.Heal(healAmount);
+        OnHeal?.Invoke();
+        UpdateSlider?.Invoke();
+    }
 }
