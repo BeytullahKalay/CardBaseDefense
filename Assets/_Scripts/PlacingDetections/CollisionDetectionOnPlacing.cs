@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
@@ -72,8 +73,15 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
         OpenActionCardScripts();
 
         _collider.enabled = true;
+        
+        PlayPlacingAnimation();
 
         Destroy(this);
+    }
+
+    private void PlayPlacingAnimation()
+    {
+        transform.DOPunchScale(Vector3.one * .5f, .25f, 2);
     }
 
     public void SetMouseBusyStateTo(bool state)
