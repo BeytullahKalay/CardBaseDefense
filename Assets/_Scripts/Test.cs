@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
+    [SerializeField] private AudioClip[] damageSoundClips;
     private void Update()
     {
         // if (Input.GetKeyDown(KeyCode.G))
@@ -25,5 +26,10 @@ public class Test : MonoBehaviour
         //     {
         //         SetCardsPosition();
         //     }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            SoundFXManager.Instance.PlayRandomSoundFXClip(damageSoundClips,transform,1f);
+        }
     }
 }
