@@ -22,6 +22,9 @@ public class RepairBuilding : MonoBehaviour, IBuildEffectCard
 
     public bool IsPlaceable(GameObject castedObject)
     {
-        return castedObject.TryGetComponent<HealthSystem>(out var healthSystem);
+        if (castedObject.TryGetComponent<HealthSystem>(out var healthSystem))
+            return healthSystem.Health < healthSystem.MaxHealth;
+
+        return false;
     }
 }
