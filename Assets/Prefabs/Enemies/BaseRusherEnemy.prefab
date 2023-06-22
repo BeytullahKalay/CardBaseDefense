@@ -902,6 +902,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   explosionClip: {fileID: 8300000, guid: b10e2ce04f219804db4a31a5a0689097, type: 3}
+  explosionParticle: {fileID: 1603639277602174884, guid: 29d97a67f4fe65641bb11ce42edf938f, type: 3}
 --- !u!114 &561619913647746630
 MonoBehaviour:
   m_ObjectHideFlags: 0

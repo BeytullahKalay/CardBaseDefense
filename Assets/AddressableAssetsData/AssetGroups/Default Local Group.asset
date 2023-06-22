@@ -69,6 +69,14 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/Enemies/BaseRusherEnemy.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: b10e2ce04f219804db4a31a5a0689097
+    m_Address: Assets/_Audio/SoundEffect/Explosion.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 29d97a67f4fe65641bb11ce42edf938f
+    m_Address: Assets/Prefabs/ParticleFX/FX_Fireworks_Yellow_Small.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: fc81fe3a7d5334f41a9d445c4600d871, type: 2}
   m_SchemaSet:

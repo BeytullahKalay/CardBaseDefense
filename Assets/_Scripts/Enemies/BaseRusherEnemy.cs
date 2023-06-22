@@ -16,6 +16,7 @@ public class BaseRusherEnemy : MonoBehaviour,IOnBoard,IEnemy
 
     [SerializeField] private AudioClip explosionClip;
 
+    [SerializeField] private GameObject explosionParticle;
 
     private Vector2 _destinationPosition;
     
@@ -61,6 +62,8 @@ public class BaseRusherEnemy : MonoBehaviour,IOnBoard,IEnemy
             }
 
             SoundFXManager.Instance.PlaySoundFXClip(explosionClip, transform);
+            Instantiate(explosionParticle, transform.position, Quaternion.identity);
+            
             Destroy(gameObject);
         }
     }
