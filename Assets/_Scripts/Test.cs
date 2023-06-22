@@ -29,7 +29,7 @@ public class Test : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            SoundFXManager.Instance.PlayRandomSoundFXClip(damageSoundClips,transform,1f);
+            SoundFXManager.Instance.PlayRandomSoundFXClip(damageSoundClips,transform);
         }
     }
 }

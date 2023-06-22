@@ -18,4 +18,4 @@ MonoBehaviour:
   whatIsTargetLayer:
     serializedVersion: 2
     m_Bits: 128
-  firePrefab: {fileID: 715455850893262444, guid: 736399d6fee3a2e4ba2d39e56117576a, type: 3}
+  shootClip: {fileID: 8300000, guid: 348e638f76965d0458576657bcb38098, type: 3}

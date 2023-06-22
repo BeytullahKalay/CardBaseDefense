@@ -18,3 +18,4 @@ MonoBehaviour:
   whatIsTargetLayer:
     serializedVersion: 2
     m_Bits: 256
+  shootClip: {fileID: 8300000, guid: 348e638f76965d0458576657bcb38098, type: 3}

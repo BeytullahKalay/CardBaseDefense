@@ -2,6 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(AudioSource))]
 public class WaveCallerUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject canvasTransform;
@@ -9,16 +10,17 @@ public class WaveCallerUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private Ease ease;
     [SerializeField] private Transform buttonAndText;
     
-    
     private Vector3 _scale;
 
     private Tween _tween;
 
     private GameManager _gm;
 
+    private AudioSource _audioSource;
 
     private void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         _gm = GameManager.Instance;
     }
 
@@ -68,6 +70,7 @@ public class WaveCallerUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void CallWaveButton()
     {
         EventManager.CallTheWave?.Invoke();
+        _audioSource.Play();
         CloseUI();
     }
 

@@ -17,3 +17,4 @@ MonoBehaviour:
   miningAmount: 1
   mineFrequency: 0.5
   moveSpeed: 15
+  clip: {fileID: 8300000, guid: 1303446c822d9d94cab97e4b73030475, type: 3}

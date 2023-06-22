@@ -7,6 +7,8 @@ public class RangedData : ScriptableObject
     [SerializeField] private float detectEnemyRadius = 5f;
     [SerializeField] private float firingFrequency = 1;
     [SerializeField] private LayerMask whatIsTargetLayer;
+    
+    public AudioClip ShootClip;
 
     public int Damage => Random.Range(damage.x,damage.y);
 
@@ -14,4 +16,5 @@ public class RangedData : ScriptableObject
     public float FiringFrequency => firingFrequency;
 
     public LayerMask WhatIsTargetLayer => whatIsTargetLayer;
+
 }

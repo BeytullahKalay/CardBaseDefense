@@ -14,10 +14,11 @@ public class BaseRusherEnemy : MonoBehaviour,IOnBoard,IEnemy
     
     [SerializeField] private LayerMask whatIsHurtLayer;
 
+    [SerializeField] private AudioClip explosionClip;
+
 
     private Vector2 _destinationPosition;
-
-
+    
     private Pooler _pooler;
     
     public BoardStates BoardState { get; set; }
@@ -59,6 +60,7 @@ public class BaseRusherEnemy : MonoBehaviour,IOnBoard,IEnemy
                 }
             }
 
+            SoundFXManager.Instance.PlaySoundFXClip(explosionClip, transform);
             Destroy(gameObject);
         }
     }

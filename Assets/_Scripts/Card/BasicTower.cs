@@ -10,11 +10,28 @@ public class BasicTower : MonoBehaviour, IActionCard
     {
         if (Time.time > _nextFireTime && DetectedEnemies().Length > 0)
         {
-            var target = DetectedEnemies()[0];
-            var bullet = Pooler.Instance.BulletPool.Get();
-            bullet.GetComponent<FireObject>().Initialize(transform, target.transform, _data.Damage);
+            SpawnBulletAndInitializeNextShootTime();
+
+            // play shoot soundFX
+            SoundFXManager.Instance.PlaySoundFXClip(_data.ShootClip,transform);
+        }
+    }
+
+    private void SpawnBulletAndInitializeNextShootTime()
+    {
+        var target = DetectedEnemies()[0];
+        var bullet = Pooler.Instance.BulletPool.Get();
+
+        if (bullet.TryGetComponent<FireObject>(out var fireObject))
+        {
+            fireObject.Initialize(transform, target.transform, _data.Damage);
             _nextFireTime = Time.time + 1 / _data.FiringFrequency;
         }
+        else
+        {
+            Debug.LogError("No FireObject script in " + bullet.name);
+        }
+        
     }
 
     private Collider2D[] DetectedEnemies()

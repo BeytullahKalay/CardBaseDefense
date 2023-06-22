@@ -26,8 +26,8 @@ public class GoldMiner : MonoBehaviour, IActionCard
 
     private void MakeGold(bool isWaveCompleted)
     {
-        if(!isWaveCompleted) return;
-        
+        if (!isWaveCompleted) return;
+
         _inBagAmount = goldMinerData.MaxGoldAmountCanCarry;
         UpdateFillAmountText();
     }
@@ -35,9 +35,8 @@ public class GoldMiner : MonoBehaviour, IActionCard
     private void OnMouseDown()
     {
         CollectGolds();
-        PlayBouncyEffect();
     }
-    
+
     private void PlayBouncyEffect()
     {
         transform.DOPunchScale(Vector3.one * .2f, .1f);
@@ -49,6 +48,13 @@ public class GoldMiner : MonoBehaviour, IActionCard
         {
             MineGold();
         }
+
+        if (_inBagAmount > 0)
+        {
+            SoundFXManager.Instance.PlaySoundFXClip(goldMinerData.Clip, transform);
+            PlayBouncyEffect();
+        }
+
         _inBagAmount = 0;
         UpdateFillAmountText();
     }

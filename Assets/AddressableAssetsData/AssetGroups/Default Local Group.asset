@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 463109c734ec40a488e64c2c840f133c
+  m_SerializeEntries:
+  - m_GUID: ad26b11b1bc7d524baf3c089f1ec3270
+    m_Address: Assets/ScriptableObject/TowerData/BasicTowerData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 29af927a8ae017740bacf15312a92a26
+    m_Address: Assets/ScriptableObject/MinerData/MiniGoldMinerData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6bb3973f69f943345b43c4ea6dcb44aa
+    m_Address: Assets/ScriptableObject/TowerData/BaseTowerData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2b7053c580e22014eb4049f5a28c2bec
+    m_Address: Assets/ScriptableObject/TowerData/Ranged Enemy Data.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 348e638f76965d0458576657bcb38098
+    m_Address: Assets/_Audio/SoundEffect/Shoot.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1a466735bcffb1d4daaa100b4a5b1e84
+    m_Address: Assets/_Audio/SoundEffect/BossHorn.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e99d7a9c0940d83419e11eb662aa62a7
+    m_Address: Assets/_Audio/SoundEffect/TowerShoot.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2a12ffa04ebdc024aae3da04bd2d83ce
+    m_Address: Assets/_Audio/Music/FluteLoop124Pm.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e161cbd0d7dc4a74391263f6a9d9f1af
+    m_Address: Assets/_Audio/Music/YelkenlerBicilecek.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6475fd4f08f85704eb53d52754fae6d7
+    m_Address: Assets/_Audio/Music/Mysterious.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b546a8eab8dd1e64bb3834071003ba31
+    m_Address: Assets/Prefabs/Enemies/RangedEnemy.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 103d8120c8d9dcf42b8017412438cb70
+    m_Address: Assets/Prefabs/Enemies/PuncherEnemy.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d36c78e6cecb7ed4f9cc35b94ebad645
+    m_Address: Assets/Prefabs/Enemies/BaseRusherEnemy.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: fc81fe3a7d5334f41a9d445c4600d871, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: e3a98e54135cc564dbc5b42c2d5b681b, type: 2}
+    - {fileID: 11400000, guid: f963f203de962e345a63821e00972c9d, type: 2}
