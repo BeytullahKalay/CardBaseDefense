@@ -9,6 +9,8 @@ public class GroundCreate : MonoBehaviour, IUsable
     [SerializeField] private GroundCreateData groundCreateData;
     
     public bool Usable { get; set; }
+
+    private SoundFXManager _soundFXManager;
     
     private Vector3Int _lastPos;
 
@@ -18,11 +20,17 @@ public class GroundCreate : MonoBehaviour, IUsable
     private Tilemap _bushTilemap;
 
     private int _numberOfGroundToPlace = 0;
+    
     private Action _onCompleteAction;
+    
     private TMP_Text _tmpText;
+
+    private AudioClip _placingSoundFX;
+    private GameObject _placingVFX;
 
     private void Awake()
     {
+        _soundFXManager = SoundFXManager.Instance;
         _groundTilemap = TilemapManager.Instance.GroundTilemap;
         _undergroundTilemap = TilemapManager.Instance.UndergroundTilemap;
         _decorationTilemap = TilemapManager.Instance.DecorationTilemap;
@@ -45,9 +53,20 @@ public class GroundCreate : MonoBehaviour, IUsable
 
         if (Input.GetMouseButtonDown(0))
         {
-            print("mouse clicked!");
             CreateGround(vector3IntPos, downIntVal, upIntVal);
+            CreatePlacingParticleVFX();
+            PlayPlacingClip();
         }
+    }
+
+    private void PlayPlacingClip()
+    {
+        _soundFXManager.PlaySoundFXClip(_placingSoundFX, transform);
+    }
+
+    private void CreatePlacingParticleVFX()
+    {
+        Instantiate(_placingVFX, Helpers.GetWorldPositionOfPointer(Helpers.MainCamera), Quaternion.identity);
     }
 
     private void CheckIsPlaceable()
@@ -264,11 +283,13 @@ public class GroundCreate : MonoBehaviour, IUsable
         }
     }
 
-    public void PrepareForPlacing(int placeGroundAmount,Action completeAction,TMP_Text textToUpdate)
+    public void PrepareForPlacing(int placeGroundAmount,Action completeAction,TMP_Text textToUpdate,AudioClip placingSoundFX, GameObject placingVFX)
     {
         _numberOfGroundToPlace = placeGroundAmount;
         _onCompleteAction = completeAction;
         _tmpText = textToUpdate;
         _tmpText.text = "X" + placeGroundAmount;
+        _placingSoundFX = placingSoundFX;
+        _placingVFX = placingVFX;
     }
 }

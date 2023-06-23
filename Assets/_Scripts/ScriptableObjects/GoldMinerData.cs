@@ -8,7 +8,8 @@ public class GoldMinerData : ScriptableObject
     [SerializeField] private int miningAmount = 1;
     [SerializeField] private float mineFrequency = 1;
     [SerializeField] private float moveSpeed = 1f;
-    [SerializeField] private AudioClip clip;
+    
+    [field: SerializeField] public AudioClip Clip { get; set; }
 
     public float MineFrequency => mineFrequency;
     public float MoveSpeed => moveSpeed;
@@ -18,6 +19,6 @@ public class GoldMinerData : ScriptableObject
 
     public GameObject GoldPrefab => goldPrefab;
 
-    public AudioClip Clip => clip;
+    //public AudioClip Clip => clip;
 
 }

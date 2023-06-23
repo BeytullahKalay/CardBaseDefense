@@ -27,9 +27,9 @@ public class Test : MonoBehaviour
         //         SetCardsPosition();
         //     }
 
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            SoundFXManager.Instance.PlayRandomSoundFXClip(damageSoundClips,transform);
-        }
+        // if (Input.GetKeyDown(KeyCode.L))
+        // {
+        //     SoundFXManager.Instance.PlayRandomSoundFXClip(damageSoundClips,transform);
+        // }
     }
 }

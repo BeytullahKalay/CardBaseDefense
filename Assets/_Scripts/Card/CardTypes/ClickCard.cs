@@ -31,7 +31,7 @@ public class ClickCard : ClassicCard
         _panel.SetActive(false);
 
         var buttonPanel = _panel.GetComponent<ButtonPanel>();
-        
+
         _button = buttonPanel.Button;
         _button.onClick.AddListener(ButtonPressedActions);
         _groundAmountText = buttonPanel.AmountText;
@@ -73,15 +73,15 @@ public class ClickCard : ClassicCard
             PlayUnSelectionAnimation();
             CloseCardSelectionImage();
         }
-        
+
         _overThisUI = false;
     }
 
     private void Update()
     {
         if (!CardSelected) return;
-        
-        if(_cardInAction) return;
+
+        if (_cardInAction) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
             UnSelectActions();
@@ -118,8 +118,9 @@ public class ClickCard : ClassicCard
 
         var createdObject = Instantiate(CardData.ObjectToSpawn);
         var groundScript = createdObject.GetComponent<GroundCreate>();
-        groundScript.PrepareForPlacing(_placeGroundAmount, CardCompleteActions, _groundAmountText);
-        
+        groundScript.PrepareForPlacing(_placeGroundAmount, CardCompleteActions, _groundAmountText,
+            CardData.PlacingSoundFX, CardData.PlacingParticleVFX);
+
         EventManager.CloseBottomUI?.Invoke();
         EventManager.SetBlockRaycastStateTo?.Invoke(false);
     }

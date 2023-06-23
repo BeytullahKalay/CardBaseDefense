@@ -10,6 +10,10 @@ public class CardData : ScriptableObject
     [SerializeField] private GameObject buttonPanel;
     [SerializeField] private int increaseCostEveryUseBy = 1;
     [TextArea(5,5)] [SerializeField] private string cardDescription;
+    
+    
+    public GameObject PlacingParticleVFX;
+    public AudioClip PlacingSoundFX;
 
 
     public GameObject ObjectToSpawn => objectToSpawn;

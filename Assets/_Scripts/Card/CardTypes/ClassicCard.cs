@@ -13,8 +13,9 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 
     private Canvas _canvas;
 
-    [Header("Card Values")]
-    [SerializeField] private TMP_Text cardCostText;
+    [Header("Card Values")] [SerializeField]
+    private TMP_Text cardCostText;
+
     [SerializeField] private TMP_Text cardNameText;
     [SerializeField] private TMP_Text cardDescriptionText;
     [SerializeField] private Image selectionImage;
@@ -107,7 +108,22 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         EventManager.AddThatToCurrentGold?.Invoke(-CardData.Cost);
         Gm.UpdateAllCardsState();
         _createdObject.GetComponent<IPlaceable>().PlaceActions();
+        SpawnPlacingParticles();
+        PlayPlacingSoundFX();
         DestroyCardFromUI();
+    }
+
+    private void SpawnPlacingParticles()
+    {
+        // this is a particle game object. Setted for deleting after animate
+        Instantiate(CardData.PlacingParticleVFX,
+            Helpers.GetWorldPositionOfPointer(Helpers.MainCamera),
+            Quaternion.identity);
+    }
+
+    private void PlayPlacingSoundFX()
+    {
+        SoundFXManager.Instance.PlaySoundFXClip(CardData.PlacingSoundFX, transform);
     }
 
     public virtual void OnDrag(PointerEventData eventData)

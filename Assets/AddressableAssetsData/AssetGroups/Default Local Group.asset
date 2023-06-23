@@ -77,6 +77,46 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/ParticleFX/FX_Fireworks_Yellow_Small.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 4c7ac5a86c9f4e04eb272b45102456c3
+    m_Address: Assets/Prefabs/ParticleFX/PlacingParticleVFX.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1303446c822d9d94cab97e4b73030475
+    m_Address: Assets/_Audio/SoundEffect/CollectCoin.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c2ea5dbdaafd77a47b1b610078398c51
+    m_Address: Assets/ScriptableObject/CardData/ArcherTower.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ae209e90e40ba214a8c51c18a9a5f4c7
+    m_Address: Assets/ScriptableObject/CardData/Barracks.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bb5b6092725728c46a79f17ee5b420e2
+    m_Address: Assets/ScriptableObject/CardData/GoldMine.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e5c3d0983e103a04181a999ef0bc46d5
+    m_Address: Assets/ScriptableObject/CardData/GroundMaker.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 414c734c795e0fb44a0e40d15eada51e
+    m_Address: Assets/ScriptableObject/CardData/Repair.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0a39690941bcb154db8454f1aa4d5850
+    m_Address: Assets/ScriptableObject/CardData/Trap.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d67e8bd36dab8764b934603ccf4cfc79
+    m_Address: Assets/_Audio/SoundEffect/SandStep.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 78894c7e9e76a8d45a9e5dbac10346d3
+    m_Address: Assets/_Audio/SoundEffect/PlaceBuilding.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: fc81fe3a7d5334f41a9d445c4600d871, type: 2}
   m_SchemaSet:
