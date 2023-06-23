@@ -12,19 +12,40 @@ public class AssetReferenceAudioClip : AssetReferenceT<AudioClip>
 
 public class AddressableManager : MonoBehaviour
 {
+    [Header("Reference Audio Clips")]
     [SerializeField] private AssetReferenceAudioClip gameMusicAssetReference;
     [SerializeField] private AssetReferenceAudioClip fightMusicAssetReference;
     [SerializeField] private AssetReferenceAudioClip baseShootFXAssetReference;
     [SerializeField] private AssetReferenceAudioClip towerShootFXAssetReference;
     [SerializeField] private AssetReferenceAudioClip warHornFXAssetReference;
+    [SerializeField] private AssetReferenceAudioClip collectCoinFXAssetReference;
 
-
+    [Header("Ranged Datas")]
     [SerializeField] private RangedData baseTowerData;
     [SerializeField] private RangedData arrowTowerData;
+    [SerializeField] private GoldMinerData goldMinerData;
 
+    [Header("Audio Sources")]
     [SerializeField] private AudioSource gameMusicAudioSource;
     [SerializeField] private AudioSource fightMusicAudioSource;
     [SerializeField] private AudioSource waveCallerAudioSource;
+
+    [Header("Card Data")]
+    [SerializeField] private CardData archerTowerCardData;
+    [SerializeField] private CardData barracsCardData;
+    [SerializeField] private CardData goldMineCardData;
+    [SerializeField] private CardData groundMakerCardData;
+    [SerializeField] private CardData repairCardData;
+    [SerializeField] private CardData trapCardData;
+    
+    [Header("Placing Sound FX")]
+    [SerializeField] private AssetReferenceAudioClip placingAssetReference;
+    [SerializeField] private AssetReferenceAudioClip groundAssetReference;
+
+    [Header("Placing Particles")]
+    [SerializeField] private AssetReferenceGameObject particleVFXGameObject;
+
+    
     
     private void Start()
     {
@@ -57,6 +78,35 @@ public class AddressableManager : MonoBehaviour
         warHornFXAssetReference.LoadAssetAsync<AudioClip>().Completed += (clip) =>
         {
             waveCallerAudioSource.clip = clip.Result;
+        };
+
+        collectCoinFXAssetReference.LoadAssetAsync<AudioClip>().Completed += (clip) =>
+        {
+            goldMinerData.Clip = clip.Result;
+        };
+
+        placingAssetReference.LoadAssetAsync<AudioClip>().Completed += (clip) =>
+        {
+            archerTowerCardData.PlacingSoundFX = clip.Result;
+            goldMineCardData.PlacingSoundFX = clip.Result;
+            barracsCardData.PlacingSoundFX = clip.Result;
+            repairCardData.PlacingSoundFX = clip.Result;
+            trapCardData.PlacingSoundFX = clip.Result;
+        };
+
+        groundAssetReference.LoadAssetAsync<AudioClip>().Completed += (clip) =>
+        {
+            groundMakerCardData.PlacingSoundFX = clip.Result;
+        };
+
+        particleVFXGameObject.LoadAssetAsync<GameObject>().Completed += (obj) =>
+        {
+            archerTowerCardData.PlacingParticleVFX = obj.Result;
+            groundMakerCardData.PlacingParticleVFX = obj.Result;
+            goldMineCardData.PlacingParticleVFX = obj.Result;
+            barracsCardData.PlacingParticleVFX = obj.Result;
+            repairCardData.PlacingParticleVFX = obj.Result;
+            trapCardData.PlacingParticleVFX = obj.Result;
         };
 
     }
