@@ -82,7 +82,7 @@ public class PuncherStateManager : MonoBehaviour, IOnBoard,IEnemy
     
     public void RemoveFromSpawnerList()
     {
-        Spawner.Instance.SpawnedEnemies.Remove(gameObject);
+        Spawner.Instance?.SpawnedEnemies.Remove(gameObject);
     }
     
     private void OnDestroy()

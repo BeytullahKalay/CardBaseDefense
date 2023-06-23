@@ -12,15 +12,16 @@ public class AssetReferenceAudioClip : AssetReferenceT<AudioClip>
 
 public class AddressableManager : MonoBehaviour
 {
-    [Header("Reference Audio Clips")]
+    [Header("General Sound FX")]
     [SerializeField] private AssetReferenceAudioClip gameMusicAssetReference;
     [SerializeField] private AssetReferenceAudioClip fightMusicAssetReference;
     [SerializeField] private AssetReferenceAudioClip baseShootFXAssetReference;
     [SerializeField] private AssetReferenceAudioClip towerShootFXAssetReference;
     [SerializeField] private AssetReferenceAudioClip warHornFXAssetReference;
     [SerializeField] private AssetReferenceAudioClip collectCoinFXAssetReference;
+    [SerializeField] private AssetReferenceAudioClip mouseOverCardFXAssetReference;
 
-    [Header("Ranged Datas")]
+    [Header("Ranged Data")]
     [SerializeField] private RangedData baseTowerData;
     [SerializeField] private RangedData arrowTowerData;
     [SerializeField] private GoldMinerData goldMinerData;
@@ -107,6 +108,16 @@ public class AddressableManager : MonoBehaviour
             barracsCardData.PlacingParticleVFX = obj.Result;
             repairCardData.PlacingParticleVFX = obj.Result;
             trapCardData.PlacingParticleVFX = obj.Result;
+        };
+
+        mouseOverCardFXAssetReference.LoadAssetAsync<AudioClip>().Completed += (clip) =>
+        {
+            archerTowerCardData.MouseOverClipSoundFX = clip.Result;
+            groundMakerCardData.MouseOverClipSoundFX = clip.Result;
+            goldMineCardData.MouseOverClipSoundFX = clip.Result;
+            barracsCardData.MouseOverClipSoundFX = clip.Result;
+            repairCardData.MouseOverClipSoundFX = clip.Result;
+            trapCardData.MouseOverClipSoundFX = clip.Result;
         };
 
     }

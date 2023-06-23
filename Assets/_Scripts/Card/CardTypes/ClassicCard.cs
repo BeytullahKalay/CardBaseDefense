@@ -155,6 +155,12 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         PlaySelectionAnimation();
         //SiblingIndex = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
+        PlayMouseOverSoundFX();
+    }
+
+    private void PlayMouseOverSoundFX()
+    {
+        SoundFXManager.Instance.PlaySoundFXClip(CardData.MouseOverClipSoundFX, transform);
     }
 
     private void OpenSelectionImage()

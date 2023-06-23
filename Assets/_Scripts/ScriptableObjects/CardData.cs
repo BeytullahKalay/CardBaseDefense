@@ -14,6 +14,7 @@ public class CardData : ScriptableObject
     
     public GameObject PlacingParticleVFX;
     public AudioClip PlacingSoundFX;
+    public AudioClip MouseOverClipSoundFX;
 
 
     public GameObject ObjectToSpawn => objectToSpawn;
