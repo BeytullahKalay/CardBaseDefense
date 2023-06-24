@@ -96,7 +96,6 @@ public class ClickCard : ClassicCard
         _panel.SetActive(false);
 
         // on exit stuff
-        transform.SetSiblingIndex(SiblingIndex);
         PlayUnSelectionAnimation();
         CloseCardSelectionImage();
 

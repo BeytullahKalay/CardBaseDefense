@@ -27,9 +27,7 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     private GoldManager _goldManager;
     private GameObject _createdObject;
     private CardPositioner _cardPositioner;
-
-    protected int SiblingIndex;
-
+    
     [Header("Animation Values")]
     private Vector3 _cardRotationOnDeck;
     private Tween _scaleTween;
@@ -45,6 +43,7 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         _rectTransform = GetComponent<RectTransform>();
         selectionImage.color = selectedColor;
         _cardPositioner = GetComponentInParent<CardPositioner>();
+        _cardPositioner.CardList.Add(transform);
     }
 
     private void OnEnable()
@@ -56,13 +55,13 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     {
         EventManager.UpdateCardUI -= UpdateCardText;
     }
+    
 
     public virtual void Start()
     {
         UpdateCardText();
         Gm.Cards.Add(this);
         UpdateCardState();
-        SiblingIndex = transform.GetSiblingIndex();
     }
 
     private void UpdateCardText()
@@ -153,7 +152,6 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     {
         OpenSelectionImage();
         PlaySelectionAnimation();
-        //SiblingIndex = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
         PlayMouseOverSoundFX();
     }
@@ -196,7 +194,7 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        transform.SetSiblingIndex(SiblingIndex);
+        //transform.SetSiblingIndex(_cardPositioner.CardList.);
         PlayUnSelectionAnimation();
         CloseCardSelectionImage();
     }
@@ -231,6 +229,7 @@ public class ClassicCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     {
         Gm.Cards.Remove(this);
         gameObject.transform.SetParent(null);
+        _cardPositioner.CardList.Remove(transform);
         Destroy(gameObject);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
@@ -8,19 +9,18 @@ public class CardPositioner : MonoBehaviour
     private float fanAngle;
     [SerializeField] private float upperAmount;
     [SerializeField] private float duration = 2f;
-    
+
+    private List<Transform> _cardList = new List<Transform>();
+
     private CanvasGroup _cardsCanvasGroup;
 
     public CanvasGroup CanvasGroup => _cardsCanvasGroup;
 
+    public List<Transform> CardList => _cardList;
+    
     private void Awake()
     {
         _cardsCanvasGroup = GetComponent<CanvasGroup>();
-    }
-
-    void Start()
-    {
-        SetCardsPosition();
     }
 
     private void OnEnable()
@@ -34,17 +34,14 @@ public class CardPositioner : MonoBehaviour
     }
 
     private void SetCardsPosition()
-    {
-        var allChildren = transform.GetAllChildren();
-
-        float cardAngleStep = 0;
+    { float cardAngleStep = 0;
         float startAngle = 0;
         
-        fanAngle = allChildren.Count * 2;
+        fanAngle = _cardList.Count * 2;
 
-        if (allChildren.Count > 1)
+        if (_cardList.Count > 1)
         {
-            cardAngleStep =fanAngle / (allChildren.Count - 1);
+            cardAngleStep =fanAngle / (_cardList.Count - 1);
             startAngle = -(fanAngle / 2f);
         }
         else
@@ -55,28 +52,20 @@ public class CardPositioner : MonoBehaviour
 
         float sum = 0;
 
-        for (int i = 0; i < allChildren.Count; i++)
+        for (int i = 0; i < _cardList.Count; i++)
         {
             var cardAngle = startAngle + i * cardAngleStep;
             var x = Mathf.Sin(cardAngle * Mathf.Deg2Rad) * radius;
             var y = Mathf.Cos(cardAngle * Mathf.Deg2Rad) * radius;
             sum += y;
 
-            allChildren[i].GetComponent<RectTransform>().DOLocalMove(new Vector2(x, y), duration);
-            allChildren[i].GetComponent<RectTransform>().DORotate(new Vector3(0f, 0f, -cardAngle), duration);
+            _cardList[i].GetComponent<RectTransform>().DOLocalMove(new Vector2(x, y), duration);
+            _cardList[i].GetComponent<RectTransform>().DORotate(new Vector3(0f, 0f, -cardAngle), duration);
 
-            allChildren[i].GetComponent<ClassicCard>().AssignCardPositionAndRotation(new Vector3(0f, 0f, -cardAngle));
+            _cardList[i].GetComponent<ClassicCard>().AssignCardPositionAndRotation(new Vector3(0f, 0f, -cardAngle));
         }
 
-        var average = sum / allChildren.Count;
+        var average = sum / _cardList.Count;
         transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -average + upperAmount, 0);
     }
-
-    // private void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         SetCardsPosition();
-    //     }
-    // }
 }
