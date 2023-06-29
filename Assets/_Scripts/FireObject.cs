@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class FireObject : MonoBehaviour
     [SerializeField] private LayerMask _targetLayerMask;
     [SerializeField] private int _damage;
     [SerializeField] private bool _hit;
+    [SerializeField] private TrailRenderer trailRenderer;
 
     private IEnumerator _coroutine;
 
@@ -27,7 +29,7 @@ public class FireObject : MonoBehaviour
         _direction = (target.position - fireTransform.position).normalized;
         _targetLayerMask = target.gameObject.layer;
         _damage = damage;
-        
+        trailRenderer.Clear();
         
         _coroutine = IfNotHitTargetDestroyCo(ifNotHitAnyTargetDestroyAfterSeconds);
         StartCoroutine(_coroutine);
