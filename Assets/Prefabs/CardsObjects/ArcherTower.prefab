@@ -595,11 +595,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6074905538072354698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ec8867b102d9004c981466b88429be5, type: 3}
+  m_Script: {fileID: 11500000, guid: 5367fe5d6a4da244e8c4d4733f5133e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
   slider: {fileID: 351535021374520376}
+  DestructionAudioClip: {fileID: 0}
+  <EarnMaterialAmountOnDestruct>k__BackingField: 4
 --- !u!114 &6258574448782083696
 MonoBehaviour:
   m_ObjectHideFlags: 0

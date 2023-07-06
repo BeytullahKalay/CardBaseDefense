@@ -13,6 +13,7 @@ public class SoundFXManager : MonoSingleton<SoundFXManager>
     /// <param name="volume">volume of clip</param>
     public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume = 1f)
     {
+        if(audioClip == null) return;
         var audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
         audioSource.clip = audioClip;
         audioSource.volume = volume;

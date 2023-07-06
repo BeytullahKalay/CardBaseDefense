@@ -14,10 +14,11 @@ public class AddressableManager : MonoBehaviour
 {
     [Header("General Sound FX")]
     [SerializeField] private AssetReferenceAudioClip gameMusicAssetReference;
+    [SerializeField] private AssetReferenceAudioClip warHornFXAssetReference;
     [SerializeField] private AssetReferenceAudioClip fightMusicAssetReference;
     [SerializeField] private AssetReferenceAudioClip baseShootFXAssetReference;
     [SerializeField] private AssetReferenceAudioClip towerShootFXAssetReference;
-    [SerializeField] private AssetReferenceAudioClip warHornFXAssetReference;
+    [SerializeField] private AssetReferenceAudioClip destructionFXAssetReference;
     [SerializeField] private AssetReferenceAudioClip collectCoinFXAssetReference;
     [SerializeField] private AssetReferenceAudioClip mouseOverCardFXAssetReference;
 
@@ -31,6 +32,12 @@ public class AddressableManager : MonoBehaviour
     [SerializeField] private AudioSource fightMusicAudioSource;
     [SerializeField] private AudioSource waveCallerAudioSource;
 
+    [Header("Building Health Systems")]
+    [SerializeField] private BuildingHealthSystem arrowTowerHealthSystem;
+    [SerializeField] private BuildingHealthSystem goldMinerHealthSystem;
+    [SerializeField] private BuildingHealthSystem barracksHealthSystem;
+    
+
     [Header("Card Data")]
     [SerializeField] private CardData archerTowerCardData;
     [SerializeField] private CardData barracsCardData;
@@ -38,6 +45,7 @@ public class AddressableManager : MonoBehaviour
     [SerializeField] private CardData groundMakerCardData;
     [SerializeField] private CardData repairCardData;
     [SerializeField] private CardData trapCardData;
+    [SerializeField] private CardData destructorCardData;
     
     [Header("Placing Sound FX")]
     [SerializeField] private AssetReferenceAudioClip placingAssetReference;
@@ -86,9 +94,17 @@ public class AddressableManager : MonoBehaviour
             goldMinerData.Clip = clip.Result;
         };
 
+        destructionFXAssetReference.LoadAssetAsync<AudioClip>().Completed += (clip) =>
+        {
+            arrowTowerHealthSystem.DestructionAudioClip = clip.Result;
+            goldMinerHealthSystem.DestructionAudioClip = clip.Result;
+            barracksHealthSystem.DestructionAudioClip = clip.Result;
+        };
+
         placingAssetReference.LoadAssetAsync<AudioClip>().Completed += (clip) =>
         {
             archerTowerCardData.PlacingSoundFX = clip.Result;
+            //destructorCardData.PlacingSoundFX = clip.Result;
             goldMineCardData.PlacingSoundFX = clip.Result;
             barracsCardData.PlacingSoundFX = clip.Result;
             repairCardData.PlacingSoundFX = clip.Result;
@@ -104,21 +120,27 @@ public class AddressableManager : MonoBehaviour
         {
             archerTowerCardData.PlacingParticleVFX = obj.Result;
             groundMakerCardData.PlacingParticleVFX = obj.Result;
+            destructorCardData.PlacingParticleVFX = obj.Result;
             goldMineCardData.PlacingParticleVFX = obj.Result;
             barracsCardData.PlacingParticleVFX = obj.Result;
             repairCardData.PlacingParticleVFX = obj.Result;
             trapCardData.PlacingParticleVFX = obj.Result;
+            
+            
+            arrowTowerHealthSystem.DestructParticleVFX = obj.Result;
+            goldMinerHealthSystem.DestructParticleVFX = obj.Result;
+            barracksHealthSystem.DestructParticleVFX = obj.Result;
         };
 
         mouseOverCardFXAssetReference.LoadAssetAsync<AudioClip>().Completed += (clip) =>
         {
             archerTowerCardData.MouseOverClipSoundFX = clip.Result;
             groundMakerCardData.MouseOverClipSoundFX = clip.Result;
+            destructorCardData.MouseOverClipSoundFX = clip.Result;
             goldMineCardData.MouseOverClipSoundFX = clip.Result;
             barracsCardData.MouseOverClipSoundFX = clip.Result;
             repairCardData.MouseOverClipSoundFX = clip.Result;
             trapCardData.MouseOverClipSoundFX = clip.Result;
         };
-
     }
 }

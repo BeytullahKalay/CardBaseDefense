@@ -27,14 +27,6 @@ public class Barracks : MonoBehaviour, IActionCard
         TrySpawnASolider(true);
     }
 
-    // private void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         SpawnTest();
-    //     }
-    // }
-
     private void TrySpawnASolider(bool isWaveCompleted)
     {
         if(!isWaveCompleted) return;
@@ -47,14 +39,6 @@ public class Barracks : MonoBehaviour, IActionCard
             spawnedSolider.Add(obj); 
         }
     }
-
-    // private void SpawnTest()
-    // {
-    //     var obj = Instantiate(soliderPrefab);
-    //     obj.GetComponent<DoRandomPath>().Initialize(transform,pathRadius,timeBetweenPaths,transform.position);
-    //     obj.GetComponent<HealthSystem>().OnDead += ClearNullObjectFromList;
-    //     spawnedSolider.Add(obj); 
-    // }
 
     private void ClearNullObjectFromList()
     {

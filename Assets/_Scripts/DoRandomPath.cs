@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(PuncherStateManager))]
 public class DoRandomPath : MonoBehaviour
 {
-    private Transform _pathCenterTransform;
+    private Vector2 _pathCenterPosition;
     
     private float _moveRadius = 3f;
     private float _timeBetweenPaths = 10f;
@@ -21,7 +20,7 @@ public class DoRandomPath : MonoBehaviour
 
     public void Initialize(Transform center, float moveRadius, float timeBetweenPaths,Vector3 spawnPosition)
     {
-        _pathCenterTransform = center;
+        _pathCenterPosition = center.position;
         _moveRadius = moveRadius;
         _timeBetweenPaths = timeBetweenPaths;
         transform.position = spawnPosition;
@@ -43,7 +42,7 @@ public class DoRandomPath : MonoBehaviour
 
     private void SetPathPosition()
     {
-        _puncherStateManager.MovePos = (Vector2)_pathCenterTransform.position + Random.insideUnitCircle * _moveRadius;
+        _puncherStateManager.MovePos = (Vector2)_pathCenterPosition + Random.insideUnitCircle * _moveRadius;
         _nextPathTime = Time.time + _timeBetweenPaths;
     }
 }

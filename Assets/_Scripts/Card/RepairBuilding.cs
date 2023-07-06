@@ -2,21 +2,21 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(BuildingDetectionOnPlacing))]
-public class RepairBuilding : MonoBehaviour, IBuildEffectCard
+public class RepairBuilding : MonoBehaviour, IBuildingEffectCard
 {
     [SerializeField] private int repairAmount = 100;
 
 
-    public void DoEffect(GameObject buildGameObject)
+    public void DoEffect(GameObject buildingGameObject)
     {
-        if (buildGameObject.TryGetComponent<HealthSystem>(out var healthSystem))
+        if (buildingGameObject.TryGetComponent<HealthSystem>(out var healthSystem))
         {
             healthSystem.Heal(repairAmount);
             Destroy(gameObject);
         }
         else
         {
-            Debug.LogError("No health system on " + buildGameObject.name);
+            Debug.LogError("No health system on " + buildingGameObject.name);
         }
     }
 

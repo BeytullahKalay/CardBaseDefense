@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BuildingDetectionOnPlacing : MonoBehaviour, IPlaceable
 {
-    [SerializeField] private LayerMask whatIsNotBuildLayerMask;
+    [SerializeField] private LayerMask whatIsBuildLayerMask;
     
     private SpriteRenderer _spriteRenderer;
     private Color _spriteColor;
@@ -11,14 +11,14 @@ public class BuildingDetectionOnPlacing : MonoBehaviour, IPlaceable
     public bool Usable { get; set; }
 
     private GameObject _raycastedObject;
-    private IBuildEffectCard _effectCard;
+    private IBuildingEffectCard _effectCard;
 
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteColor = _spriteRenderer.material.color;
-        _effectCard = GetComponent<IBuildEffectCard>();
+        _effectCard = GetComponent<IBuildingEffectCard>();
     }
 
     private void Start()
@@ -29,23 +29,18 @@ public class BuildingDetectionOnPlacing : MonoBehaviour, IPlaceable
     private void Update()
     {
         var ray = Helpers.MainCamera.ScreenPointToRay((Vector2)Input.mousePosition);
-        var hit2D = Physics2D.GetRayIntersection(ray,whatIsNotBuildLayerMask);
-
+        var hit2D = Physics2D.GetRayIntersection(ray,20,whatIsBuildLayerMask);
         
         if (hit2D.collider != null && _effectCard.IsPlaceable(hit2D.collider.gameObject))
         {
             Usable = true;
-            
             SetSpriteAlphaToUsable();
-
             _raycastedObject = hit2D.collider.gameObject;
         }
         else
         {
             Usable = false;
-            
             SetSpriteAlphaNotUsable();
-
             _raycastedObject = null;
         }
     }

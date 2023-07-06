@@ -166,4 +166,3 @@ MonoBehaviour:
   whatIsNotPlaceableLayerMask:
     serializedVersion: 2
     m_Bits: 144
-  Collide: 0

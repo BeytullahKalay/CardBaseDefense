@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BombTrap : MonoBehaviour, IActionCard, ITrap
+public class BombTrap : MonoBehaviour, IActionCard, ITrap,IDestructable
 {
     [SerializeField] private TrapData _trapData;
     [SerializeField] private Color ready;
@@ -66,5 +66,10 @@ public class BombTrap : MonoBehaviour, IActionCard, ITrap
     public void Enable(bool state)
     {
         this.enabled = state;
+    }
+
+    public void Destruct()
+    {
+        Destroy(gameObject);
     }
 }
