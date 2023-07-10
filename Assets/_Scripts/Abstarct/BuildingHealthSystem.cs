@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BuildingHealthSystem : HealthSystem,IDestructable,IEarnMaterial
+public class BuildingHealthSystem : HealthSystem,IEarnMaterial
 {
     public AudioClip DestructionAudioClip;
     public GameObject DestructParticleVFX;
