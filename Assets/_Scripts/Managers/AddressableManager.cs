@@ -41,6 +41,7 @@ public class AddressableManager : MonoBehaviour
     [Header("Card Data")]
     [SerializeField] private CardData archerTowerCardData;
     [SerializeField] private CardData barracsCardData;
+    [SerializeField] private CardData barracsArcherCardData;
     [SerializeField] private CardData goldMineCardData;
     [SerializeField] private CardData groundMakerCardData;
     [SerializeField] private CardData repairCardData;
@@ -103,6 +104,7 @@ public class AddressableManager : MonoBehaviour
 
         placingAssetReference.LoadAssetAsync<AudioClip>().Completed += (clip) =>
         {
+            barracsArcherCardData.PlacingSoundFX = clip.Result;
             archerTowerCardData.PlacingSoundFX = clip.Result;
             //destructorCardData.PlacingSoundFX = clip.Result;
             goldMineCardData.PlacingSoundFX = clip.Result;
@@ -118,6 +120,7 @@ public class AddressableManager : MonoBehaviour
 
         particleVFXGameObject.LoadAssetAsync<GameObject>().Completed += (obj) =>
         {
+            barracsArcherCardData.PlacingParticleVFX = obj.Result;
             archerTowerCardData.PlacingParticleVFX = obj.Result;
             groundMakerCardData.PlacingParticleVFX = obj.Result;
             destructorCardData.PlacingParticleVFX = obj.Result;
@@ -134,6 +137,7 @@ public class AddressableManager : MonoBehaviour
 
         mouseOverCardFXAssetReference.LoadAssetAsync<AudioClip>().Completed += (clip) =>
         {
+            barracsArcherCardData.MouseOverClipSoundFX = clip.Result;
             archerTowerCardData.MouseOverClipSoundFX = clip.Result;
             groundMakerCardData.MouseOverClipSoundFX = clip.Result;
             destructorCardData.MouseOverClipSoundFX = clip.Result;
