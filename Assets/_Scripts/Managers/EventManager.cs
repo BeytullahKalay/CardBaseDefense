@@ -4,9 +4,12 @@ public static class EventManager
 {
     public static Action UpdateGoldUI;
     public static Action UpdateCardUI;
+    public static Action UpdateSpecialMaterialUI;
     
     
     public static Action<int> AddThatToCurrentGold;
+    public static Action<int> AddThatToCurrentSpecialMaterial;
+
     public static Action SetCardsPosition;
     public static Action CallTheWave;
     public static Action CheckIsWaveCleared;

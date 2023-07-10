@@ -41,6 +41,8 @@ public class BuildingHealthSystem : HealthSystem,IDestructable,IEarnMaterial
     public void EarnMaterial()
     {
         print("Earned " + EarnMaterialAmountOnDestruct + " material(s) from " + gameObject.name);
+
+        EventManager.AddThatToCurrentSpecialMaterial?.Invoke(EarnMaterialAmountOnDestruct);
     }
 
     private void Destroy()
