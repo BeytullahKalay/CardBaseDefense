@@ -599,8 +599,8 @@ GameObject:
   - component: {fileID: 7112912903196052836}
   - component: {fileID: 8100210564832295245}
   - component: {fileID: 7112912903196052835}
-  - component: {fileID: 7112912904767531974}
   - component: {fileID: 7102939079570842836}
+  - component: {fileID: 5787342172015235528}
   m_Layer: 8
   m_Name: RangedEnemy
   m_TagString: Untagged
@@ -738,20 +738,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatedSlider: {fileID: 2824843128761364297}
   animationSpeed: 0.75
---- !u!114 &7112912904767531974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7112912903196052827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6ad2b7ad9fdf614da3b4c758164dd83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rangedData: {fileID: 11400000, guid: 2b7053c580e22014eb4049f5a28c2bec, type: 2}
-  UnitStates: 0
 --- !u!114 &7102939079570842836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,6 +753,20 @@ MonoBehaviour:
   animationForce: 0.1
   animationDuration: 0.1
   vibration: 1
+--- !u!114 &5787342172015235528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112912903196052827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c1f6856b7e3434fad03b6e3fd01282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangedData: {fileID: 11400000, guid: 2b7053c580e22014eb4049f5a28c2bec, type: 2}
+  UnitStates: 0
 --- !u!1 &7112912903704118784
 GameObject:
   m_ObjectHideFlags: 0

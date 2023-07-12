@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PuncherStateManager : MonoBehaviour, IOnBoard,IEnemy
+public class PuncherStateManager : MonoBehaviour, IOnBoard, IEnemy, IUnit
 {
     [SerializeField] private PunchData punchData;
+
     [SerializeField] private BoardStates startState;
-    [HideInInspector]public UnitStates UnitStates;
+    //[HideInInspector]public UnitStates UnitStates;
 
     private PuncherBaseState _currentState;
 
@@ -18,7 +19,8 @@ public class PuncherStateManager : MonoBehaviour, IOnBoard,IEnemy
     public BoardStates BoardState { get; set; }
     public Transform BoardedTransform { get; set; }
     public NavMeshAgent NavMeshAgent { get; set; }
-    public Vector3 MovePos { get; set; }
+    [field: SerializeField] public UnitStates UnitStates { get; set; }
+    public Vector2 MovePos { get; set; }
 
     private void Awake()
     {
@@ -79,12 +81,12 @@ public class PuncherStateManager : MonoBehaviour, IOnBoard,IEnemy
     {
         Gizmos.DrawWireSphere(transform.position, punchData.DetectRadius);
     }
-    
+
     public void RemoveFromSpawnerList()
     {
         Spawner.Instance?.SpawnedEnemies.Remove(gameObject);
     }
-    
+
     private void OnDestroy()
     {
         RemoveFromSpawnerList();

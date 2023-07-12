@@ -2,21 +2,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RangedEnemyStateManager : MonoBehaviour,IOnBoard,IEnemy
+public class RangedStateManager : MonoBehaviour,IOnBoard,IEnemy,IUnit
 {
 
     [SerializeField] private RangedData rangedData;
-    [HideInInspector]public UnitStates UnitStates;
     
-    private RangedEnemyBaseState _currentState;
+    [field: SerializeField]public UnitStates UnitStates { get; set; }
+    [field: SerializeField]public BoardStates BoardState { get; set; }
+    public Vector2 MovePos { get; set; }
+
+    
     public NavMeshAgent NavMeshAgent{ get; set; }
     
-    public RangedRangedEnemyIdleState RangedRangedEnemyIdleState;
-    public RangedRangedEnemyMoveState RangedRangedEnemyMoveState;
-    public RangedEnemyAttackState RangedEnemyAttackState;
+    private RangedBaseState _currentState;
+    public RangedIdleState RangedIdleState;
+    public RangedMoveState RangedMoveState;
+    public RangedAttackState RangedAttackState;
     
     
-    public BoardStates BoardState { get; set; }
     public Transform BoardedTransform { get; set; }
 
 
@@ -24,13 +27,15 @@ public class RangedEnemyStateManager : MonoBehaviour,IOnBoard,IEnemy
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
         BoardedTransform = transform;
+        MovePos = GameManager.Instance.BaseTransform.position;
+
         
-        RangedEnemyAttackState = new RangedEnemyAttackState(rangedData, transform, NavMeshAgent,
+        RangedAttackState = new RangedAttackState(rangedData, transform, NavMeshAgent,
             GameManager.Instance.BaseTransform.position);
-        RangedRangedEnemyIdleState = new RangedRangedEnemyIdleState();
-        RangedRangedEnemyMoveState = new RangedRangedEnemyMoveState(NavMeshAgent,transform);
+        RangedIdleState = new RangedIdleState();
+        RangedMoveState = new RangedMoveState(NavMeshAgent,transform);
         
-        _currentState = RangedRangedEnemyIdleState;
+        _currentState = RangedIdleState;
 
     }
 
@@ -44,7 +49,7 @@ public class RangedEnemyStateManager : MonoBehaviour,IOnBoard,IEnemy
         _currentState.OnUpdate(this);
     }
 
-    public void SwitchState(RangedEnemyBaseState newState)
+    public void SwitchState(RangedBaseState newState)
     {
         _currentState.OnExit(this);
         _currentState = newState;
@@ -93,4 +98,5 @@ public class RangedEnemyStateManager : MonoBehaviour,IOnBoard,IEnemy
     {
         EventManager.CheckIsWaveCleared?.Invoke();
     }
+
 }

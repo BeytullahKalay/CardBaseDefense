@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RangedEnemyAttackState : RangedEnemyBaseState
+public class RangedAttackState : RangedBaseState
 {
     private RangedData _rangedData;
     private Transform _transform;
@@ -12,8 +12,9 @@ public class RangedEnemyAttackState : RangedEnemyBaseState
     private Pooler _pooler;
 
     public Action Attack;
+    
 
-    public RangedEnemyAttackState(RangedData rangedData, Transform transform, NavMeshAgent agent,
+    public RangedAttackState(RangedData rangedData, Transform transform, NavMeshAgent agent,
         Vector2 basePosition)
     {
         _rangedData = rangedData;
@@ -23,12 +24,12 @@ public class RangedEnemyAttackState : RangedEnemyBaseState
         _pooler = Pooler.Instance;
     }
 
-    public override void OnEnter(RangedEnemyStateManager stateManager)
+    public override void OnEnter(RangedStateManager stateManager)
     {
         stateManager.UnitStates = UnitStates.Attack;
     }
 
-    public override void OnUpdate(RangedEnemyStateManager stateManager)
+    public override void OnUpdate(RangedStateManager stateManager)
     {
         if (stateManager.DetectTargets().Capacity > 0)
         {
@@ -37,22 +38,29 @@ public class RangedEnemyAttackState : RangedEnemyBaseState
             _agent.SetDestination(_transform.position);
             _nextFireTime = Time.time + 1 / _rangedData.FiringFrequency;
             Attack?.Invoke();
+            FireBullet(stateManager);
+            //Fire(stateManager);
         }
         else
         {
             _agent.SetDestination(_basePosition);
-            stateManager.SwitchState(stateManager.RangedRangedEnemyMoveState);
+            stateManager.SwitchState(stateManager.RangedMoveState);
         }
     }
 
-    public void FireBullet(RangedEnemyStateManager stateManager)
+    public void FireBullet(RangedStateManager stateManager)
     {
         var target = stateManager.DetectTargets()[0];
         var obj = _pooler.BulletPool.Get();
         obj.GetComponent<FireObject>().Initialize(_transform, target.transform, _rangedData.Damage);
     }
 
-    public override void OnExit(RangedEnemyStateManager stateManager)
+    // private void Fire(RangedStateManager stateManager)
+    // {
+    //     FireBullet(stateManager); // <- Bad
+    // }
+
+    public override void OnExit(RangedStateManager stateManager)
     {
     }
 }

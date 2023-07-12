@@ -1,16 +1,16 @@
 using UnityEngine;
 
-[RequireComponent(typeof(RangedEnemyStateManager))]
+[RequireComponent(typeof(RangedStateManager))]
 public class RangedEnemyHealth : HealthSystem
 {
     [SerializeField] private GameObject canvasGameObject;
 
-    private RangedEnemyStateManager _rangedEnemyStateManager;
+    private RangedStateManager rangedStateManager;
     
     protected override void Awake()
     {
         base.Awake();
-        _rangedEnemyStateManager = GetComponent<RangedEnemyStateManager>();
+        rangedStateManager = GetComponent<RangedStateManager>();
     }
     
     protected override void OnEnable()
@@ -29,6 +29,6 @@ public class RangedEnemyHealth : HealthSystem
     private void DeadActions()
     {
         canvasGameObject.SetActive(false);
-        _rangedEnemyStateManager.enabled = false;
+        rangedStateManager.enabled = false;
     }
 }

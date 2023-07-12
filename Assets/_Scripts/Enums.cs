@@ -6,6 +6,7 @@ public enum BoardStates
     Landed
 }
 
+[System.Serializable]
 public enum UnitStates
 {
     Idle,

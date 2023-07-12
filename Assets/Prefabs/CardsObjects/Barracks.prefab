@@ -272,7 +272,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   slider: {fileID: 2590527859477054208}
-  DestructionAudioClip: {fileID: 0}
+  DestructionAudioClip: {fileID: 8300000, guid: 71deee364cabc1a41b662ef5ff04357b, type: 3}
+  DestructParticleVFX: {fileID: 7467308703086043173, guid: 4c7ac5a86c9f4e04eb272b45102456c3, type: 3}
   <EarnMaterialAmountOnDestruct>k__BackingField: 3
 --- !u!114 &2590527858089349973
 MonoBehaviour:
@@ -318,7 +319,7 @@ MonoBehaviour:
   maxSoliderAmount: 3
   pathRadius: 3
   timeBetweenPaths: 10
-  soliderPrefab: {fileID: 4527514551535082029, guid: bcff1c56991932344bfdaaf1e6fc3692, type: 3}
+  soliderPrefab: {fileID: 4527514551535082029, guid: df2665a854c754c478527be204cc8ab2, type: 3}
   spawnedSolider: []
 --- !u!114 &2590527858089349981
 MonoBehaviour:

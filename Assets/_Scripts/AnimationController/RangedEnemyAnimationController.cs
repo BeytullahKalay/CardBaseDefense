@@ -4,8 +4,8 @@ using UnityEngine.AI;
 public class RangedEnemyAnimationController : AnimationControllerSystem
 {
     private SpriteRenderer _spriteRenderer;
-    private RangedEnemyStateManager _rangedEnemyStateManager;
-    private RangedEnemyAttackState _attackState;
+    private RangedStateManager rangedStateManager;
+    private RangedAttackState _attackState;
 
     public virtual void Awake()
     {
@@ -13,8 +13,8 @@ public class RangedEnemyAnimationController : AnimationControllerSystem
         Agent = GetComponentInParent<NavMeshAgent>();
         Animator = GetComponentInChildren<Animator>();
         
-        _rangedEnemyStateManager = GetComponentInParent<RangedEnemyStateManager>();
-        _attackState = _rangedEnemyStateManager.RangedEnemyAttackState;
+        rangedStateManager = GetComponentInParent<RangedStateManager>();
+        _attackState = rangedStateManager.RangedAttackState;
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -39,13 +39,13 @@ public class RangedEnemyAnimationController : AnimationControllerSystem
 
     private void Flip()
     {
-        if (_rangedEnemyStateManager.UnitStates != UnitStates.Attack)
+        if (rangedStateManager.UnitStates != UnitStates.Attack)
         {
             _spriteRenderer.flipX = Agent.velocity.x <= 0;
         }
         else
         {
-            var target = _rangedEnemyStateManager.DetectTargets()[0];
+            var target = rangedStateManager.DetectTargets()[0];
             var dir = (target.transform.position - transform.position).normalized;
             _spriteRenderer.flipX = dir.x <= 0;
         }
@@ -54,7 +54,7 @@ public class RangedEnemyAnimationController : AnimationControllerSystem
     public override void OnDead()
     {
         base.OnDead();
-        _rangedEnemyStateManager.enabled = false;
+        rangedStateManager.enabled = false;
         Animator.SetTrigger(DeadValName);
         canvasGameObject.SetActive(false);
     }
@@ -67,6 +67,6 @@ public class RangedEnemyAnimationController : AnimationControllerSystem
     // using by animation system
     public void FireBullet()
     {
-        _attackState.FireBullet(_rangedEnemyStateManager);
+        _attackState.FireBullet(rangedStateManager);
     }
 }
