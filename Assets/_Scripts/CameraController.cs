@@ -46,7 +46,7 @@ public class CameraController : MonoSingleton<CameraController>
         _mouseWheelInput = Input.mouseScrollDelta.y;
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         HandleCameraPosition();
 
@@ -71,7 +71,7 @@ public class CameraController : MonoSingleton<CameraController>
         transform.position = desPos;
     }
 
-    public void UpdateMaxMovePosition(Vector3 start,Vector3 end)
+    public void UpdateMaxMovePosition(Vector3 start, Vector3 end)
     {
         _maxUpPosition = start.y > _maxUpPosition ? start.y : _maxUpPosition;
         _maxDownPosition = end.y < _maxDownPosition ? end.y : _maxDownPosition;

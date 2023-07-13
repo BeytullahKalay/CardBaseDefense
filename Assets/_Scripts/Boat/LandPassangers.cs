@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -18,7 +19,10 @@ public class LandPassangers : MonoBehaviour
     private void Awake()
     {
         _boatFading = GetComponent<BoatFading>();
-        
+    }
+
+    private void Start()
+    {
         foreach (Transform child in transform)
         {
             if(child.TryGetComponent<IOnBoard>(out var t)) _boardedObjectsList.Add(t);
