@@ -15,12 +15,12 @@ public class Boat : MonoBehaviour
 
     private Vector3Int _detectedGroundPosition;
 
-    private LandPassangers _landPassengers;
+    private LandPassengers _landPassengers;
 
 
     private void Awake()
     {
-        _landPassengers = GetComponent<LandPassangers>();
+        _landPassengers = GetComponent<LandPassengers>();
         _basePosition = GameManager.Instance.BaseTransform.position;
         _tilemapManager = TilemapManager.Instance;
     }
@@ -54,6 +54,7 @@ public class Boat : MonoBehaviour
     {
         if (_isGroundTileDetected)
         {
+            print("Landed!");
             _landPassengers.LandPassenger(_detectedGroundPosition);
             Destroy(this);
             return;

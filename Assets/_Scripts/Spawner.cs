@@ -46,13 +46,13 @@ public class Spawner : MonoSingleton<Spawner>
 
         var obj = Instantiate(spawnObject, spawnPosition.position, Quaternion.identity);
 
-        foreach (Transform child in obj.transform)
-        {
-            if (child.TryGetComponent<IOnBoard>(out var enemy))
-            {
-                spawnedEnemies.Add(enemy.BoardedTransform.gameObject);
-            }
-        }
+        // foreach (Transform child in obj.transform)
+        // {
+        //     if (child.TryGetComponent<IOnBoard>(out var enemy))
+        //     {
+        //         spawnedEnemies.Add(enemy.BoardedTransform.gameObject);
+        //     }
+        // }
 
         WaveCleared = false;
     }

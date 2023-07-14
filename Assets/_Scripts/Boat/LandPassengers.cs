@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class LandPassangers : MonoBehaviour
+public class LandPassengers : MonoBehaviour
 {
     [SerializeField] private float jumpDuration;
     [SerializeField] private float jumpPower;
@@ -21,12 +20,9 @@ public class LandPassangers : MonoBehaviour
         _boatFading = GetComponent<BoatFading>();
     }
 
-    private void Start()
+    public void AddPassengerToList(IOnBoard enemy)
     {
-        foreach (Transform child in transform)
-        {
-            if(child.TryGetComponent<IOnBoard>(out var t)) _boardedObjectsList.Add(t);
-        }
+        _boardedObjectsList.Add(enemy);
     }
 
     private void Update()
@@ -47,6 +43,7 @@ public class LandPassangers : MonoBehaviour
         
         foreach (var boarded in _boardedObjectsList)
         {
+            print("jump");
             await boarded.BoardedTransform.DOJump(jumpPos, jumpPower, 1, jumpDuration).SetEase(ease)
                 .OnComplete(() =>
                 {
