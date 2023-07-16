@@ -43,7 +43,6 @@ public class LandPassengers : MonoBehaviour
         
         foreach (var boarded in _boardedObjectsList)
         {
-            print("jump");
             await boarded.BoardedTransform.DOJump(jumpPos, jumpPower, 1, jumpDuration).SetEase(ease)
                 .OnComplete(() =>
                 {

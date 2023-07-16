@@ -31,6 +31,7 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
     private void Start()
     {
         OpenActions();
+        _collider.enabled = false;
     }
     
     private void CloseActionCardScripts()

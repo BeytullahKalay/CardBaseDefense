@@ -1,14 +1,11 @@
+
 using UnityEngine;
 
-public class BuildingHealthSystem : HealthSystem,IEarnMaterial
+public class SupportBuildingHealth : HealthSystem
 {
     public AudioClip DestructionAudioClip;
     public GameObject DestructParticleVFX;
     
-    
-    [field: SerializeField] public int EarnMaterialAmountOnDestruct { get; private set; }
-
-
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -17,7 +14,7 @@ public class BuildingHealthSystem : HealthSystem,IEarnMaterial
         OnDead += SpawnParticles;
         OnDead += Destroy;
     }
-
+    
     protected override void OnDisable()
     {
         base.OnDisable();
@@ -26,32 +23,25 @@ public class BuildingHealthSystem : HealthSystem,IEarnMaterial
         OnDead -= SpawnParticles;
         OnDead -= Destroy;
     }
-
+    
     private void PlayDestructionClip()
     {
         SoundFXManager.Instance.PlaySoundFXClip(DestructionAudioClip, transform);
     }
     
-    public void Destruct()
+    private void SpawnParticles()
     {
-        OnDead?.Invoke();
-        EarnMaterial();
+        Instantiate(DestructParticleVFX, transform.position, Quaternion.identity);
     }
-
-    public void EarnMaterial()
-    {
-        print("Earned " + EarnMaterialAmountOnDestruct + " material(s) from " + gameObject.name);
-
-        EventManager.AddThatToCurrentSpecialMaterial?.Invoke(EarnMaterialAmountOnDestruct);
-    }
-
+    
     private void Destroy()
     {
         Destroy(gameObject);
     }
     
-    private void SpawnParticles()
+    public override void Heal(int healAmount)
     {
-        Instantiate(DestructParticleVFX, transform.position, Quaternion.identity);
+        base.Heal(healAmount);
+        UpdateSlider?.Invoke();
     }
 }

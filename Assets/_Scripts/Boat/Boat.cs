@@ -54,7 +54,6 @@ public class Boat : MonoBehaviour
     {
         if (_isGroundTileDetected)
         {
-            print("Landed!");
             _landPassengers.LandPassenger(_detectedGroundPosition);
             Destroy(this);
             return;
