@@ -8,4 +8,5 @@ public interface IOnBoard
     public Transform BoardedTransform { get; set; }
     public NavMeshAgent NavMeshAgent { get; set; }
     public void RemoveFromSpawnerList();
+    public bool IsDead();
 }
