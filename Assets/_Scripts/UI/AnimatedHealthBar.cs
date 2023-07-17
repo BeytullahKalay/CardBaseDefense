@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(HealthSystem))]
-public class AnimatedHealthBar : MonoBehaviour
+public class AnimatedHealthBar : MonoBehaviour,IHasHealthbarSlider
 {
     [SerializeField] private Slider animatedSlider;
     [SerializeField] private float animationSpeed = 5f;
@@ -43,5 +43,10 @@ public class AnimatedHealthBar : MonoBehaviour
         _tween?.Kill();
         _tween = DOTween.To(() => sliderVal, x => sliderVal = x, desVal, animationSpeed)
             .SetSpeedBased().OnUpdate(() => { animatedSlider.value = sliderVal; });
+    }
+
+    public GameObject GetHealthBar()
+    {
+        return animatedSlider.gameObject;
     }
 }

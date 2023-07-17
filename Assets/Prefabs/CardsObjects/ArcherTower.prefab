@@ -417,6 +417,7 @@ GameObject:
   - component: {fileID: 6682979045669812429}
   - component: {fileID: 2205468908370327761}
   - component: {fileID: 6258574448782083696}
+  - component: {fileID: 6954596629447854138}
   - component: {fileID: 2271039375666933208}
   m_Layer: 7
   m_Name: ArcherTower
@@ -601,6 +602,7 @@ MonoBehaviour:
   maxHealth: 100
   slider: {fileID: 351535021374520376}
   DestructionAudioClip: {fileID: 0}
+  DestructParticleVFX: {fileID: 0}
   <EarnMaterialAmountOnDestruct>k__BackingField: 4
 --- !u!114 &6258574448782083696
 MonoBehaviour:
@@ -616,6 +618,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatedSlider: {fileID: 5710196246173006257}
   animationSpeed: 0.75
+--- !u!114 &6954596629447854138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6074905538072354698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b7cab7713034d4d990cf7f608fd8a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2271039375666933208
 MonoBehaviour:
   m_ObjectHideFlags: 0

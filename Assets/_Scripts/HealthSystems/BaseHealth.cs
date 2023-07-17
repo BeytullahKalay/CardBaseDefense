@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(BasicTower))]
-public class BaseHealth : HealthSystem
+public class BaseHealth : HealthSystem,IHasHealthbarSlider
 {
     [Space(10)]
     
@@ -45,5 +45,10 @@ public class BaseHealth : HealthSystem
         base.Heal(healAmount);
         OnHeal?.Invoke();
         UpdateSlider?.Invoke();
+    }
+
+    public GameObject GetHealthBar()
+    {
+        return slider.gameObject;
     }
 }

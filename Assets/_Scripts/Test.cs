@@ -35,5 +35,19 @@ public class Test : MonoBehaviour
         // {
         //     print(2f.Remap(0,4,0,100));
         // }
+
+        // var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        // RaycastHit hit;
+        // if (Physics.Raycast(ray,out hit))
+        // {
+        //     print(hit.transform.name);
+        // }
+        
+        // RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        //
+        // if (hit.collider != null)
+        // {
+        //     print(hit.collider.gameObject.name);
+        // }
     }
 }
