@@ -18,8 +18,7 @@ MonoBehaviour:
   cardType: 0
   buttonPanel: {fileID: 7587818972153548042, guid: 2755cd8934da70a42af11e88e5f4d448, type: 3}
   increaseCostEveryUseBy: 1
-  cardDescription: This card creates a construction building. The building heals
-    other building every end of wave.
+  cardDescription: Heals other building excluding base buildings every end of wave.
   PlacingParticleVFX: {fileID: 7467308703086043173, guid: 4c7ac5a86c9f4e04eb272b45102456c3, type: 3}
   PlacingSoundFX: {fileID: 8300000, guid: 78894c7e9e76a8d45a9e5dbac10346d3, type: 3}
   MouseOverClipSoundFX: {fileID: 8300000, guid: aa79dac8785ef7043b1ef560f9f7c1c2, type: 3}
