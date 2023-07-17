@@ -7,7 +7,6 @@ public class PuncherStateManager : MonoBehaviour, IOnBoard, IEnemy, IUnit
     [SerializeField] private PunchData punchData;
 
     [SerializeField] private BoardStates startState;
-    //[HideInInspector]public UnitStates UnitStates;
 
     private PuncherBaseState _currentState;
 
@@ -22,8 +21,12 @@ public class PuncherStateManager : MonoBehaviour, IOnBoard, IEnemy, IUnit
     [field: SerializeField] public UnitStates UnitStates { get; set; }
     public Vector2 MovePos { get; set; }
 
+    private HealthSystem _healthSystem;
+
     private void Awake()
     {
+        _healthSystem = GetComponent<HealthSystem>();
+        
         BoardedTransform = transform;
         NavMeshAgent = GetComponent<NavMeshAgent>();
         MovePos = GameManager.Instance.BaseTransform.position;
@@ -85,6 +88,11 @@ public class PuncherStateManager : MonoBehaviour, IOnBoard, IEnemy, IUnit
     public void RemoveFromSpawnerList()
     {
         Spawner.Instance?.SpawnedEnemies.Remove(gameObject);
+    }
+
+    public bool IsDead()
+    {
+        return _healthSystem.Health <= 0;
     }
 
     private void OnDestroy()

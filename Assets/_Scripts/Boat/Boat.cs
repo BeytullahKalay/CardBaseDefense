@@ -12,6 +12,7 @@ public class Boat : MonoBehaviour
     private TilemapManager _tilemapManager;
 
     private bool _isGroundTileDetected;
+    private bool _allUnitsDead;
 
     private Vector3Int _detectedGroundPosition;
 
@@ -23,6 +24,16 @@ public class Boat : MonoBehaviour
         _landPassengers = GetComponent<LandPassengers>();
         _basePosition = GameManager.Instance.BaseTransform.position;
         _tilemapManager = TilemapManager.Instance;
+    }
+
+    private void OnEnable()
+    {
+        _landPassengers.AllUnitsDead += OnAllUnitsDead;
+    }
+
+    private void OnDisable()
+    {
+        _landPassengers.AllUnitsDead -= OnAllUnitsDead;
     }
 
     private void Start()
@@ -52,6 +63,9 @@ public class Boat : MonoBehaviour
 
     private void Move()
     {
+        if (_allUnitsDead) return;
+        
+        
         if (_isGroundTileDetected)
         {
             _landPassengers.LandPassenger(_detectedGroundPosition);
@@ -60,5 +74,11 @@ public class Boat : MonoBehaviour
         }
         
         transform.position += transform.right * (speed * Time.fixedDeltaTime);
+    }
+
+    private void OnAllUnitsDead()
+    {
+        _allUnitsDead = true;
+        Destroy(this);
     }
 }

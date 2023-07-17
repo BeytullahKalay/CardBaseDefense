@@ -22,6 +22,8 @@ public class RangedStateManager : MonoBehaviour,IOnBoard,IEnemy,IUnit
     
     public Transform BoardedTransform { get; set; }
 
+    private HealthSystem _health;
+
 
     private void Awake()
     {
@@ -36,6 +38,7 @@ public class RangedStateManager : MonoBehaviour,IOnBoard,IEnemy,IUnit
         RangedMoveState = new RangedMoveState(NavMeshAgent,transform);
         
         _currentState = RangedIdleState;
+        _health = GetComponent<HealthSystem>();
 
     }
 
@@ -87,7 +90,12 @@ public class RangedStateManager : MonoBehaviour,IOnBoard,IEnemy,IUnit
     {
         Spawner.Instance.SpawnedEnemies.Remove(gameObject);
     }
-    
+
+    public bool IsDead()
+    {
+        return _health.Health <= 0;
+    }
+
     private void OnDestroy()
     {
         RemoveFromSpawnerList();

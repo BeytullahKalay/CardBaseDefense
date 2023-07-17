@@ -21,6 +21,8 @@ public class BaseRusherEnemy : MonoBehaviour,IOnBoard,IEnemy
     private Vector2 _destinationPosition;
     
     private Pooler _pooler;
+
+    private HealthSystem _healthSystem;
     
     public BoardStates BoardState { get; set; }
     public Transform BoardedTransform { get; set; }
@@ -32,6 +34,7 @@ public class BaseRusherEnemy : MonoBehaviour,IOnBoard,IEnemy
         BoardedTransform = transform;
         NavMeshAgent = GetComponent<NavMeshAgent>();
         _pooler = Pooler.Instance;
+        _healthSystem = GetComponent<HealthSystem>();
 
         var basePosition = (Vector2)GameManager.Instance.BaseTransform.position;
         var direction = ((Vector2)transform.position - basePosition).normalized;
@@ -77,6 +80,12 @@ public class BaseRusherEnemy : MonoBehaviour,IOnBoard,IEnemy
     {
         Spawner.Instance.SpawnedEnemies.Remove(gameObject);
     }
+
+    public bool IsDead()
+    {
+       return _healthSystem.Health <= 0;
+    }
+
 
     private void OnDestroy()
     {
