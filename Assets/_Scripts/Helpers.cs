@@ -77,12 +77,12 @@ public static class Helpers
     /// <summary>
     /// Set sprite renderer color alpha
     /// </summary>
-    public static SpriteRenderer SetColorAlpha(this SpriteRenderer tmpText, float alphaValue)
+    public static SpriteRenderer SetColorAlpha(this SpriteRenderer renderer, float alphaValue)
     {
-        var c = tmpText.color;
+        var c = renderer.color;
         c.a = alphaValue;
-        tmpText.color = c;
-        return tmpText;
+        renderer.color = c;
+        return renderer;
     }
 
     /// <summary>
@@ -142,5 +142,14 @@ public static class Helpers
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360;
         return angle;
+    }
+
+    
+    /// <summary>
+    ///  Remapping given float to desired number range
+    /// </summary>
+    public static float Remap(this float value, float from1, float to1, float from2, float to2)
+    {
+        return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
     }
 }
