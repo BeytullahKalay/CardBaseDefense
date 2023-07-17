@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class LandPassengers : MonoBehaviour
     private BoatFading _boatFading;
 
     private bool _landed;
+
+    public Action AllUnitsDead;
     
     private void Awake()
     {
@@ -27,6 +30,14 @@ public class LandPassengers : MonoBehaviour
 
     private void Update()
     {
+        _boardedObjectsList.RemoveAll(item => item.IsDead());
+
+        if (_boardedObjectsList.Count == 0)
+        {
+            _boatFading.FadeAndDestroy();
+            AllUnitsDead?.Invoke();
+        }
+        
         if (_landed) return;
         
         foreach (var onBoard in _boardedObjectsList)
