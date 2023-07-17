@@ -1,5 +1,5 @@
 
 public interface IHealableBuilding
 {
-   public void Heal(int healAmount);
+   public void HealBuilding(int healAmount);
 }

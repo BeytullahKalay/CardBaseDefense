@@ -54,7 +54,7 @@ public class BuildingHealthSystem : HealthSystem,IEarnMaterial,IHealableBuilding
         Instantiate(DestructParticleVFX, transform.position, Quaternion.identity);
     }
 
-    public void Heal(int healAmount)
+    public void HealBuilding(int healAmount)
     {
         base.Heal(healAmount);
     }

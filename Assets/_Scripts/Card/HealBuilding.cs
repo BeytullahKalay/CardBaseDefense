@@ -1,10 +1,9 @@
 using UnityEngine;
 
-public class ConstructionBuilding : MonoBehaviour, IActionCard
+public class HealBuilding : BuffBuilding, IActionCard
 {
-    [SerializeField] private float constructionRadius = 3f;
     [SerializeField] private int healAmount = 20;
-
+    
     private void OnEnable()
     {
         EventManager.WaveCompleted += Heal;
@@ -15,22 +14,17 @@ public class ConstructionBuilding : MonoBehaviour, IActionCard
         EventManager.WaveCompleted -= Heal;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, constructionRadius);
-    }
-
     private void Heal(bool waveCompleted)
     {
         if (!waveCompleted) return;
         
-        var buildings = Physics2D.OverlapCircleAll(transform.position, constructionRadius);
+        var buildings = Physics2D.OverlapCircleAll(transform.position, buffRadius);
 
         if (buildings.Length <= 0) return;
 
         foreach (var building in buildings)
             if (building.TryGetComponent<IHealableBuilding>(out var healableBuilding))
-                healableBuilding.Heal(healAmount);
+                healableBuilding.HealBuilding(healAmount);
     }
 
     public void Enable(bool state)

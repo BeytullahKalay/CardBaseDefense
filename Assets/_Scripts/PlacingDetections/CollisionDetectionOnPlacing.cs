@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
 {
     [SerializeField] private float detectRadius = 3f;
     [SerializeField] private LayerMask whatIsNotPlaceableLayerMask;
+
+    public Action PlaceAction;
     
     public bool Usable { get; set; }
 
@@ -76,6 +79,8 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
         _collider.enabled = true;
         
         PlayPlacingAnimation();
+        
+        PlaceAction?.Invoke();
 
         Destroy(this);
     }

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] damageSoundClips;
     private void Update()
     {
         // if (Input.GetKeyDown(KeyCode.G))
@@ -30,6 +29,11 @@ public class Test : MonoBehaviour
         // if (Input.GetKeyDown(KeyCode.L))
         // {
         //     SoundFXManager.Instance.PlayRandomSoundFXClip(damageSoundClips,transform);
+        // }
+
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     print(2f.Remap(0,4,0,100));
         // }
     }
 }

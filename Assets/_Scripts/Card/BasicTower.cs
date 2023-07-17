@@ -1,10 +1,17 @@
 using UnityEngine;
 
-public class BasicTower : MonoBehaviour, IActionCard
+public class BasicTower : MonoBehaviour, IActionCard, IDamageIncreaseable
 {
     [SerializeField] private RangedData _data;
 
     private float _nextFireTime = float.MinValue;
+
+    private int _damage;
+
+    private void Start()
+    {
+        _damage = _data.Damage;
+    }
 
     private void Update()
     {
@@ -13,7 +20,7 @@ public class BasicTower : MonoBehaviour, IActionCard
             SpawnBulletAndInitializeNextShootTime();
 
             // play shoot soundFX
-            SoundFXManager.Instance.PlaySoundFXClip(_data.ShootClip,transform);
+            SoundFXManager.Instance.PlaySoundFXClip(_data.ShootClip, transform);
         }
     }
 
@@ -24,14 +31,13 @@ public class BasicTower : MonoBehaviour, IActionCard
 
         if (bullet.TryGetComponent<FireObject>(out var fireObject))
         {
-            fireObject.Initialize(transform, target.transform, _data.Damage);
+            fireObject.Initialize(transform, target.transform, _damage);
             _nextFireTime = Time.time + 1 / _data.FiringFrequency;
         }
         else
         {
             Debug.LogError("No FireObject script in " + bullet.name);
         }
-        
     }
 
     private Collider2D[] DetectedEnemies()
@@ -51,4 +57,13 @@ public class BasicTower : MonoBehaviour, IActionCard
     }
 
 
+    public void IncreaseDamage(int increasingAmount)
+    {
+        _damage += increasingAmount;
+    }
+
+    public void DecreaseDamage(int decreasingAmount)
+    {
+        _damage -= decreasingAmount;
+    }
 }
