@@ -678,6 +678,8 @@ GameObject:
   - component: {fileID: 912725999}
   - component: {fileID: 912725998}
   - component: {fileID: 912725997}
+  - component: {fileID: 7452119711518468314}
+  - component: {fileID: 3052812650620633522}
   m_Layer: 7
   m_Name: ConstructionBuilding
   m_TagString: Untagged
@@ -892,6 +894,31 @@ MonoBehaviour:
   animationForce: 0.1
   animationDuration: 0.1
   vibration: 1
+--- !u!114 &7452119711518468314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417210678133590566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b7cab7713034d4d990cf7f608fd8a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3052812650620633522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417210678133590566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e63c16487f06f34ba28df686dfd4a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circleTransform: {fileID: 5942055778511918156}
 --- !u!1 &7497444092088790657
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,7 +929,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5942055778511918156}
   - component: {fileID: 245879339332474558}
-  - component: {fileID: 1896382674689850391}
   m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
@@ -977,15 +1003,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1896382674689850391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7497444092088790657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7b23c041a51c8b41911af35c10faf58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

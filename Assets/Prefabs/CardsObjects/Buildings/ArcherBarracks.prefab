@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2590527858089349975, guid: 6580bf02e9b847047959e38ecef898d7, type: 3}
       propertyPath: m_Name
-      value: RangedBarracks
+      value: ArcherBarracks
       objectReference: {fileID: 0}
     - target: {fileID: 2590527858089349980, guid: 6580bf02e9b847047959e38ecef898d7, type: 3}
       propertyPath: soliderPrefab

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3301722702583139374}
   - component: {fileID: 8993115083580640988}
-  - component: {fileID: 7346833958104654965}
   m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
@@ -85,18 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7346833958104654965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704677176395216611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7b23c041a51c8b41911af35c10faf58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7786317949656502852
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,6 +102,8 @@ GameObject:
   - component: {fileID: 9197616465491660685}
   - component: {fileID: 9197616465491660684}
   - component: {fileID: 9197616465491660687}
+  - component: {fileID: 7264718227268464792}
+  - component: {fileID: 6130019610575290774}
   m_Layer: 7
   m_Name: DamageBuffBuilding
   m_TagString: Untagged
@@ -329,6 +318,31 @@ MonoBehaviour:
   animationForce: 0.1
   animationDuration: 0.1
   vibration: 1
+--- !u!114 &7264718227268464792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7786317949656502852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b7cab7713034d4d990cf7f608fd8a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6130019610575290774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7786317949656502852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e63c16487f06f34ba28df686dfd4a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circleTransform: {fileID: 3301722702583139374}
 --- !u!1 &9197616464750838784
 GameObject:
   m_ObjectHideFlags: 0
