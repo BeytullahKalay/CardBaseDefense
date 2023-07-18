@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SliderOpeningController : MonoBehaviour,IClickable
+public class SliderOpeningController : MonoBehaviour,IUnSelect
 {
     private IHasHealthbarSlider[] _healthBarSliders;
 
@@ -38,7 +38,7 @@ public class SliderOpeningController : MonoBehaviour,IClickable
         }
     }
 
-    public void OnDeselected()
+    public void UnSelected()
     {
         foreach (var slider in _healthBarSliders)
         {

@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class SupportBuildingHealth : HealthSystem
+public class SupportBuildingHealth : HealthSystem,IHasHealthbarSlider
 {
     public AudioClip DestructionAudioClip;
     public GameObject DestructParticleVFX;
@@ -43,5 +43,10 @@ public class SupportBuildingHealth : HealthSystem
     {
         base.Heal(healAmount);
         UpdateSlider?.Invoke();
+    }
+
+    public GameObject GetHealthBar()
+    {
+        return slider.gameObject;
     }
 }

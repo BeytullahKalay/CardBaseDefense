@@ -3,8 +3,8 @@ using UnityEngine;
 public class MouseSelectManager : MonoBehaviour
 {
     [SerializeField] private LayerMask selectableLayers;
-    
-    private IClickable _selectedClickable;
+
+    private IUnSelect[] _selectedClickable;
     private Camera _cam;
 
     private void Awake()
@@ -15,16 +15,27 @@ public class MouseSelectManager : MonoBehaviour
     private void Update()
     {
         if (!Input.GetKeyDown(KeyCode.Mouse0)) return;
-        
-        var hit = Physics2D.Raycast(_cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero,selectableLayers);
-        
-        _selectedClickable?.OnDeselected();
+
+        var hit = Physics2D.Raycast(_cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, selectableLayers);
+
+
+        if (_selectedClickable?.Length > 0)
+        {
+            foreach (var clickable in _selectedClickable)
+                clickable.UnSelected();
+        }
+
         _selectedClickable = null;
-        
+
         if (hit.collider == null) return;
-        
+
         print(hit.collider.gameObject.name);
-        _selectedClickable = hit.collider.GetComponent<IClickable>();
-        _selectedClickable.OnSelected();
+        _selectedClickable = hit.collider.GetComponents<IUnSelect>();
+
+        if (_selectedClickable?.Length > 0)
+        {
+            foreach (var clickable in _selectedClickable)
+                clickable.OnSelected();
+        }
     }
 }
