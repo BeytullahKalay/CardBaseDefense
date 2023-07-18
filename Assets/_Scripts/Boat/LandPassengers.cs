@@ -16,6 +16,8 @@ public class LandPassengers : MonoBehaviour
 
     private bool _landed;
 
+    private bool _allUnitDead;
+
     public Action AllUnitsDead;
     
     private void Awake()
@@ -36,6 +38,7 @@ public class LandPassengers : MonoBehaviour
         {
             _boatFading.FadeAndDestroy();
             AllUnitsDead?.Invoke();
+            _allUnitDead = true;
         }
         
         if (_landed) return;
@@ -48,6 +51,8 @@ public class LandPassengers : MonoBehaviour
 
     public async void LandPassenger(Vector3Int detectedGroundPosition)
     {
+        if(_allUnitDead) return;
+        
         _landed = true;
         var dir = (detectedGroundPosition - transform.position).normalized;
         var jumpPos = transform.position + dir * jumpDistance;

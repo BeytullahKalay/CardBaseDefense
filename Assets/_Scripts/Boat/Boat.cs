@@ -79,6 +79,6 @@ public class Boat : MonoBehaviour
     private void OnAllUnitsDead()
     {
         _allUnitsDead = true;
-        Destroy(this);
+        //Destroy(this);
     }
 }
