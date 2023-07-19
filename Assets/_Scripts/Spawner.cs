@@ -44,15 +44,7 @@ public class Spawner : MonoSingleton<Spawner>
     {
         ChangeSpawnPositionRandomly();
 
-        var obj = Instantiate(spawnObject, spawnPosition.position, Quaternion.identity);
-
-        // foreach (Transform child in obj.transform)
-        // {
-        //     if (child.TryGetComponent<IOnBoard>(out var enemy))
-        //     {
-        //         spawnedEnemies.Add(enemy.BoardedTransform.gameObject);
-        //     }
-        // }
+        Instantiate(spawnObject, spawnPosition.position, Quaternion.identity);
 
         WaveCleared = false;
     }

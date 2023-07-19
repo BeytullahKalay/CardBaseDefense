@@ -32,7 +32,7 @@ public class BottomUIBlockRaycastHandler : MonoBehaviour
     
     private void BlockRaycast(bool waveStatus)
     {
-        _canvasGroup.blocksRaycasts = true;
+        _canvasGroup.blocksRaycasts = waveStatus;
     }
 
     private void SetBlockRaycastStateTo(bool state)
