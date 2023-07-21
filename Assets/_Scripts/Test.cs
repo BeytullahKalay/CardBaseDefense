@@ -3,6 +3,24 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
+
+    // private Material _mat;
+    //
+    // private void Awake()
+    // {
+    //     _mat = GetComponent<SpriteRenderer>().material;
+    // }
+    //
+    // private void OnMouseEnter()
+    // {
+    //     _mat.SetInt("_Activate",1);
+    // }
+    //
+    // private void OnMouseExit()
+    // {
+    //     _mat.SetInt("_Activate",0);
+    // }
+
     private void Update()
     {
         // if (Input.GetKeyDown(KeyCode.G))
