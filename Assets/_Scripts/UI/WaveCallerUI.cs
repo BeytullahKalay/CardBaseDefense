@@ -96,49 +96,58 @@ public class WaveCallerUI : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             if (_isOpen) return;
-            _isOpen = true;
-            generalGameObject.SetActive(true);
-
-            // open canvas
-            _canvasAlphaTween?.Kill();
-            var canvasAlpha = canvasGroup.alpha;
-            _canvasAlphaTween = DOTween.To(() => canvasAlpha, x => canvasAlpha = x, 1, openAndCloseFadingDuration)
-                .OnUpdate(() => { canvasGroup.alpha = canvasAlpha; }).SetSpeedBased();
-
-            // fill the fill image
-            _imageFillAmountTween?.Kill();
-            var imageFillAmount = fillImage.fillAmount;
-            _imageFillAmountTween = DOTween.To(() => imageFillAmount, x => imageFillAmount = x, 1, fillTime)
-                .SetSpeedBased().OnUpdate(() => { fillImage.fillAmount = imageFillAmount; }).OnComplete(() =>
-                {
-                    // completed calling stuff
-                    knightImageTransform.DOShakePosition(.35f, 10, 30);
-                    animator.SetTrigger("Attack");
-                    StartCoroutine(_coroutine);
-                    _audioSource.Play();
-                    EventManager.CallTheWave?.Invoke();
-                });
+            FillAnimation();
         }
         else
         {
             _isOpen = false;
-
-            // discharge fill image
-            _imageFillAmountTween?.Kill();
-            var imageFillAmount = fillImage.fillAmount;
-            _imageFillAmountTween = DOTween.To(() => imageFillAmount, x => imageFillAmount = x, 0, dischargeTime)
-                .SetSpeedBased().OnUpdate(() => { fillImage.fillAmount = imageFillAmount; }).OnComplete(() =>
-                {
-                    // close canvas
-                    _canvasAlphaTween?.Kill();
-                    var canvasAlpha = canvasGroup.alpha;
-                    _canvasAlphaTween = DOTween
-                        .To(() => canvasAlpha, x => canvasAlpha = x, 0, openAndCloseFadingDuration).SetSpeedBased()
-                        .OnUpdate(() => { canvasGroup.alpha = canvasAlpha; }).OnComplete(() =>
-                        {
-                            generalGameObject.SetActive(false);
-                        });
-                });
+            DischargeAnimation();
         }
+    }
+
+    private void DischargeAnimation()
+    {
+        // discharge fill image
+        _imageFillAmountTween?.Kill();
+        var imageFillAmount = fillImage.fillAmount;
+        _imageFillAmountTween = DOTween.To(() => imageFillAmount, x => imageFillAmount = x, 0, dischargeTime)
+            .SetSpeedBased().OnUpdate(() => { fillImage.fillAmount = imageFillAmount; }).OnComplete(() =>
+            {
+                // close canvas
+                _canvasAlphaTween?.Kill();
+                var canvasAlpha = canvasGroup.alpha;
+                _canvasAlphaTween = DOTween
+                    .To(() => canvasAlpha, x => canvasAlpha = x, 0, openAndCloseFadingDuration).SetSpeedBased()
+                    .OnUpdate(() => { canvasGroup.alpha = canvasAlpha; }).OnComplete(() =>
+                    {
+                        generalGameObject.SetActive(false);
+                    });
+            });
+    }
+
+    private void FillAnimation()
+    {
+        _isOpen = true;
+        generalGameObject.SetActive(true);
+
+        // open canvas
+        _canvasAlphaTween?.Kill();
+        var canvasAlpha = canvasGroup.alpha;
+        _canvasAlphaTween = DOTween.To(() => canvasAlpha, x => canvasAlpha = x, 1, openAndCloseFadingDuration)
+            .OnUpdate(() => { canvasGroup.alpha = canvasAlpha; }).SetSpeedBased();
+
+        // fill the fill image
+        _imageFillAmountTween?.Kill();
+        var imageFillAmount = fillImage.fillAmount;
+        _imageFillAmountTween = DOTween.To(() => imageFillAmount, x => imageFillAmount = x, 1, fillTime)
+            .SetSpeedBased().OnUpdate(() => { fillImage.fillAmount = imageFillAmount; }).OnComplete(() =>
+            {
+                // completed calling stuff
+                knightImageTransform.DOShakePosition(.35f, 10, 30);
+                animator.SetTrigger("Attack");
+                StartCoroutine(_coroutine);
+                _audioSource.Play();
+                EventManager.CallTheWave?.Invoke();
+            });
     }
 }
