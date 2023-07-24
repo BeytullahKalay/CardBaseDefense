@@ -1,8 +1,13 @@
+using System;
 using UnityEngine;
 
-public class SliderOpeningController : MonoBehaviour,IUnSelect
+public class ClickedController : OnClicked, IUnSelect
 {
     private IHasHealthbarSlider[] _healthBarSliders;
+
+    private SpriteRenderer _renderer;
+
+    private bool _selected;
 
     private void OnEnable()
     {
@@ -18,11 +23,12 @@ public class SliderOpeningController : MonoBehaviour,IUnSelect
     private void Awake()
     {
         _healthBarSliders = GetComponents<IHasHealthbarSlider>();
+        _renderer = GetComponent<SpriteRenderer>();
     }
 
     private void HideHealthBarSliders(bool state)
     {
-        if(!state) return;
+        if (!state) return;
 
         foreach (var slider in _healthBarSliders)
         {
@@ -30,12 +36,37 @@ public class SliderOpeningController : MonoBehaviour,IUnSelect
         }
     }
 
-    public void OnSelected()
+    private void OnMouseEnter()
     {
+        if (!_selected)
+            OpenOutline();
+    }
+
+    private void OnMouseExit()
+    {
+        if (!_selected)
+            CloseOutline();
+    }
+
+    private void OpenOutline()
+    {
+        _renderer.material.SetInt("_Activate", 1);
+    }
+
+    private void CloseOutline()
+    {
+        _renderer.material.SetInt("_Activate", 0);
+    }
+
+    public override void OnSelected()
+    {
+        base.OnSelected();
         foreach (var slider in _healthBarSliders)
         {
             slider.GetHealthBar().SetActive(true);
         }
+
+        _selected = true;
     }
 
     public void UnSelected()
@@ -44,5 +75,7 @@ public class SliderOpeningController : MonoBehaviour,IUnSelect
         {
             slider.GetHealthBar().SetActive(false);
         }
+        CloseOutline();
+        _selected = false;
     }
 }

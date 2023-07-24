@@ -22,20 +22,23 @@ public class MouseSelectManager : MonoBehaviour
         if (_selectedClickable?.Length > 0)
         {
             foreach (var clickable in _selectedClickable)
+            {
                 clickable.UnSelected();
+            }
         }
 
         _selectedClickable = null;
 
         if (hit.collider == null) return;
 
-        print(hit.collider.gameObject.name);
         _selectedClickable = hit.collider.GetComponents<IUnSelect>();
 
         if (_selectedClickable?.Length > 0)
         {
             foreach (var clickable in _selectedClickable)
+            {
                 clickable.OnSelected();
+            }
         }
     }
 }
