@@ -1,5 +1,5 @@
 
-public interface IDestructable
+public interface IDestructible
 {
     public void Destruct();
 }

@@ -51,10 +51,12 @@ public class AddressableManager : MonoBehaviour
     [SerializeField] private CardData destructorCardData;
     [SerializeField] private CardData healConstructionCardData;
     [SerializeField] private CardData damageBuffCardData;
+    [SerializeField] private CardData upgradeCardData;
     
     [Header("Placing Sound FX")]
     [SerializeField] private AssetReferenceAudioClip placingAssetReference;
     [SerializeField] private AssetReferenceAudioClip groundAssetReference;
+    [SerializeField] private AssetReferenceAudioClip upgradeAssetReference;
 
     [Header("Placing Particles")]
     [SerializeField] private AssetReferenceGameObject particleVFXGameObject;
@@ -125,6 +127,11 @@ public class AddressableManager : MonoBehaviour
             groundMakerCardData.PlacingSoundFX = clip.Result;
         };
 
+        upgradeAssetReference.LoadAssetAsync<AudioClip>().Completed += clip =>
+        {
+            upgradeCardData.PlacingSoundFX = clip.Result;
+        };
+
         particleVFXGameObject.LoadAssetAsync<GameObject>().Completed += (obj) =>
         {
             healConstructionCardData.PlacingParticleVFX = obj.Result;
@@ -135,6 +142,7 @@ public class AddressableManager : MonoBehaviour
             damageBuffCardData.PlacingParticleVFX = obj.Result;
             goldMineCardData.PlacingParticleVFX = obj.Result;
             barracsCardData.PlacingParticleVFX = obj.Result;
+            upgradeCardData.PlacingParticleVFX = obj.Result;
             repairCardData.PlacingParticleVFX = obj.Result;
             trapCardData.PlacingParticleVFX = obj.Result;
             
@@ -156,6 +164,7 @@ public class AddressableManager : MonoBehaviour
             damageBuffCardData.MouseOverClipSoundFX = clip.Result;
             goldMineCardData.MouseOverClipSoundFX = clip.Result;
             barracsCardData.MouseOverClipSoundFX = clip.Result;
+            upgradeCardData.MouseOverClipSoundFX = clip.Result;
             repairCardData.MouseOverClipSoundFX = clip.Result;
             trapCardData.MouseOverClipSoundFX = clip.Result;
         };

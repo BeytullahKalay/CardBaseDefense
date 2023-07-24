@@ -125,6 +125,10 @@ MonoBehaviour:
     m_Address: Assets/_Audio/SoundEffect/DestuctBuilding.wav
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: ecac7dd93d2646444bded5b551860409
+    m_Address: Assets/_Audio/SoundEffect/UpgradeSFX.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: fc81fe3a7d5334f41a9d445c4600d871, type: 2}
   m_SchemaSet:

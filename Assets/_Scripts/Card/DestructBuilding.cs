@@ -1,5 +1,4 @@
 using UnityEngine;
-[RequireComponent(typeof(BuildingDetectionOnPlacing))]
 
 public class DestructBuilding : MonoBehaviour,IBuildingEffectCard
 {
@@ -13,9 +12,15 @@ public class DestructBuilding : MonoBehaviour,IBuildingEffectCard
 
     public void DoEffect(GameObject buildingGameObject)
     {
-        buildingGameObject.GetComponent<IDestructable>().Destruct();
-        
-        Destroy(gameObject);
+        if (TryGetComponent<IDestructible>(out var destructible))
+        {
+            destructible.Destruct();
+            Destroy(gameObject);
+        }
+        else
+        {
+            Debug.LogError("No IDestructible on " + buildingGameObject.name);
+        }
     }
 
     public bool IsPlaceable(GameObject castedObject)

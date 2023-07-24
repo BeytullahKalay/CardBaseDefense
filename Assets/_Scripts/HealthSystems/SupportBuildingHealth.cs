@@ -1,10 +1,13 @@
 
 using UnityEngine;
 
-public class SupportBuildingHealth : HealthSystem,IHasHealthbarSlider
+public class SupportBuildingHealth : HealthSystem,IHasHealthbarSlider,IEarnMaterial
 {
     public AudioClip DestructionAudioClip;
     public GameObject DestructParticleVFX;
+    
+    [field: SerializeField] public int EarnMaterialAmountOnDestruct { get; private set; }
+
     
     protected override void OnEnable()
     {
@@ -48,5 +51,17 @@ public class SupportBuildingHealth : HealthSystem,IHasHealthbarSlider
     public GameObject GetHealthBar()
     {
         return slider.gameObject;
+    }
+
+    public void Destruct()
+    {
+        OnDead?.Invoke();
+        EarnMaterial();
+    }
+    
+    public void EarnMaterial()
+    {
+        print("Earned " + EarnMaterialAmountOnDestruct + " material(s) from " + gameObject.name);
+        EventManager.AddThatToCurrentSpecialMaterial?.Invoke(EarnMaterialAmountOnDestruct);
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BombTrap : MonoBehaviour, IActionCard, ITrap,IDestructable
+public class BombTrap : MonoBehaviour, IActionCard, ITrap,IDestructible
 {
     [SerializeField] private TrapData _trapData;
     [SerializeField] private Color ready;
