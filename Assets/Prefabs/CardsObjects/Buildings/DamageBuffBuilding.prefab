@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 9197616465491660687}
   - component: {fileID: 7264718227268464792}
   - component: {fileID: 6130019610575290774}
+  - component: {fileID: 1894634619075495296}
   m_Layer: 7
   m_Name: DamageBuffBuilding
   m_TagString: Untagged
@@ -257,6 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffRadius: 3
   damageBuffAmount: 100
+  <EarnMaterialAmountOnDestruct>k__BackingField: 0
 --- !u!114 &7786317949656502856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +345,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circleTransform: {fileID: 3301722702583139374}
+--- !u!114 &1894634619075495296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7786317949656502852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5367fe5d6a4da244e8c4d4733f5133e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  slider: {fileID: 9197616465576074671}
+  DestructionAudioClip: {fileID: 0}
+  DestructParticleVFX: {fileID: 0}
+  <EarnMaterialAmountOnDestruct>k__BackingField: 1
 --- !u!1 &9197616464750838784
 GameObject:
   m_ObjectHideFlags: 0

@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 331954001}
   - component: {fileID: 331954000}
   m_Layer: 8
-  m_Name: Canvas  (1)
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -680,6 +680,7 @@ GameObject:
   - component: {fileID: 912725997}
   - component: {fileID: 7452119711518468314}
   - component: {fileID: 3052812650620633522}
+  - component: {fileID: 8785513802088462400}
   m_Layer: 7
   m_Name: ConstructionBuilding
   m_TagString: Untagged
@@ -919,6 +920,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circleTransform: {fileID: 5942055778511918156}
+--- !u!114 &8785513802088462400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417210678133590566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5367fe5d6a4da244e8c4d4733f5133e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  slider: {fileID: 1233061325}
+  DestructionAudioClip: {fileID: 0}
+  DestructParticleVFX: {fileID: 0}
+  <EarnMaterialAmountOnDestruct>k__BackingField: 1
 --- !u!1 &7497444092088790657
 GameObject:
   m_ObjectHideFlags: 0

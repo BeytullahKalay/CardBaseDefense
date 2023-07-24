@@ -36,6 +36,8 @@ public class AddressableManager : MonoBehaviour
     [SerializeField] private BuildingHealthSystem arrowTowerHealthSystem;
     [SerializeField] private BuildingHealthSystem goldMinerHealthSystem;
     [SerializeField] private BuildingHealthSystem barracksHealthSystem;
+    [SerializeField] private BuildingHealthSystem damageBuffBuildingHealthSystem;
+    [SerializeField] private BuildingHealthSystem constructionBuildingHealthSystem;
     
 
     [Header("Card Data")]
@@ -99,6 +101,8 @@ public class AddressableManager : MonoBehaviour
 
         destructionFXAssetReference.LoadAssetAsync<AudioClip>().Completed += (clip) =>
         {
+            constructionBuildingHealthSystem.DestructionAudioClip = clip.Result;
+            damageBuffBuildingHealthSystem.DestructionAudioClip = clip.Result;
             arrowTowerHealthSystem.DestructionAudioClip = clip.Result;
             goldMinerHealthSystem.DestructionAudioClip = clip.Result;
             barracksHealthSystem.DestructionAudioClip = clip.Result;
@@ -135,6 +139,8 @@ public class AddressableManager : MonoBehaviour
             trapCardData.PlacingParticleVFX = obj.Result;
             
             
+            constructionBuildingHealthSystem.DestructParticleVFX = obj.Result;
+            damageBuffBuildingHealthSystem.DestructParticleVFX = obj.Result;
             arrowTowerHealthSystem.DestructParticleVFX = obj.Result;
             goldMinerHealthSystem.DestructParticleVFX = obj.Result;
             barracksHealthSystem.DestructParticleVFX = obj.Result;
