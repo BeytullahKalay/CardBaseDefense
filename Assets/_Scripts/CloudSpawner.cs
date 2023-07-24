@@ -4,13 +4,15 @@ using Random = UnityEngine.Random;
 
 public class CloudSpawner : MonoBehaviour
 {
-    [SerializeField]private CloudSpawnerData _cloudSpawnerData;
-    
+    [SerializeField] private CloudSpawnerData _cloudSpawnerData;
+
     private Tilemap _cloudTilemap;
+    private Tilemap _cloudShadow;
 
     private void Awake()
     {
         _cloudTilemap = TilemapManager.Instance.CloudTilemap;
+        _cloudShadow = TilemapManager.Instance.CloudShadow;
     }
 
     private void Start()
@@ -18,7 +20,10 @@ public class CloudSpawner : MonoBehaviour
         for (int i = 0; i < _cloudSpawnerData.DrawAmount; i++)
         {
             var pos = (Random.insideUnitCircle * _cloudSpawnerData.SpawnRadius) + (Vector2)transform.position;
-            _cloudTilemap.SetTile(_cloudTilemap.WorldToCell(pos), GetRandomTile());
+            var randomTile = GetRandomTile();
+            _cloudTilemap.SetTile(_cloudTilemap.WorldToCell(pos), randomTile);
+            _cloudShadow.SetTile(_cloudShadow.WorldToCell(pos + new Vector2(0, _cloudShadow.transform.position.y)),
+                randomTile);
         }
     }
 
@@ -32,15 +37,17 @@ public class CloudSpawner : MonoBehaviour
 
     private void DrawTile(int numOfTile)
     {
-        if (numOfTile <_cloudSpawnerData.DrawAmount)
-        {
-            for (int i = 0; i < _cloudSpawnerData.DrawAmount - numOfTile; i++)
-            {
-                var pos = (Random.insideUnitCircle * _cloudSpawnerData.SpawnRadius) + (Vector2)transform.position -
-                          (Vector2)_cloudTilemap.transform.position;
+        if (numOfTile >= _cloudSpawnerData.DrawAmount) return;
 
-                _cloudTilemap.SetTile(Vector3Int.RoundToInt(pos), GetRandomTile());
-            }
+
+        for (int i = 0; i < _cloudSpawnerData.DrawAmount - numOfTile; i++)
+        {
+            var rand = (Random.insideUnitCircle * _cloudSpawnerData.SpawnRadius);
+
+            var cloudPos = rand + (Vector2)transform.position - (Vector2)_cloudTilemap.transform.position;
+            var randomTile = GetRandomTile();
+            _cloudTilemap.SetTile(Vector3Int.RoundToInt(cloudPos), randomTile);
+            _cloudShadow.SetTile(Vector3Int.RoundToInt(cloudPos), randomTile);
         }
     }
 
@@ -50,9 +57,9 @@ public class CloudSpawner : MonoBehaviour
         {
             for (var y = -(int)maxDistance; y < maxDistance; y++)
             {
-                var a = _cloudTilemap.GetTile(
+                var tile = _cloudTilemap.GetTile(
                     _cloudTilemap.WorldToCell(new Vector3Int(x, y, 0) + transform.position));
-                if (a)
+                if (tile)
                 {
                     numOfTile++;
                 }
