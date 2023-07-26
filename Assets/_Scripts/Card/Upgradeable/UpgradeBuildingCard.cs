@@ -13,8 +13,8 @@ public class UpgradeBuildingCard : MonoBehaviour, IBuildingEffectCard
     {
         if (buildingGameObject.TryGetComponent<IUpgradeable>(out var upgradeable))
         {
-            
-            upgradeable.Upgrade();
+            upgradeable.OpenUpgradeUI();
+            //upgradeable.Upgrade();
             Destroy(gameObject);
         }
         else

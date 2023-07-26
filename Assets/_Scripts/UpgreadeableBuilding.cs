@@ -1,18 +1,19 @@
 using UnityEngine;
 
-public class UpgreadeableBuilding : MonoBehaviour, IUpgradeable
+public abstract class UpgreadeableBuilding : MonoBehaviour, IUpgradeable
 {
-    [field: SerializeField] public UpgradeConditionData ConditionData { get; private set; }
-
-
-    public void Upgrade()
+    public virtual void OpenUpgradeUI()
+    {
+        print("open ui");
+    }
+    
+    public virtual void Upgrade()
     {
         print("Upgrade not implemented!");
     }
 
-    public bool IsUpgradable()
+    public virtual bool IsUpgradable()
     {
-        print("upgrade condition not implemented!");
-        return ConditionData.TempCondition;
+        return false;
     }
 }

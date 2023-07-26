@@ -655,10 +655,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6074905538072354698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50dfd208ded99c9439a96fee829840e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ce65c518e85ca44ab3d0be2193de06e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ConditionData>k__BackingField: {fileID: 11400000, guid: fd738b00c0e2cb347b403ca9c5105d15, type: 2}
+  upgradeable: 0
 --- !u!1 &6568669672215705162
 GameObject:
   m_ObjectHideFlags: 0

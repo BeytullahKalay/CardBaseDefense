@@ -1,6 +1,6 @@
 public interface IUpgradeable
 {
-    public UpgradeConditionData ConditionData { get;}
+    public void OpenUpgradeUI();
     public void Upgrade();
     public bool IsUpgradable();
 }

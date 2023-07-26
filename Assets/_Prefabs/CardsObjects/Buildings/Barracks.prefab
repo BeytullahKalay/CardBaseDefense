@@ -360,10 +360,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2590527858089349975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50dfd208ded99c9439a96fee829840e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5782e227d2f340678787f16fc478f575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ConditionData>k__BackingField: {fileID: 11400000, guid: d032c3194c2e57b40be4f6840798881b, type: 2}
+  upgradeable: 0
 --- !u!1 &2590527858185679118
 GameObject:
   m_ObjectHideFlags: 0

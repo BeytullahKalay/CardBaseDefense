@@ -67,5 +67,24 @@ PrefabInstance:
       propertyPath: <ConditionData>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: 9e10659799049ec4fa42f1b8dedaec5a, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3568695049677953006, guid: 6580bf02e9b847047959e38ecef898d7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6580bf02e9b847047959e38ecef898d7, type: 3}
+--- !u!1 &1971662786763789072 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2590527858089349975, guid: 6580bf02e9b847047959e38ecef898d7, type: 3}
+  m_PrefabInstance: {fileID: 4084667586112045127}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6692270206283961735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971662786763789072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f1f3ff5de1e45cbac65356432318526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeable: 0
