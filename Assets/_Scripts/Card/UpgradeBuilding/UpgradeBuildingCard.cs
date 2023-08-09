@@ -4,7 +4,7 @@ public class UpgradeBuildingCard : MonoBehaviour, IBuildingEffectCard
 {
     private GameObject _whatIsBaseBuilding;
 
-    private void Start()
+    private void Awake()
     {
         _whatIsBaseBuilding = GameManager.Instance.BaseTransform.gameObject;
     }
@@ -14,7 +14,6 @@ public class UpgradeBuildingCard : MonoBehaviour, IBuildingEffectCard
         if (buildingGameObject.TryGetComponent<IUpgradeable>(out var upgradeable))
         {
             upgradeable.OpenUpgradeUI();
-            //upgradeable.Upgrade();
             Destroy(gameObject);
         }
         else

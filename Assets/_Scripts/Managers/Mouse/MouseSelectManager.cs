@@ -6,15 +6,17 @@ public class MouseSelectManager : MonoBehaviour
 
     private IUnSelect[] _selectedClickable;
     private Camera _cam;
+    private MouseStateManager _mouseStateManager;
 
     private void Awake()
     {
         _cam = Camera.main;
+        _mouseStateManager = MouseStateManager.Instance;
     }
 
     private void Update()
     {
-        if (!Input.GetKeyDown(KeyCode.Mouse0)) return;
+        if (!Input.GetKeyDown(KeyCode.Mouse0) || _mouseStateManager.MouseState == MouseState.Busy) return;
 
         var hit = Physics2D.Raycast(_cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, selectableLayers);
 

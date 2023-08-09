@@ -7,18 +7,18 @@ public class BuildingDetectionOnPlacing : MonoBehaviour, IPlaceable
     private SpriteRenderer _spriteRenderer;
     private Color _spriteColor;
     
-
     public bool Usable { get; set; }
 
     private GameObject _raycastedObject;
     private IBuildingEffectCard _effectCard;
-
+    private MouseStateManager _mouseStateManager;
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteColor = _spriteRenderer.material.color;
         _effectCard = GetComponent<IBuildingEffectCard>();
+        _mouseStateManager = MouseStateManager.Instance;
     }
 
     private void Start()
@@ -63,21 +63,16 @@ public class BuildingDetectionOnPlacing : MonoBehaviour, IPlaceable
         Destroy(this);
     }
 
-    public void SetMouseBusyStateTo(bool state)
-    {
-        EventManager.SetMouseStateTo?.Invoke(state ? MouseState.Busy : MouseState.Available);
-    }
-
     public void OpenActions()
     {
         _spriteRenderer.sortingOrder += 1;
-        SetMouseBusyStateTo(true);
+        _mouseStateManager.SetMouseBusyStateTo(MouseState.Busy);
     }
 
     public void DestroyActions()
     {
         _spriteRenderer.sortingOrder -= 1;
-        SetMouseBusyStateTo(false);
+        _mouseStateManager.SetMouseBusyStateTo(MouseState.Available);
     }
 
     private void OnDestroy()

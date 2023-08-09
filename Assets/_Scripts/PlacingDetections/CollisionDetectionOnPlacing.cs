@@ -21,6 +21,9 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
     private Color _spriteColor;
 
     private TilemapManager _tilemapManager;
+    
+    private MouseStateManager _mouseStateManager;
+
 
     private void Awake()
     {
@@ -28,6 +31,7 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteColor = _spriteRenderer.material.color;
         _collider = GetComponent<Collider2D>();
+        _mouseStateManager = MouseStateManager.Instance;
         CloseActionCardScripts();
     }
 
@@ -90,21 +94,16 @@ public class CollisionDetectionOnPlacing : MonoBehaviour,IPlaceable
         transform.DOPunchScale(Vector3.one * .5f, .25f, 2);
     }
 
-    public void SetMouseBusyStateTo(bool state)
-    {
-        EventManager.SetMouseStateTo?.Invoke(state ? MouseState.Busy : MouseState.Available);
-    }
-
     public void OpenActions()
     {
         _spriteRenderer.sortingOrder += 1;
-        SetMouseBusyStateTo(true);
+        _mouseStateManager.SetMouseBusyStateTo(MouseState.Busy);
     }
 
     public void DestroyActions()
     {
         _spriteRenderer.sortingOrder -= 1;
-        SetMouseBusyStateTo(false);
+        _mouseStateManager.SetMouseBusyStateTo(MouseState.Available);
     }
 
     private void OpenActionCardScripts()

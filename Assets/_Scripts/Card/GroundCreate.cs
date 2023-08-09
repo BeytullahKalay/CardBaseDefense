@@ -27,6 +27,9 @@ public class GroundCreate : MonoBehaviour, IUsable
 
     private AudioClip _placingSoundFX;
     private GameObject _placingVFX;
+    
+    private MouseStateManager _mouseStateManager;
+
 
     private void Awake()
     {
@@ -35,6 +38,7 @@ public class GroundCreate : MonoBehaviour, IUsable
         _undergroundTilemap = TilemapManager.Instance.UndergroundTilemap;
         _decorationTilemap = TilemapManager.Instance.DecorationTilemap;
         _bushTilemap = TilemapManager.Instance.BushTilemap;
+        _mouseStateManager = MouseStateManager.Instance;
     }
 
     private void Start()
@@ -144,6 +148,7 @@ public class GroundCreate : MonoBehaviour, IUsable
             EventManager.SetBlockRaycastStateTo?.Invoke(true);
             EventManager.CloseBottomUI?.Invoke();
             CardSelectManager.Instance.SelectedCards.Clear();
+            //_mouseStateManager.SetMouseBusyStateTo(MouseState.Available);
             Destroy(gameObject);
         }
     }
@@ -192,21 +197,16 @@ public class GroundCreate : MonoBehaviour, IUsable
         DestroyActions();
     }
 
-    public void SetMouseBusyStateTo(bool state)
-    {
-        EventManager.SetMouseStateTo?.Invoke(state ? MouseState.Busy : MouseState.Available);
-    }
-
     public void OpenActions()
     {
-        SetMouseBusyStateTo(true);
+        _mouseStateManager.SetMouseBusyStateTo(MouseState.Busy);
     }
     
 
     public void DestroyActions()
     {
         _undergroundTilemap.ClearAllEditorPreviewTiles();
-        SetMouseBusyStateTo(false);
+        _mouseStateManager.SetMouseBusyStateTo(MouseState.Available);
     }
 
     private void CheckBoundaries(Vector3Int vector3IntPos, int downIntVal, int upIntVal)

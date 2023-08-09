@@ -1,6 +1,5 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 public class Test : MonoBehaviour
@@ -22,6 +21,7 @@ public class Test : MonoBehaviour
     // {
     //     _mat.SetInt("_Activate",0);
     // }
+    
 
     private void Update()
     {

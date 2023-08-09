@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class ClickedController : OnClicked, IUnSelect
@@ -38,6 +37,8 @@ public class ClickedController : OnClicked, IUnSelect
 
     private void OnMouseEnter()
     {
+        if (MouseStateManager.Instance.MouseState == MouseState.Busy) return;
+        
         if (!_selected)
             OpenOutline();
     }
@@ -75,6 +76,7 @@ public class ClickedController : OnClicked, IUnSelect
         {
             slider.GetHealthBar().SetActive(false);
         }
+
         CloseOutline();
         _selected = false;
     }

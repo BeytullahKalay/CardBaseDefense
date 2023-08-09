@@ -363,7 +363,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5782e227d2f340678787f16fc478f575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeable: 0
+  upgradeImageAndLogics:
+  - UpgradeName: Test2
+    UpgradeImage: {fileID: -2055716048, guid: 888b6afb8e413c546820c081acd3dabb, type: 3}
+    UpgradeEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3568695049677953006}
+          m_TargetAssemblyTypeName: BarrackUpgrade, Assembly-CSharp
+          m_MethodName: Upgrade1
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - UpgradeName: Test3
+    UpgradeImage: {fileID: -610536579, guid: 3a8bf8a9f00d03c48b53b4711d6fc5c1, type: 3}
+    UpgradeEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3568695049677953006}
+          m_TargetAssemblyTypeName: BarrackUpgrade, Assembly-CSharp
+          m_MethodName: Upgrade2
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - UpgradeName: Test3
+    UpgradeImage: {fileID: 42711118, guid: 3a8bf8a9f00d03c48b53b4711d6fc5c1, type: 3}
+    UpgradeEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3568695049677953006}
+          m_TargetAssemblyTypeName: BarrackUpgrade, Assembly-CSharp
+          m_MethodName: Upgrade3
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  upgradeable: 1
 --- !u!1 &2590527858185679118
 GameObject:
   m_ObjectHideFlags: 0
