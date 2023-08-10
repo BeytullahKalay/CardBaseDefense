@@ -15,4 +15,4 @@ MonoBehaviour:
   upgradeButtonPrefab: {fileID: 4415922076588211058, guid: 18c0af36053448f40acfd814eb205693, type: 3}
   distanceFromCenter: 2
   duration: 0.5
-  offsetAngle: 50
+  offsetAngle: 70

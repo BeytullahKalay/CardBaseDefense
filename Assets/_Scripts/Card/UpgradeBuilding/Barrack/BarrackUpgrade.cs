@@ -9,19 +9,25 @@ public class BarrackUpgrade : UpgradeableBuilding
         return upgradeable;
     }
     
-    public void Upgrade1()
+    // using by unity event
+    public void IncreaseUnitHealth()
     {
         print("1");
+        CloseUpgradeUI();
     }
-    
-    public void Upgrade2()
+
+    // using by unity event
+    public void IncreaseUnitDamage()
     {
         print("2");
+        CloseUpgradeUI();
     }
     
-    public void Upgrade3()
+    // using by unity event
+    public void IncreaseUnitAmount()
     {
         print("3");
+        CloseUpgradeUI();
     }
 }
 

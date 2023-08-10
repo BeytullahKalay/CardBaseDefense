@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffRadius: 3
-  damageBuffAmount: 100
+  damageBuffAmount: 15
 --- !u!114 &7786317949656502856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,6 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76676ce34eaa49e19b2167460e11fa86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeImageAndLogics: []
   upgradeable: 0
 --- !u!1 &9197616464750838784
 GameObject:

@@ -32,7 +32,7 @@ public class LandPassengers : MonoBehaviour
 
     private void Update()
     {
-        _boardedObjectsList.RemoveAll(item => item.IsDead());
+        _boardedObjectsList.RemoveAll(enemy => enemy.IsDead());
 
         if (_boardedObjectsList.Count == 0)
         {

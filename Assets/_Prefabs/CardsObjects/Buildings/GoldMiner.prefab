@@ -828,7 +828,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f9ca3901ac44069d37997019050ea2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeable: 0
+  upgradeImageAndLogics:
+  - upgradeName: Increase Number of Coin made
+    UpgradeImage: {fileID: 1982135080, guid: c7665827a895c404492ea1b4de663875, type: 3}
+    UpgradeEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -4362565965033253347}
+          m_TargetAssemblyTypeName: GoldMinerUpgrade, Assembly-CSharp
+          m_MethodName: IncreaseNumberOfCoin
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 5
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  upgradeable: 1
 --- !u!1 &6357917060938602697
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public abstract class UpgradeableBuilding : MonoBehaviour, IUpgradeable
     private MouseStateManager _mouseStateManager;
 
     
-    private void Awake()
+    public virtual void Awake()
     {
         _upgradeCanvasManager = UpgradeCanvasManager.Instance;
         _mouseStateManager = MouseStateManager.Instance;
@@ -28,7 +28,7 @@ public abstract class UpgradeableBuilding : MonoBehaviour, IUpgradeable
         return false;
     }
 
-    public virtual void CloseUpgradeUI()
+    protected void CloseUpgradeUI()
     {
         _mouseStateManager.SetMouseBusyStateTo(MouseState.Available);
         _upgradeCanvasManager.UpgradeCanvasGameObject.SetActive(false);
