@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95b46d936b08f214198c4ce4249df961, type: 3}
+  m_Name: GoldMinerData
+  m_EditorClassIdentifier: 
+  goldPrefab: {fileID: 4576231393655237157, guid: dfc91a04c99db354e80ec39ddfd5a6ce, type: 3}
+  numberOfGoldCreating: 4
+  coinMoveSpeed: 20
+  <Clip>k__BackingField: {fileID: 8300000, guid: 1303446c822d9d94cab97e4b73030475, type: 3}
