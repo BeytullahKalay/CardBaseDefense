@@ -26,16 +26,6 @@ public class Boat : MonoBehaviour
         _tilemapManager = TilemapManager.Instance;
     }
 
-    private void OnEnable()
-    {
-        _landPassengers.AllUnitsDead += OnAllUnitsDead;
-    }
-
-    private void OnDisable()
-    {
-        _landPassengers.AllUnitsDead -= OnAllUnitsDead;
-    }
-
     private void Start()
     {
         _direction = (_basePosition - (Vector2)transform.position).normalized;
@@ -51,8 +41,8 @@ public class Boat : MonoBehaviour
     {
         var pos = checkGroundPoint.position;
         var tileAnchor = _tilemapManager.GroundTilemap.tileAnchor;
-        var mousePosVector3 = new Vector3(pos.x, pos.y, 0) - new Vector3(tileAnchor.x, tileAnchor.y, 0);
-        _detectedGroundPosition = Vector3Int.RoundToInt(mousePosVector3);
+        var mapPosition2D = new Vector3(pos.x, pos.y, 0) - new Vector3(tileAnchor.x, tileAnchor.y, 0);
+        _detectedGroundPosition = Vector3Int.RoundToInt(mapPosition2D);
         _isGroundTileDetected = _tilemapManager.GroundTilemap.HasTile(_detectedGroundPosition);
     }
 
@@ -74,11 +64,5 @@ public class Boat : MonoBehaviour
         }
         
         transform.position += transform.right * (speed * Time.fixedDeltaTime);
-    }
-
-    private void OnAllUnitsDead()
-    {
-        _allUnitsDead = true;
-        //Destroy(this);
     }
 }

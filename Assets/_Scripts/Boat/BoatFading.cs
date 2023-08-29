@@ -11,6 +11,7 @@ public class BoatFading : MonoBehaviour
         var alpha = boatRenderer.color.a;
         DOTween.To(() => alpha, x => alpha = x, 0, fadeDuration).OnUpdate(() =>
         {
+            
             var c = boatRenderer.color;
             c.a = alpha;
             boatRenderer.color = c;

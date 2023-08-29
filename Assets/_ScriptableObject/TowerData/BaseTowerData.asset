@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a738bafe7cf72d4696cca3f9ba8f489, type: 3}
   m_Name: BaseTowerData
   m_EditorClassIdentifier: 
-  damage: {x: 11, y: 14}
+  damage: {x: 11, y: 15}
   detectEnemyRadius: 10
   firingFrequency: 1.25
   whatIsTargetLayer:
     serializedVersion: 2
     m_Bits: 256
-  shootClip: {fileID: 8300000, guid: 348e638f76965d0458576657bcb38098, type: 3}
+  ShootClip: {fileID: 8300000, guid: 348e638f76965d0458576657bcb38098, type: 3}
