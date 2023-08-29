@@ -1,4 +1,3 @@
-using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,10 +20,9 @@ public class WaveCallerUI : MonoBehaviour
     private Tween _canvasAlphaTween;
     private Tween _imageFillAmountTween;
     
-    private IEnumerator _coroutine;
-
-
     private AudioSource _audioSource;
+
+    private float _waitSeconds = 1f;
 
     private void Awake()
     {
@@ -51,7 +49,6 @@ public class WaveCallerUI : MonoBehaviour
         canvasGroup.alpha = 0;
         generalGameObject.SetActive(false);
         fillImage.fillAmount = 0;
-        _coroutine = CloseUIWithFading_CO(1f);
     }
 
     private void LockUI()
@@ -70,8 +67,10 @@ public class WaveCallerUI : MonoBehaviour
         fillImage.fillAmount = 0;
     }
 
-    private void CloseWithFadingCallerUI()
+    private void CloseWithFadingCallerUI(float remainingTime)
     {
+        if(remainingTime > 0) return;
+        
         _canvasAlphaTween?.Kill();
         var canvasAlpha = canvasGroup.alpha;
         _canvasAlphaTween = DOTween
@@ -81,17 +80,15 @@ public class WaveCallerUI : MonoBehaviour
                 generalGameObject.SetActive(false);
             });
     }
-    
-    private IEnumerator CloseUIWithFading_CO(float waitSeconds)
+
+    private void CloseUIWithFading(float waitSeconds)
     {
-        yield return new WaitForSeconds(waitSeconds);
-        CloseWithFadingCallerUI();
+        DOVirtual.Float(waitSeconds, 0, waitSeconds, CloseWithFadingCallerUI).SetEase(Ease.Linear);
     }
 
     private void Update()
     {
         if (_lock) return;
-
 
         if (Input.GetKey(KeyCode.Space))
         {
@@ -145,7 +142,8 @@ public class WaveCallerUI : MonoBehaviour
                 // completed calling stuff
                 knightImageTransform.DOShakePosition(.35f, 10, 30);
                 animator.SetTrigger("Attack");
-                StartCoroutine(_coroutine);
+                CloseUIWithFading(_waitSeconds);
+                
                 _audioSource.Play();
                 EventManager.CallTheWave?.Invoke();
             });
