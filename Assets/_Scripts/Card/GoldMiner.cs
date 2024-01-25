@@ -2,13 +2,27 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
+
+[RequireComponent(typeof(SpriteRenderer))]
 public class GoldMiner : MonoBehaviour, IActionCard
 {
     [SerializeField] private GoldMinerData goldMinerData;
     [SerializeField] private TMP_Text fillAmountText;
 
+    [SerializeField] private Sprite goldMinerSpriteReadToCollect;
+    [SerializeField] private Sprite goldMinerSpriteDefault;
+
+
     private int _numberOfGoldCreating;
     private int _numberOfCollectedGolds;
+
+    private SpriteRenderer _spriteRenderer;
+
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
 
     private void OnEnable()
     {
@@ -19,10 +33,11 @@ public class GoldMiner : MonoBehaviour, IActionCard
     {
         EventManager.WaveCompleted -= MakeGold;
     }
-    
+
     private void Start()
     {
         _numberOfGoldCreating = goldMinerData.NumberOfGoldCreating;
+        SetSpriteToDefaultMiner();
         UpdateFillAmountText();
     }
 
@@ -32,11 +47,14 @@ public class GoldMiner : MonoBehaviour, IActionCard
 
         _numberOfCollectedGolds = _numberOfGoldCreating;
         UpdateFillAmountText();
+        SetSpriteToDReadyToCollectMiner();
     }
+
 
     private void OnMouseDown()
     {
         CollectGolds();
+        SetSpriteToDefaultMiner();
     }
 
     private void PlayBouncyEffect()
@@ -83,10 +101,20 @@ public class GoldMiner : MonoBehaviour, IActionCard
     {
         this.enabled = state;
     }
-    
+
     public void IncreaseNumberOfGoldCreating(int increasingAmount)
     {
         _numberOfGoldCreating += increasingAmount;
         UpdateFillAmountText();
     }
+
+    private void SetSpriteToDefaultMiner()
+    {
+        _spriteRenderer.sprite = goldMinerSpriteDefault;
+    }
+    private void SetSpriteToDReadyToCollectMiner()
+    {
+        _spriteRenderer.sprite = goldMinerSpriteReadToCollect;
+    }
+
 }
