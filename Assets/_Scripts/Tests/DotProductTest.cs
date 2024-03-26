@@ -9,6 +9,8 @@ public class DotProductTest : MonoBehaviour
 	{
 		var targetDir = (square.position - transform.position).normalized;
 
-		Debug.Log(Vector2.Dot(transform.up, targetDir));
+		//Debug.Log(Vector2.Dot(transform.up, targetDir));
+
+		Debug.Log(targetDir);
 	}
 }
