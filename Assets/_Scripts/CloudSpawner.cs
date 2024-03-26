@@ -74,7 +74,7 @@ public class CloudSpawner : MonoBehaviour
         return _cloudSpawnerData.TileList[Random.Range(0, _cloudSpawnerData.TileList.Count)];
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, _cloudSpawnerData.SpawnRadius);
