@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 752873504297175698, guid: 6580bf02e9b847047959e38ecef898d7, type: 3}
+      propertyPath: m_SortingLayer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2590527858089349975, guid: 6580bf02e9b847047959e38ecef898d7, type: 3}
       propertyPath: m_Name
       value: ArcherBarracks
@@ -63,6 +67,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2590527858185679117, guid: 6580bf02e9b847047959e38ecef898d7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590527858185679117, guid: 6580bf02e9b847047959e38ecef898d7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590527859490835275, guid: 6580bf02e9b847047959e38ecef898d7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590527859490835275, guid: 6580bf02e9b847047959e38ecef898d7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3568695049677953006, guid: 6580bf02e9b847047959e38ecef898d7, type: 3}
       propertyPath: <ConditionData>k__BackingField
       value: 
@@ -87,4 +107,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f1f3ff5de1e45cbac65356432318526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeImageAndLogics: []
   upgradeable: 0

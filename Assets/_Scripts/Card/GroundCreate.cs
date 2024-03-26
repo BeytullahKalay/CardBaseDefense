@@ -7,11 +7,11 @@ using UnityEngine.Tilemaps;
 public class GroundCreate : MonoBehaviour, IUsable
 {
     [SerializeField] private GroundCreateData groundCreateData;
-    
+
     public bool Usable { get; set; }
 
     private SoundFXManager _soundFXManager;
-    
+
     private Vector3Int _lastPos;
 
     private Tilemap _groundTilemap;
@@ -20,14 +20,14 @@ public class GroundCreate : MonoBehaviour, IUsable
     private Tilemap _bushTilemap;
 
     private int _numberOfGroundToPlace = 0;
-    
+
     private Action _onCompleteAction;
-    
+
     private TMP_Text _tmpText;
 
     private AudioClip _placingSoundFX;
     private GameObject _placingVFX;
-    
+
     private MouseStateManager _mouseStateManager;
 
 
@@ -78,7 +78,7 @@ public class GroundCreate : MonoBehaviour, IUsable
         Usable = !_groundTilemap.HasTile(Helpers.GetMousePositionForTilemap(_groundTilemap));
 
         if (!Usable) return;
-        
+
         var vector3IntPos = Helpers.GetMousePositionForTilemap(_groundTilemap);
         var downIntVal = Mathf.FloorToInt(groundCreateData.SizeOfGround * .5f);
         var upIntVal = Mathf.CeilToInt(groundCreateData.SizeOfGround * .5f);
@@ -100,14 +100,14 @@ public class GroundCreate : MonoBehaviour, IUsable
                 foreach (var tileCheck in tileChecks)
                 {
                     if (!tileCheck) continue;
-                    
+
                     Usable = true;
                     _undergroundTilemap.color = groundCreateData.NotPlaceableColor;
                     return;
                 }
             }
         }
-        
+
         Usable = false;
         _undergroundTilemap.color = groundCreateData.PlaceableColor;
     }
@@ -118,26 +118,23 @@ public class GroundCreate : MonoBehaviour, IUsable
         var endX = vector3IntPos.x + upIntVal;
         var startY = vector3IntPos.y - downIntVal;
         var endY = vector3IntPos.y + upIntVal;
-            
+
         _undergroundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, startX, startY, endX, endY);
         _groundTilemap.BoxFill(vector3IntPos, groundCreateData.TileBase, startX, startY, endX, endY);
         _decorationTilemap.BoxFill(vector3IntPos, groundCreateData.DecorationTile, startX, startY, endX, endY);
-
-            
-        AddRandomBushes(vector3IntPos, downIntVal, upIntVal);
 
 
         NavmeshManager.Instance.UpdateSurfaceData();
         _undergroundTilemap.ClearAllEditorPreviewTiles();
 
         var start = _groundTilemap.CellToWorld(new Vector3Int(startX, startY, 0));
-        var end =_groundTilemap.CellToWorld(new Vector3Int(endX, endY, 0));
+        var end = _groundTilemap.CellToWorld(new Vector3Int(endX, endY, 0));
 
         // set camera max position values
-        CameraController.Instance.UpdateMaxMovePosition(start,end);
-        
+        CameraController.Instance.UpdateMaxMovePosition(start, end);
+
         // set spawner spawn position values
-        Spawner.Instance.UpdateMaxMovePosition(start,end);
+        Spawner.Instance.UpdateMaxMovePosition(start, end);
 
         _numberOfGroundToPlace--;
         _tmpText.text = "X" + _numberOfGroundToPlace;
@@ -148,19 +145,7 @@ public class GroundCreate : MonoBehaviour, IUsable
             EventManager.SetBlockRaycastStateTo?.Invoke(true);
             EventManager.CloseBottomUI?.Invoke();
             CardSelectManager.Instance.SelectedCards.Clear();
-            //_mouseStateManager.SetMouseBusyStateTo(MouseState.Available);
             Destroy(gameObject);
-        }
-    }
-
-    private void AddRandomBushes(Vector3Int vector3IntPos, int downIntVal, int upIntVal)
-    {
-        for (var x = vector3IntPos.x - downIntVal; x <= vector3IntPos.x + upIntVal; x++)
-        {
-            for (var y = vector3IntPos.y - downIntVal; y <= vector3IntPos.y + upIntVal; y++)
-            {
-                _bushTilemap.SetTile(new Vector3Int(x, y, 0), groundCreateData.BushTile);
-            }
         }
     }
 
@@ -185,7 +170,7 @@ public class GroundCreate : MonoBehaviour, IUsable
                 vector3IntPos, groundCreateData.TileBase,
                 vector3IntPos.x - downIntVal,
                 vector3IntPos.y - downIntVal,
-                vector3IntPos.x + upIntVal, 
+                vector3IntPos.x + upIntVal,
                 vector3IntPos.y + upIntVal);
         }
 
@@ -201,7 +186,7 @@ public class GroundCreate : MonoBehaviour, IUsable
     {
         _mouseStateManager.SetMouseBusyStateTo(MouseState.Busy);
     }
-    
+
 
     public void DestroyActions()
     {
@@ -283,7 +268,7 @@ public class GroundCreate : MonoBehaviour, IUsable
         }
     }
 
-    public void PrepareForPlacing(int placeGroundAmount,Action completeAction,TMP_Text textToUpdate,AudioClip placingSoundFX, GameObject placingVFX)
+    public void PrepareForPlacing(int placeGroundAmount, Action completeAction, TMP_Text textToUpdate, AudioClip placingSoundFX, GameObject placingVFX)
     {
         _numberOfGroundToPlace = placeGroundAmount;
         _onCompleteAction = completeAction;

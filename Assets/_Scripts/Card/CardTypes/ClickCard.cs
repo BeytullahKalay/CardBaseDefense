@@ -41,7 +41,6 @@ public class ClickCard : ClassicCard
     // those empty function(s) should be removed
     public override void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("ON POINTER UP!!");
     }
 
     public override void OnDrag(PointerEventData eventData)
@@ -105,8 +104,6 @@ public class ClickCard : ClassicCard
 
     private void ButtonPressedActions()
     {
-        print("BUTTON WORKED!");
-
         _cardInAction = true;
 
         EventManager.AddThatToCurrentGold?.Invoke(-CardData.Cost);

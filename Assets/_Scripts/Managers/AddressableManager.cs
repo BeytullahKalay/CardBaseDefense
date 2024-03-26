@@ -7,7 +7,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 [Serializable]
 public class AssetReferenceAudioClip : AssetReferenceT<AudioClip>
 {
-    public AssetReferenceAudioClip(string guid) : base(guid){}
+    public AssetReferenceAudioClip(string guid) : base(guid) { }
 }
 
 public class AddressableManager : MonoBehaviour
@@ -36,9 +36,9 @@ public class AddressableManager : MonoBehaviour
     [SerializeField] private BuildingHealthSystem arrowTowerHealthSystem;
     [SerializeField] private BuildingHealthSystem goldMinerHealthSystem;
     [SerializeField] private BuildingHealthSystem barracksHealthSystem;
-    [SerializeField] private BuildingHealthSystem damageBuffBuildingHealthSystem;
-    [SerializeField] private BuildingHealthSystem constructionBuildingHealthSystem;
-    
+    [SerializeField] private SupportBuildingHealth damageBuffBuildingHealthSystem;
+    [SerializeField] private SupportBuildingHealth constructionBuildingHealthSystem;
+
 
     [Header("Card Data")]
     [SerializeField] private CardData archerTowerCardData;
@@ -52,7 +52,7 @@ public class AddressableManager : MonoBehaviour
     [SerializeField] private CardData healConstructionCardData;
     [SerializeField] private CardData damageBuffCardData;
     [SerializeField] private CardData upgradeCardData;
-    
+
     [Header("Placing Sound FX")]
     [SerializeField] private AssetReferenceAudioClip placingAssetReference;
     [SerializeField] private AssetReferenceAudioClip groundAssetReference;
@@ -61,8 +61,8 @@ public class AddressableManager : MonoBehaviour
     [Header("Placing Particles")]
     [SerializeField] private AssetReferenceGameObject particleVFXGameObject;
 
-    
-    
+
+
     private void Start()
     {
         Addressables.InitializeAsync().Completed += AddressableManager_Completed;
@@ -145,8 +145,8 @@ public class AddressableManager : MonoBehaviour
             upgradeCardData.PlacingParticleVFX = obj.Result;
             repairCardData.PlacingParticleVFX = obj.Result;
             trapCardData.PlacingParticleVFX = obj.Result;
-            
-            
+
+
             constructionBuildingHealthSystem.DestructParticleVFX = obj.Result;
             damageBuffBuildingHealthSystem.DestructParticleVFX = obj.Result;
             arrowTowerHealthSystem.DestructParticleVFX = obj.Result;

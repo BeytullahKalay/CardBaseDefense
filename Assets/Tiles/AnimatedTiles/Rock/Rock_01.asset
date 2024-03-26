@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Rock_01
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: -1406839827, guid: fb18b9f36b0f6b84d9eabd56eec4fdc0, type: 3}
-  - {fileID: 1695029315, guid: fb18b9f36b0f6b84d9eabd56eec4fdc0, type: 3}
-  - {fileID: 1135106392, guid: fb18b9f36b0f6b84d9eabd56eec4fdc0, type: 3}
-  - {fileID: 1928921342, guid: fb18b9f36b0f6b84d9eabd56eec4fdc0, type: 3}
-  - {fileID: 1651134710, guid: fb18b9f36b0f6b84d9eabd56eec4fdc0, type: 3}
-  - {fileID: -1822645522, guid: fb18b9f36b0f6b84d9eabd56eec4fdc0, type: 3}
-  - {fileID: 1621269448, guid: fb18b9f36b0f6b84d9eabd56eec4fdc0, type: 3}
-  - {fileID: 1897441732, guid: fb18b9f36b0f6b84d9eabd56eec4fdc0, type: 3}
+  - {fileID: -123939889, guid: d26b29b9b09a6a24aba4e130ec7c1ee4, type: 3}
+  - {fileID: -1010341275, guid: d26b29b9b09a6a24aba4e130ec7c1ee4, type: 3}
+  - {fileID: 1924748115, guid: d26b29b9b09a6a24aba4e130ec7c1ee4, type: 3}
+  - {fileID: -2093810531, guid: d26b29b9b09a6a24aba4e130ec7c1ee4, type: 3}
+  - {fileID: -1242256171, guid: d26b29b9b09a6a24aba4e130ec7c1ee4, type: 3}
+  - {fileID: 1378038482, guid: d26b29b9b09a6a24aba4e130ec7c1ee4, type: 3}
+  - {fileID: -1032010866, guid: d26b29b9b09a6a24aba4e130ec7c1ee4, type: 3}
+  - {fileID: 404367077, guid: d26b29b9b09a6a24aba4e130ec7c1ee4, type: 3}
   m_MinSpeed: 6
   m_MaxSpeed: 6
   m_AnimationStartTime: 0
